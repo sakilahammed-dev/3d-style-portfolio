@@ -33,8 +33,9 @@ export const projects = [
     title: "Unnoto Khabar",
     can: "images/projects/UnnotoKhabar/UnnotoKhabarCan.webp",
     images: [
-      { src: "images/projects/UnnotoKhabar/1.webp", alt: "Unnoto Khabar Honey Banner" },
-      { src: "images/projects/UnnotoKhabar/2.webp", alt: "Unnoto Khabar Dates Banner" },
+      { src: "images/projects/UnnotoKhabar/hero_products.jpg", alt: "Unnoto Khabar Premium Organic Showcase" },
+      { src: "images/projects/UnnotoKhabar/1.webp", alt: "Unnoto Khabar Honey Storefront" },
+      { src: "images/projects/UnnotoKhabar/2.webp", alt: "Unnoto Khabar Dates Collection" },
       { src: "images/projects/UnnotoKhabar/3.webp", alt: "Natural Raw Honey Product" },
       { src: "images/projects/UnnotoKhabar/4.webp", alt: "Honey Nuts Premium Mix" },
     ],
