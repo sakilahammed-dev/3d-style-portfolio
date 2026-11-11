@@ -195,7 +195,7 @@ export default function ProjectsPage({ language }) {
     );
   }
 
-  // Grid view (9 Vending Machine Cans)
+  // Grid view (3x3 Vending Machine Cans - 100% matches original reference screenshot)
   return (
     <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-2xl md:text-3xl text-center">
       <div className="absolute w-full h-full bg-grid"></div>
@@ -208,16 +208,14 @@ export default function ProjectsPage({ language }) {
                 setSelectedProject(project);
                 setActiveImageIndex(0);
               }}
-              className="flex flex-col shadow-lg shadow-neutral-500 bg-neutral-200/60 backdrop-blur-xs items-center justify-center rounded-2xl cursor-pointer hover:scale-105 transition-transform border border-neutral-50 p-2"
+              className="flex flex-col shadow-lg shadow-neutral-500 bg-neutral-200/60 backdrop-blur-xs items-center justify-center rounded-2xl cursor-pointer hover:scale-105 transition-transform border border-neutral-50"
             >
               <img
                 src={project.can}
                 alt={project.title}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
               />
-              <div className="p-2 font-mono text-base md:text-xl font-bold truncate w-full">
-                {project.title}
-              </div>
+              <div className="p-2 font-mono">{project.title}</div>
             </div>
           ))}
         </div>
@@ -236,7 +234,7 @@ export default function ProjectsPage({ language }) {
             {t.prev}
           </button>
 
-          <span className="flex items-center text-lg md:text-2xl font-bold">
+          <span className="flex items-center">
             {t.page} {currentPage} {t.of} {totalPages}
           </span>
 
