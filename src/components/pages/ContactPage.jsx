@@ -1,4 +1,4 @@
-import { BsLinkedin, BsGithub, BsWhatsapp, BsEnvelopeFill } from "react-icons/bs";
+import { BsLinkedin, BsGithub, BsWhatsapp } from "react-icons/bs";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { useForm } from "@formspree/react";
 import { useState, useEffect } from "react";
@@ -14,129 +14,99 @@ export default function ContactPage({ setTarget, language }) {
   const content = {
     en: {
       title: "Contact Me",
-      findMe: "Connect with me:",
-      orMessage: "Or send a direct message:",
-      name: "Your Name",
-      email: "Your Email",
-      message: "Your Message",
-      send: "Send Message",
+      findMe: "You can find me on:",
+      orMessage: "Or send me a message:",
+      name: "Name",
+      email: "Email",
+      message: "Message",
+      send: "Send",
       sentTitle: "Message Sent!",
-      sentMsg: "Thanks for reaching out! I’ll get back to you shortly.",
+      sentMsg: "Thanks for reaching out. I’ll get back to you soon.",
       close: "Close",
-      location: "Dhaka, Bangladesh",
     },
     es: {
       title: "Contáctame",
-      findMe: "Conéctate conmigo:",
-      orMessage: "O envíame un mensaje directo:",
-      name: "Tu Nombre",
-      email: "Tu Correo Electrónico",
-      message: "Tu Mensaje",
-      send: "Enviar Mensaje",
-      sentTitle: "¡Mensaje Enviado!",
-      sentMsg: "¡Gracias por contactarme! Te responderé muy pronto.",
+      findMe: "Puedes encontrarme en:",
+      orMessage: "O envíame un mensaje:",
+      name: "Nombre",
+      email: "Correo electrónico",
+      message: "Mensaje",
+      send: "Enviar",
+      sentTitle: "¡Mensaje enviado!",
+      sentMsg: "Gracias por contactarme. Te responderé pronto.",
       close: "Cerrar",
-      location: "Dhaka, Bangladesh",
     },
     bn: {
-      title: "যোগাযোগ",
-      findMe: "সোশ্যাল ও সরাসরি কানেক্ট:",
-      orMessage: "অথবা সরাসরি বার্তা পাঠান:",
-      name: "আপনার নাম",
-      email: "আপনার ইমেইল",
-      message: "আপনার বার্তা",
-      send: "বার্তা পাঠান",
-      sentTitle: "বার্তা সফলভাবে পাঠানো হয়েছে!",
-      sentMsg: "যোগাযোগ করার জন্য ধন্যবাদ! আমি দ্রুত আপনার সাথে যোগাযোগ করব।",
-      close: "বন্ধ করুন",
-      location: "ঢাকা, বাংলাদেশ",
+      title: "Contact Me",
+      findMe: "You can find me on:",
+      orMessage: "Or send me a message:",
+      name: "Name",
+      email: "Email",
+      message: "Message",
+      send: "Send",
+      sentTitle: "Message Sent!",
+      sentMsg: "Thanks for reaching out. I’ll get back to you soon.",
+      close: "Close",
     },
   };
 
   const t = content[language] || content.en;
 
   return (
-    <div className="w-full h-full relative bg-neutral-200 select-none overflow-hidden font-mono">
+    <div className="w-full h-full relative bg-neutral-200 select-none">
       <div className="absolute w-full h-full bg-grid"></div>
-
-      <div className="absolute w-full h-full text-xs md:text-sm p-4 flex flex-col justify-between border border-neutral-300">
-        {/* Header */}
-        <div className="w-full text-center items-center justify-between flex pb-1 border-b border-neutral-300/60">
-          <button
-            onClick={() => setTarget("AboutMe_Red_Text_Target")}
-            className="cursor-pointer hover:scale-110 transition-transform"
-          >
-            <MdKeyboardArrowLeft className="w-6 h-6 md:w-10 md:h-10 text-neutral-800" />
+      <div className="absolute w-full h-full text-xl md:text-2xl p-4 flex flex-col items-center justify-between border font-mono">
+        <div className="w-full text-center items-center justify-between flex font-mono">
+          <button onClick={() => setTarget("AboutMe_Red_Text_Target")}>
+            <MdKeyboardArrowLeft className="w-7 h-7 md:w-12 md:h-12" />
           </button>
-          <h1 className="text-xl md:text-3xl font-bold tracking-tight text-neutral-900">
-            {t.title}
-          </h1>
-          <button
-            onClick={() => setTarget("AboutMe_Red_Text_Target")}
-            className="cursor-pointer hover:scale-110 transition-transform"
-          >
-            <MdKeyboardArrowRight className="w-6 h-6 md:w-10 md:h-10 text-neutral-800" />
+          <h1 className="text-2xl md:text-4xl">{t.title}</h1>
+          <button onClick={() => setTarget("AboutMe_Red_Text_Target")}>
+            <MdKeyboardArrowRight className="w-7 h-7 md:w-12 md:h-12" />
           </button>
         </div>
 
-        {/* Quick Connect Icon Buttons */}
-        <div className="w-full text-center flex flex-col gap-1 my-2">
-          <p className="text-xs md:text-sm font-semibold text-neutral-700">
+        <div className="w-full text-center items-center justify-center flex flex-col md:gap-4">
+          <h2 className="w-full text-center text-xl md:text-3xl font-mono">
             {t.findMe}
-          </p>
-          <div className="w-full flex items-center justify-around px-2">
+          </h2>
+          <div className="w-full flex items-center justify-around">
             <a
               href="https://linkedin.com/in/sakilahammed"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="p-3 rounded-2xl shadow-md shadow-neutral-400 hover:scale-110 transition-transform bg-neutral-100 text-blue-700 border border-neutral-50 cursor-pointer"
+              className="font-mono flex gap-4 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50"
             >
-              <BsLinkedin className="w-5 h-5 md:w-7 md:h-7" />
+              <BsLinkedin className="w-7 h-7 md:w-12 md:h-12" />
             </a>
             <a
               href="https://github.com/sakilahammed-dev"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-3 rounded-2xl shadow-md shadow-neutral-400 hover:scale-110 transition-transform bg-neutral-100 text-neutral-900 border border-neutral-50 cursor-pointer"
+              className="font-mono flex gap-4 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50"
             >
-              <BsGithub className="w-5 h-5 md:w-7 md:h-7" />
+              <BsGithub className="w-7 h-7 md:w-12 md:h-12" />
             </a>
             <a
               href="https://wa.me/8801763838194"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="WhatsApp Chat"
-              className="p-3 rounded-2xl shadow-md shadow-neutral-400 hover:scale-110 transition-transform bg-neutral-100 text-green-600 border border-neutral-50 cursor-pointer"
+              className="font-mono flex gap-4 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50"
             >
-              <BsWhatsapp className="w-5 h-5 md:w-7 md:h-7" />
-            </a>
-            <a
-              href="mailto:sakilahammed114@gmail.com"
-              aria-label="Email Directly"
-              className="p-3 rounded-2xl shadow-md shadow-neutral-400 hover:scale-110 transition-transform bg-neutral-100 text-red-600 border border-neutral-50 cursor-pointer"
-            >
-              <BsEnvelopeFill className="w-5 h-5 md:w-7 md:h-7" />
+              <BsWhatsapp className="w-7 h-7 md:w-12 md:h-12" />
             </a>
           </div>
-          <p className="text-[11px] text-neutral-500 mt-1">
-            sakilahammed114@gmail.com • {t.location}
-          </p>
         </div>
 
-        {/* Message Form or Success Modal */}
         {showModal ? (
-          <div className="w-full flex-1 flex flex-col items-center justify-center gap-3 p-4 bg-neutral-100/90 rounded-2xl border border-neutral-300">
-            <h2 className="font-bold text-lg md:text-xl text-neutral-900 text-center">
+          <div className="w-full h-full flex flex-col text-2xl items-center justify-around">
+            <h2 className="font-semibold w-full text-center text-3xl">
               {t.sentTitle}
             </h2>
-            <p className="text-xs md:text-sm text-neutral-600 text-center">
-              {t.sentMsg}
-            </p>
+            <p className="w-full text-center">{t.sentMsg}</p>
             <button
               onClick={() => setShowModal(false)}
-              className="px-4 py-2 rounded-xl bg-neutral-900 text-white text-xs md:text-sm font-semibold hover:scale-105 transition-transform cursor-pointer"
+              className="font-mono flex items-center justify-center py-2 px-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/60 border border-neutral-50"
             >
               {t.close}
             </button>
@@ -144,21 +114,24 @@ export default function ContactPage({ setTarget, language }) {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="w-full flex flex-col gap-2 pt-1 border-t border-neutral-300/60"
+            className="w-full flex flex-col text-lg md:text-2xl md:gap-2 mb-4"
           >
-            <div className="w-full flex flex-col">
-              <label htmlFor="name" className="text-[11px] md:text-xs text-neutral-600 font-semibold mb-0.5">
+            <h2 className="text-xl md:text-3xl w-full text-center font-mono">
+              {t.orMessage}
+            </h2>
+            <div className="w-full h-full px-4">
+              <label htmlFor="name" className="font-mono">
                 {t.name}
               </label>
               <input
                 id="name"
                 name="name"
                 required
-                className="p-1.5 md:p-2 rounded-xl bg-neutral-100 shadow-inner text-xs md:text-sm border border-neutral-300 outline-none focus:border-neutral-700"
+                className="p-2 rounded-2xl bg-neutral-200 shadow-inner shadow-neutral-500 w-full font-mono border border-neutral-50"
               />
             </div>
-            <div className="w-full flex flex-col">
-              <label htmlFor="email" className="text-[11px] md:text-xs text-neutral-600 font-semibold mb-0.5">
+            <div className="w-full h-full px-4">
+              <label htmlFor="email" className="font-mono">
                 {t.email}
               </label>
               <input
@@ -166,27 +139,28 @@ export default function ContactPage({ setTarget, language }) {
                 name="email"
                 type="email"
                 required
-                className="p-1.5 md:p-2 rounded-xl bg-neutral-100 shadow-inner text-xs md:text-sm border border-neutral-300 outline-none focus:border-neutral-700"
+                className="p-2 rounded-2xl shadow-inner bg-neutral-200 shadow-neutral-500 w-full font-mono border border-neutral-50"
               />
             </div>
-            <div className="w-full flex flex-col">
-              <label htmlFor="message" className="text-[11px] md:text-xs text-neutral-600 font-semibold mb-0.5">
+            <div className="w-full h-full px-4">
+              <label htmlFor="message" className="font-mono">
                 {t.message}
               </label>
               <textarea
                 id="message"
                 name="message"
-                rows={2}
                 required
-                className="p-1.5 md:p-2 rounded-xl bg-neutral-100 shadow-inner text-xs md:text-sm border border-neutral-300 outline-none focus:border-neutral-700 resize-none"
+                className="p-2 rounded-2xl shadow-inner bg-neutral-200 shadow-neutral-500 w-full font-mono border border-neutral-50"
               />
             </div>
-            <button
-              type="submit"
-              className="w-full mt-1 py-2 rounded-xl bg-neutral-900 text-white text-xs md:text-sm font-semibold shadow-md shadow-neutral-400 hover:scale-[1.02] transition-transform cursor-pointer"
-            >
-              {t.send}
-            </button>
+            <div className="w-full h-full px-4">
+              <button
+                type="submit"
+                className="font-mono flex items-center justify-center px-4 md:py-2 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50"
+              >
+                {t.send}
+              </button>
+            </div>
           </form>
         )}
       </div>
