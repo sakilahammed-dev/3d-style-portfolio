@@ -22,9 +22,54 @@ import {
   SiPython,
   SiNumpy,
   SiScikitlearn,
+  SiNextdotjs,
+  SiTypescript,
+  SiPostgresql,
+  SiPrisma,
 } from "react-icons/si";
 
 export const projects = [
+  {
+    title: "Unnoto Khabar",
+    can: "images/projects/UnnotoKhabar/UnnotoKhabarCan.webp",
+    images: [
+      { src: "images/projects/UnnotoKhabar/1.webp", alt: "Unnoto Khabar Honey Banner" },
+      { src: "images/projects/UnnotoKhabar/2.webp", alt: "Unnoto Khabar Dates Banner" },
+      { src: "images/projects/UnnotoKhabar/3.webp", alt: "Natural Raw Honey Product" },
+      { src: "images/projects/UnnotoKhabar/4.webp", alt: "Honey Nuts Premium Mix" },
+    ],
+    description: {
+      en: "Unnoto Khabar (উন্নত খাবার) is a full-stack premium organic e-commerce platform built with Next.js, TypeScript, Tailwind CSS, Prisma, and PostgreSQL. Features real-time order processing, reactive cart management, and seamless edge deployment.",
+      es: "Unnoto Khabar es una plataforma de comercio electrónico orgánica premium construida con Next.js, TypeScript, Tailwind CSS, Prisma y PostgreSQL. Cuenta con procesamiento de pedidos en tiempo real y despliegue en el edge.",
+      bn: "উন্নত খাবার (Unnoto Khabar) - নেক্সট.জেএস, টাইপস্ক্রিপ্ট, প্রিজমা এবং পোস্টগ্রেসকিউএল দিয়ে নির্মিত প্রিমিয়াম অর্গানিক ই-কমার্স প্ল্যাটফর্ম। কুইক অর্ডার, রিয়েল-টাইম কার্ট এবং ক্লাউডফ্লেয়ার এজ আর্কিটেকচার সম্বলিত।",
+    },
+    tech: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss, SiPostgresql, SiPrisma],
+    features: {
+      en: [
+        "Modern Next.js App Router architecture with high-speed performance.",
+        "Quick Order modal and reactive Cart Context management.",
+        "Prisma ORM with PostgreSQL database schema and migrations.",
+        "Full mobile-responsive design with district delivery calculations.",
+        "Edge-ready Cloudflare & Vercel deployment with SSL and caching.",
+      ],
+      es: [
+        "Arquitectura moderna de Next.js App Router con alto rendimiento.",
+        "Modal de pedido rápido y gestión reactiva de carrito de compras.",
+        "Integración de base de datos PostgreSQL con Prisma ORM.",
+        "Diseño totalmente adaptable a móviles con cálculo de envíos.",
+        "Despliegue optimizado en Vercel y Cloudflare con caché perimetral.",
+      ],
+      bn: [
+        "নেক্সট.জেএস অ্যাপ রাউটার ও হাই-স্পিড পারফরম্যান্স আর্কিটেকচার।",
+        "কুইক অর্ডার মডাল ও রিয়েল-টাইম কার্ট স্টেট ম্যানেজমেন্ট।",
+        "প্রিজমা ওআরএম ও পোস্টগ্রেসকিউএল ডেটাবেস ইন্টিগ্রেশন।",
+        "৬৪ জেলার ডেলিভারি ও কুরিয়ার শিপিং ক্যালকুলেশন।",
+        "ভার্সেল ও ক্লাউডফ্লেয়ার এজ ডিপ্লয়মেন্ট।",
+      ],
+    },
+    date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
+    github: "https://github.com/sakilahammed-dev/unnoto-khabar",
+  },
   {
     title: "ArcFace Backbones",
     can: "images/projects/ArcfaceBackbones/ArcfaceCan.webp",
