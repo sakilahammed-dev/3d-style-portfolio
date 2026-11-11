@@ -72,7 +72,7 @@ export default function ContactPage({ setTarget, language }) {
           </h2>
           <div className="w-full flex items-center justify-around">
             <a
-              href="https://linkedin.com/in/sakilahammed"
+              href="https://www.linkedin.com/in/sakilahammed-ai/"
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono flex gap-4 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50"
