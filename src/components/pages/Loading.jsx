@@ -287,7 +287,7 @@ export default function Loading({ loaded, setShowLoading }) {
                 ref={spaRef}
                 className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
               >
-                Iniciar
+                শুরু করুন
               </span>
             </button>
           ) : (

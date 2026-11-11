@@ -3,7 +3,7 @@ import { BsTranslate } from "react-icons/bs";
 
 const LANGUAGES = [
   { code: "en", label: "English" },
-  { code: "es", label: "Español" },
+  { code: "bn", label: "বাংলা" },
 ];
 
 export default function LanguageSelector({ selected, onChange }) {

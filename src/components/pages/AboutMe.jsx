@@ -23,13 +23,13 @@ export default function AboutMe({ setTarget, language }) {
       cvFile: "images/Sakil_Ahammed_CV.pdf",
     },
     bn: {
-      title: "About Me",
-      name: "I'm Sakil Ahammed",
+      title: "আমার সম্পর্কে",
+      name: "আমি শাকিল আহাম্মেদ",
       desc1:
-        "Passionate about learning new technologies, building things, breaking them, and figuring out how to make them better.",
+        "নতুন প্রযুক্তি শেখা, উন্নত সিস্টেম আর্কিটেকচার তৈরি এবং জটিল সমস্যার গভীরে গিয়ে সমাধান করতে নিবেদিতপ্রাণ।",
       desc2:
-        "Full-Stack AI & Automation Architect specializing in web, mobile applications, and workflow automation.",
-      cv: "Check out my CV",
+        "ফুল-স্ট্যাক এআই ও অটোমেশন আর্কিটেক্ট — ওয়েব, মোবাইল অ্যাপস ও স্বয়ংক্রিয় ব্যবসায়িক সমাধান তৈরিতে দক্ষ।",
+      cv: "আমার সিভি দেখুন",
       cvFile: "images/Sakil_Ahammed_CV.pdf",
     },
   };
