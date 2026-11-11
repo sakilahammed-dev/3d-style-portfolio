@@ -69,6 +69,7 @@ export const projects = [
     },
     date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
     github: "https://github.com/sakilahammed-dev/unnoto-khabar",
+    homepage: "https://unnoto-khabar.vercel.app",
   },
   {
     title: "ArcFace Backbones",

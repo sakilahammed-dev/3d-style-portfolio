@@ -53,7 +53,7 @@ export default function AboutMe({ setTarget, language }) {
         <img
           src="images/profile.webp"
           alt="Sakil Ahammed"
-          className="flex object-cover rounded-4xl shadow-lg shadow-neutral-500 h-1/3 border border-neutral-50"
+          className="object-cover rounded-4xl shadow-lg shadow-neutral-500 h-1/3 aspect-square border border-neutral-50 shrink-0"
         />
 
         <div className="w-full h-full text-center items-center justify-between flex flex-col font-mono p-2">
