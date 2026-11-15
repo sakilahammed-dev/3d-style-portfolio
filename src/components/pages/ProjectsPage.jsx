@@ -20,13 +20,13 @@ export default function ProjectsPage({ language }) {
 
   const content = {
     en: {
-      back: "ব্যাক",
-      prev: "পূর্ববর্তী",
-      next: "পরবর্তী",
-      page: "পৃষ্ঠা",
-      of: "এর",
-      viewCode: "GitHub এর সোর্স",
-      liveDemo: "Live Website দেখুন",
+      back: "Back",
+      prev: "Prev",
+      next: "Next",
+      page: "Page",
+      of: "of",
+      viewCode: "GitHub Source",
+      liveDemo: "Live Website",
     },
     es: {
       back: "Volver",
@@ -38,7 +38,7 @@ export default function ProjectsPage({ language }) {
       liveDemo: "Sitio Web",
     },
     bn: {
-      back: "ব্যাক",
+      back: "Back",
       prev: "পূর্ববর্তী",
       next: "পরবর্তী",
       page: "পৃষ্ঠা",
