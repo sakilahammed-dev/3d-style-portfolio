@@ -26,6 +26,7 @@ import {
   SiTypescript,
   SiPostgresql,
   SiPrisma,
+  SiRedis,
 } from "react-icons/si";
 
 export const projects = [
@@ -116,37 +117,46 @@ export const projects = [
   },
 
   {
-    title: "3D Portfolio",
-    can: "images/projects/3dPortfolio/3dPortfolioCan.webp",
+    title: "Al-Mu'allim OS",
+    can: "images/projects/AlMuallimOS/AlMuallimCan.webp",
     images: [
-      { src: "images/projects/3dPortfolio/1.gif", alt: "Image1" },
-      { src: "images/projects/3dPortfolio/2.gif", alt: "Image2" },
-      { src: "images/projects/3dPortfolio/3.gif", alt: "Image3" },
-      { src: "images/projects/3dPortfolio/4.gif", alt: "Image4" },
+      { src: "images/projects/AlMuallimOS/1.webp", alt: "Muhtamim Executive Dashboard & Institutional Hub" },
+      { src: "images/projects/AlMuallimOS/2.webp", alt: "30-Para Hifz Engine & Retention Heatmap" },
+      { src: "images/projects/AlMuallimOS/3.webp", alt: "Verified Campus Gatepass Security Terminal" },
+      { src: "images/projects/AlMuallimOS/4.webp", alt: "Shariah Dual-Fund Double-Entry Ledger & Balance Sheet" },
     ],
     description: {
-      en: "3DPortfolio is an interactive personal portfolio built with Three.js and React Three Fiber. It presents a 3D environment with animated objects that represent sections like About Me, Contact, Music, Games, and Projects. HTML content is rendered directly on 3D model screens, enhanced with GSAP animations and multilingual support.",
-      es: "3DPortfolio es un portafolio personal interactivo creado con Three.js y React Three Fiber. Presenta un entorno 3D con objetos animados que representan secciones como Sobre Mí, Contáctame, Música, Juegos y Proyectos. El contenido HTML se muestra directamente en pantallas de modelos 3D, con animaciones de GSAP y soporte multilingüe.",
+      en: "Al-Mu'allim OS is an enterprise-grade, multi-tenant madrasa operating system engineered for Bangladeshi Qawmi, Hifz, and Aliya institutions. Features a 30-Para Quran Hifz memorization engine with retention heatmaps, Shariah-compliant dual-fund double-entry accounting (General vs Zakat/Lillah), server-side OTP gatepass terminal, dual-board exams (Befaq & NCTB), and BANBEIS regulatory survey export.",
+      es: "Al-Mu'allim OS es un sistema operativo madrasa multi-inquilino de nivel empresarial diseñado para instituciones islámicas en Bangladesh con motor de memorización Hifz de 30 paras, contabilidad dual de la Shariah y terminal de seguridad con OTP.",
+      bn: "আল-মু'আল্লিম ওএস (Al-Mu'allim OS) - বাংলাদেশের কওমি, হিফজ ও আলিয়া মাদ্রাসার জন্য নির্মিত এন্টারপ্রাইজ মাল্টি-টেন্যান্ট ম্যানেজমেন্ট অপারেটিং সিস্টেম। এতে রয়েছে ৩০-পারা হিফজ ট্র্যাকার ও রিটেনশন হিটম্যাপ, শরিয়াহ দ্বৈত-তহবিল (সাধারণ বনাম যাকাত/লিল্লাহ) ডাবল-এন্ট্রি লেজার, অভিভাবক ওটিপি সম্বলিত গেটপাস সিকিউরিটি টার্মিনাল এবং ব্যানবেইস বার্ষিক অডিট এক্সপোর্ট।",
     },
-    tech: [SiThreedotjs, SiReact, SiTailwindcss, SiVite, SiBlender],
+    tech: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss, SiPostgresql, SiPrisma, SiRedis, SiDocker],
     features: {
       en: [
-        "Immersive 3D navigation with interactive portfolio sections.",
-        "HTML content embedded on 3D model surfaces.",
-        "Dynamic hover effects and object interactions.",
-        "Smooth GSAP-powered camera transitions.",
-        "Multilanguage project descriptions.",
+        "30-Para Hifz memorization engine with Sabak, Sabki, Amokhta and revision decay heatmaps.",
+        "Shariah Dual-Fund accounting strictly isolating General operating funds from Zakat/Lillah welfare.",
+        "High-security campus gatepass terminal with server-side OTP, 3-attempt lockout & NID fallback.",
+        "Dual-board examination & sanad engine supporting Qawmi (Befaq) and Aliya (NCTB) grading.",
+        "BANBEIS regulatory survey reporting, Argon2id security, and tested disaster recovery backup.",
       ],
       es: [
-        "Navegación 3D inmersiva con secciones interactivas.",
-        "Contenido HTML incrustado en superficies de modelos 3D.",
-        "Efectos dinámicos al pasar el ratón y objetos interactivos.",
-        "Transiciones suaves de cámara con GSAP.",
-        "Descripciones de proyectos en varios idiomas.",
+        "Motor de memorización de 30 paras con mapas de calor de revisión y retención.",
+        "Contabilidad de doble fondo de la Shariah que aísla fondos operativos de Zakat/Lillah.",
+        "Terminal de seguridad de pases con OTP del servidor y bloqueo ante intentos fallidos.",
+        "Motor académico unificado para calificaciones de juntas Qawmi y Aliya.",
+        "Exportación regulatoria BANBEIS y copias de seguridad de recuperación ante desastres.",
+      ],
+      bn: [
+        "সবক, সবকি, আমুখতা ও রিভিশন ডিকে অ্যালার্ট সহ ৩০-পারা হিফজ ট্র্যাকিং হিটম্যাপ।",
+        "সাধারণ তহবিল ও যাকাত/লিল্লাহ ফান্ড সম্পূর্ণ পৃথক রেখে শরিয়াহ ডাবল-এন্ট্রি ব্যালেন্স শিট।",
+        "সার্ভার-সাইড ওটিপি ও ৩-বার ব্যর্থতায় লকআউট সুবিধা সহ সুরক্ষিত ক্যাম্পাস গেটপাস টার্মিনাল।",
+        "বেফাকুল মাদারিস (কওমি) ও মাদ্রাসা বোর্ড (আলিয়া) উভয় ধারার সমন্বিত রেজাল্ট ও সনদ ইঞ্জিন।",
+        "ব্যানবেইস (BANBEIS) বাৎসরিক শিক্ষা অডিট এক্সপোর্ট এবং পিডিপিএ ২০২৬ কমপ্লায়েন্স।",
       ],
     },
-    date: { en: "August 2025", es: "Agosto de 2025" },
-    github: "https://github.com/ItO210/3d-portfolio-website",
+    date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
+    github: "https://github.com/sakilahammed-dev/al-muallim-os",
+    homepage: "https://al-muallim-os.vercel.app",
   },
 
   {
