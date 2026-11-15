@@ -17,7 +17,14 @@ export default function App() {
   const [showLoading, setShowLoading] = useState(true);
   const [cameraReset, setCameraReset] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(() => {
+    return localStorage.getItem("portfolio_lang") || "bn";
+  });
+
+  const handleLanguageChange = (lang) => {
+    setLanguage(lang);
+    localStorage.setItem("portfolio_lang", lang);
+  };
 
   const handleToggleMute = () => {
     if (!audioRef.current) return;
@@ -69,7 +76,7 @@ export default function App() {
               <BsFillHouseDoorFill className="w-6 h-6 md:w-8 md:h-8" />
             </button>
             <div className="h-full flex gap-2">
-              <LanguageSelector selected={language} onChange={setLanguage} />
+              <LanguageSelector selected={language} onChange={handleLanguageChange} />
               <audio
                 ref={audioRef}
                 src={"music/hamon.wav"}

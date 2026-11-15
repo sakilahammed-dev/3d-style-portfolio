@@ -20,13 +20,13 @@ export default function ProjectsPage({ language }) {
 
   const content = {
     en: {
-      back: "Back",
-      prev: "Prev",
-      next: "Next",
-      page: "Page",
-      of: "of",
-      viewCode: "GitHub Source",
-      liveDemo: "Live Website",
+      back: "ব্যাক",
+      prev: "পূর্ববর্তী",
+      next: "পরবর্তী",
+      page: "পৃষ্ঠা",
+      of: "এর",
+      viewCode: "GitHub এর সোর্স",
+      liveDemo: "Live Website দেখুন",
     },
     es: {
       back: "Volver",
@@ -48,7 +48,7 @@ export default function ProjectsPage({ language }) {
     },
   };
 
-  const t = content[language] || content.en;
+  const t = content[language] || content.bn || content.en;
 
   // Single Project Clean & Crystal-Clear Showcase View
   if (selectedProject) {
@@ -72,6 +72,7 @@ export default function ProjectsPage({ language }) {
 
     const detailed =
       selectedProject.detailedDescription?.[language] ||
+      selectedProject.detailedDescription?.bn ||
       selectedProject.detailedDescription?.en;
 
     return (
@@ -86,7 +87,7 @@ export default function ProjectsPage({ language }) {
             </h1>
 
             <span className="text-base md:text-xl text-neutral-600 font-medium px-1">
-              {selectedProject.date?.[language] || selectedProject.date?.en}
+              {selectedProject.date?.[language] || selectedProject.date?.bn || selectedProject.date?.en}
             </span>
           </div>
 
