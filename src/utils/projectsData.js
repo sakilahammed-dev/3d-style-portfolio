@@ -34,16 +34,42 @@ export const projects = [
     title: "Unnoto Khabar",
     can: "images/projects/UnnotoKhabar/UnnotoKhabarCan.webp",
     images: [
-      { src: "images/projects/UnnotoKhabar/hero_products.jpg", alt: "Unnoto Khabar Premium Organic Showcase" },
-      { src: "images/projects/UnnotoKhabar/1.webp", alt: "Unnoto Khabar Honey Storefront" },
-      { src: "images/projects/UnnotoKhabar/2.webp", alt: "Unnoto Khabar Dates Collection" },
-      { src: "images/projects/UnnotoKhabar/3.webp", alt: "Natural Raw Honey Product" },
-      { src: "images/projects/UnnotoKhabar/4.webp", alt: "Honey Nuts Premium Mix" },
+      { src: "images/projects/UnnotoKhabar/unnoto_banner.webp", alt: "উন্নত খাবার - সুস্থ জীবনের সমাহার" },
     ],
     description: {
-      en: "Unnoto Khabar (উন্নত খাবার) is a full-stack premium organic e-commerce platform built with Next.js, TypeScript, Tailwind CSS, Prisma, and PostgreSQL. Features real-time order processing, reactive cart management, and seamless edge deployment.",
-      es: "Unnoto Khabar es una plataforma de comercio electrónico orgánica premium construida con Next.js, TypeScript, Tailwind CSS, Prisma y PostgreSQL. Cuenta con procesamiento de pedidos en tiempo real y despliegue en el edge.",
-      bn: "উন্নত খাবার (Unnoto Khabar) - নেক্সট.জেএস, টাইপস্ক্রিপ্ট, প্রিজমা এবং পোস্টগ্রেসকিউএল দিয়ে নির্মিত প্রিমিয়াম অর্গানিক ই-কমার্স প্ল্যাটফর্ম। কুইক অর্ডার, রিয়েল-টাইম কার্ট এবং ক্লাউডফ্লেয়ার এজ আর্কিটেকচার সম্বলিত।",
+      en: "Unnoto Khabar (উন্নত খাবার) is a full-stack premium organic e-commerce platform built with Next.js, TypeScript, Tailwind CSS, Prisma, and PostgreSQL. Dedicated to providing 100% pure, natural, and adulteration-free wholesome nutrition across Bangladesh with frictionless 1-click quick orders.",
+      es: "Unnoto Khabar es una plataforma de comercio electrónico orgánica premium construida con Next.js, TypeScript, Tailwind CSS, Prisma y PostgreSQL.",
+      bn: "উন্নত খাবার (Unnoto Khabar) - সুস্থ জীবনের জন্য শতভাগ খাঁটি, প্রাকৃতিক ও নির্ভেজাল খাদ্যের বিশ্বস্ত অনলাইন শপ। নেক্সট.জেএস (Next.js), টাইপস্ক্রিপ্ট, প্রিজমা এবং পোস্টগ্রেসকিউএল দিয়ে নির্মিত একটি পূর্ণাঙ্গ আধুনিক ই-কমার্স প্ল্যাটফর্ম।",
+    },
+    detailedDescription: {
+      en: {
+        intro: "Unnoto Khabar (উন্নত খাবার) is a modern full-stack organic e-commerce brand engineered to deliver 100% natural, unadulterated, and nutrient-dense foods straight to households across Bangladesh with high-speed performance and zero friction.",
+        categories: [
+          "Pure Raw Honey: 100% unprocessed, natural floral honey sustainably harvested from the Sundarbans and local organic beekeepers.",
+          "Nutritious Premium Honey Nuts: A power-packed fusion of hand-roasted cashews, almonds, walnuts, and pistachios steeped in pure raw honey.",
+          "Cold-Pressed Virgin Black Seed Oil: 100% pure therapeutic oil extracted with cold-press methods to ensure peak health benefits.",
+          "Imported Royal Dates: Hand-selected authentic Medjool, Ajwa, and Maryam dates delivered in hygienic airtight packaging."
+        ],
+        techDetails: [
+          "Next.js App Router & TypeScript: Ultra-responsive edge rendering with instant hydration and high-speed page loads.",
+          "1-Click Quick Order: Frictionless guest checkout modal without mandatory upfront sign-in.",
+          "64 Districts Delivery Engine: Automated district delivery calculations with real-time tracking and PostgreSQL database safety."
+        ]
+      },
+      bn: {
+        intro: "উন্নত খাবার (Unnoto Khabar) - সুস্থ ও সুন্দর জীবনের জন্য শতভাগ খাঁটি, প্রাকৃতিক ও নির্ভেজাল পুষ্টিকর খাদ্যের এক অনন্য বিশ্বস্ত সমাহার। আধুনিক প্রযুক্তি ও স্বাস্থ্যকর খাদ্যসংস্কৃতির সমন্বয়ে সারা বাংলাদেশের মানুষের কাছে নিরাপদ ও নির্ভেজাল খাদ্যপণ্য দ্রুত পৌঁছে দেওয়ার লক্ষ্য নিয়ে এই পূর্ণাঙ্গ ই-কমার্স প্ল্যাটফর্মটি তৈরি করা হয়েছে।",
+        categories: [
+          "খাঁটি প্রাকৃতিক মধু (Pure Honey): কোনো কৃত্রিম চিনি বা কেমিক্যাল প্রসেসিং ছাড়া সুন্দরবন ও বিভিন্ন ফুলের শতভাগ খাঁটি কাঁচা মধু।",
+          "পুষ্টিকর প্রিমিয়াম হানি নাট (Honey Nuts): কাজুবাদাম, কাঠবাদাম, পেস্তাবাদাম ও আখরোটের পুষ্টিকর সংমিশ্রণে প্রস্তুত প্রিমিয়াম হেলথ ফুড।",
+          "কোল্ড-প্রেসড কালোজিরা তেল (Black Seed Oil): রোগপ্রতিরোধ ক্ষমতা বৃদ্ধি ও সুস্বাস্থ্যের জন্য শতভাগ নির্ভেজাল ফার্স্ট-কোল্ড-প্রেসড তেল।",
+          "আমদানি করা প্রিমিয়াম খেজুর (Premium Dates): আজওয়া, মেদজুল, মরিয়ম ও আম্বর খেজুরের বিশেষ ফ্রেশ কালেকশন।"
+        ],
+        techDetails: [
+          "নেক্সট.জেএস (Next.js) ও টাইপস্ক্রিপ্ট: সর্বাধুনিক এজ আর্কিটেকচার যা প্রতিটি পেজকে চোখের পলকে লোড করে।",
+          "১-ক্লিকে কুইক অর্ডার সিস্টেম: অ্যাকাউন্ট খোলার ঝামেলা ছাড়াই সরাসরি নাম, ফোন ও ঠিকানা দিয়ে চোখের পলকে অর্ডার করার সুবিধা।",
+          "৬৪ জেলার স্বয়ংক্রিয় ডেলিভারি: কুরিয়ার চার্জ স্বয়ংক্রিয় হিসাব, রিয়েল-টাইম কার্ট এবং প্রিজমা ও পোস্টগ্রেসকিউএল ডেটাবেস নিরাপত্তা।"
+        ]
+      }
     },
     tech: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss, SiPostgresql, SiPrisma],
     features: {

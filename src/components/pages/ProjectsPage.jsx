@@ -20,13 +20,13 @@ export default function ProjectsPage({ language }) {
 
   const content = {
     en: {
-      back: "Back to Projects",
+      back: "Back",
       prev: "Prev",
       next: "Next",
       page: "Page",
       of: "of",
-      viewCode: "GitHub",
-      liveDemo: "Live Demo",
+      viewCode: "GitHub Source",
+      liveDemo: "Live Website",
     },
     es: {
       back: "Volver",
@@ -34,17 +34,17 @@ export default function ProjectsPage({ language }) {
       next: "Siguiente",
       page: "Página",
       of: "de",
-      viewCode: "GitHub",
-      liveDemo: "Ver Demo",
+      viewCode: "Código GitHub",
+      liveDemo: "Sitio Web",
     },
     bn: {
-      back: "তালিকায় ফিরুন",
+      back: "ব্যাক",
       prev: "পূর্ববর্তী",
       next: "পরবর্তী",
       page: "পৃষ্ঠা",
       of: "এর",
-      viewCode: "GitHub",
-      liveDemo: "লাইভ দেখুন",
+      viewCode: "GitHub এর সোর্স",
+      liveDemo: "Live Website দেখুন",
     },
   };
 
@@ -70,11 +70,15 @@ export default function ProjectsPage({ language }) {
       setActiveImageIndex((prev) => (prev + 1) % images.length);
     };
 
+    const detailed =
+      selectedProject.detailedDescription?.[language] ||
+      selectedProject.detailedDescription?.en;
+
     return (
       <div className="font-mono w-full h-full relative bg-neutral-200 select-none text-xl md:text-3xl text-neutral-800">
         <div className="absolute w-full h-full bg-grid"></div>
 
-        <div className="absolute w-full h-full p-6 flex flex-col items-center justify-between gap-4 border border-neutral-300">
+        <div className="absolute w-full h-full p-6 flex flex-col items-center justify-between gap-3 border border-neutral-300">
           {/* Top Bar: Back Button & Title */}
           <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80">
             <button
@@ -97,9 +101,9 @@ export default function ProjectsPage({ language }) {
             </span>
           </div>
 
-          {/* Prominent High-Resolution Showcase Image with Navigation Arrows */}
-          <div className="relative w-full h-[45%] flex items-center justify-center overflow-hidden">
-            <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-xl shadow-neutral-500/40 border-2 border-neutral-50 bg-neutral-100 flex items-center justify-center">
+          {/* Prominent High-Resolution Showcase Image */}
+          <div className={`relative w-full ${detailed ? "h-[38%]" : "h-[45%]"} flex items-center justify-center overflow-hidden shrink-0`}>
+            <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-xl shadow-neutral-500/30 border-2 border-neutral-50 bg-neutral-100 flex items-center justify-center">
               <img
                 src={currentImg.src}
                 alt={currentImg.alt || selectedProject.title}
@@ -107,6 +111,7 @@ export default function ProjectsPage({ language }) {
               />
             </div>
 
+            {/* Slider arrows and dots only when there are multiple images */}
             {images.length > 1 && (
               <>
                 <button
@@ -140,29 +145,76 @@ export default function ProjectsPage({ language }) {
             )}
           </div>
 
-          {/* Clean & Crisp Description */}
-          <p className="text-center text-lg md:text-2xl text-neutral-800 leading-relaxed px-4 max-w-[95%]">
-            {selectedProject.description?.[language] ||
-              selectedProject.description?.en}
-          </p>
+          {/* Project Details Content Area */}
+          {detailed ? (
+            <div className="flex-1 w-full overflow-y-auto pr-1 flex flex-col gap-3 text-left font-sans text-neutral-800">
+              <div className="bg-white/70 p-4 rounded-2xl border border-neutral-300 shadow-xs">
+                <p className="text-base md:text-xl font-medium leading-relaxed text-neutral-800">
+                  {detailed.intro}
+                </p>
+              </div>
 
-          {/* Smooth Sliding Tech Stack Ticker */}
-          {selectedProject.tech && (
-            <div className="w-full py-1">
-              <TechCarousel icons={selectedProject.tech} />
+              {detailed.categories && (
+                <div className="bg-white/80 p-4 rounded-2xl border border-neutral-300 shadow-xs">
+                  <h3 className="font-bold text-neutral-900 text-lg md:text-2xl mb-2 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+                    {language === "bn" ? "আমাদের বিশেষ খাদ্যপণ্যসমূহ:" : "Core Premium Offerings:"}
+                  </h3>
+                  <ul className="space-y-2 text-base md:text-xl text-neutral-700">
+                    {detailed.categories.map((cat, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-emerald-700 font-bold text-lg">•</span>
+                        <span>{cat}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {detailed.techDetails && (
+                <div className="bg-white/80 p-4 rounded-2xl border border-neutral-300 shadow-xs">
+                  <h3 className="font-bold text-neutral-900 text-lg md:text-2xl mb-2 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                    {language === "bn" ? "প্রযুক্তিগত বৈশিষ্ট্য ও বিশেষত্ব:" : "Technical Architecture & Highlights:"}
+                  </h3>
+                  <ul className="space-y-2 text-base md:text-xl text-neutral-700">
+                    {detailed.techDetails.map((td, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-blue-700 font-bold text-lg">•</span>
+                        <span>{td}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
+          ) : (
+            <>
+              {/* Clean & Crisp Description */}
+              <p className="text-center text-lg md:text-2xl text-neutral-800 leading-relaxed px-4 max-w-[95%]">
+                {selectedProject.description?.[language] ||
+                  selectedProject.description?.en}
+              </p>
+
+              {/* Smooth Sliding Tech Stack Ticker */}
+              {selectedProject.tech && (
+                <div className="w-full py-1">
+                  <TechCarousel icons={selectedProject.tech} />
+                </div>
+              )}
+            </>
           )}
 
-          {/* Bottom Action Buttons */}
-          <div className="flex gap-4 w-full justify-center p-2">
+          {/* Bottom Action Buttons: Back, GitHub Source, Live Website */}
+          <div className="flex gap-4 w-full justify-center p-2 shrink-0">
             <button
               onClick={() => {
                 setSelectedProject(null);
                 setActiveImageIndex(0);
               }}
-              className="flex-1 font-mono flex gap-3 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50 text-lg md:text-2xl font-bold cursor-pointer"
+              className="flex-1 font-mono flex gap-2 items-center justify-center p-3.5 rounded-2xl shadow-md shadow-neutral-400 hover:scale-105 transition-transform bg-neutral-200/90 border border-neutral-50 text-base md:text-xl font-bold cursor-pointer text-neutral-800"
             >
-              <BsArrowLeft className="w-6 h-6" />
+              <BsArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
               <span>{t.back}</span>
             </button>
 
@@ -171,9 +223,9 @@ export default function ProjectsPage({ language }) {
                 href={selectedProject.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 font-mono flex gap-3 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-900 text-white text-lg md:text-2xl font-bold"
+                className="flex-1 font-mono flex gap-2 items-center justify-center p-3.5 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-900 text-white text-base md:text-xl font-bold"
               >
-                <BsGithub className="w-6 h-6" />
+                <BsGithub className="w-5 h-5 md:w-6 md:h-6" />
                 <span>{t.viewCode}</span>
               </a>
             )}
@@ -183,9 +235,9 @@ export default function ProjectsPage({ language }) {
                 href={selectedProject.homepage}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 font-mono flex gap-3 items-center justify-center p-4 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-emerald-700 text-white text-lg md:text-2xl font-bold"
+                className="flex-1 font-mono flex gap-2 items-center justify-center p-3.5 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-emerald-700 text-white text-base md:text-xl font-bold"
               >
-                <BsGlobe className="w-6 h-6" />
+                <BsGlobe className="w-5 h-5 md:w-6 md:h-6" />
                 <span>{t.liveDemo}</span>
               </a>
             )}
