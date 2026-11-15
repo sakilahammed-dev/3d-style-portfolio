@@ -42,32 +42,188 @@ export const projects = [
       bn: "উন্নত খাবার (Unnoto Khabar) - সুস্থ জীবনের জন্য শতভাগ খাঁটি, প্রাকৃতিক ও নির্ভেজাল খাদ্যের বিশ্বস্ত অনলাইন শপ। নেক্সট.জেএস (Next.js), টাইপস্ক্রিপ্ট, প্রিজমা এবং পোস্টগ্রেসকিউএল দিয়ে নির্মিত একটি পূর্ণাঙ্গ আধুনিক ই-কমার্স প্ল্যাটফর্ম।",
     },
     detailedDescription: {
-      en: {
-        intro: "Unnoto Khabar (উন্নত খাবার) is a modern full-stack organic e-commerce brand engineered to deliver 100% natural, unadulterated, and nutrient-dense foods straight to households across Bangladesh with high-speed performance and zero friction.",
-        categories: [
-          "Pure Raw Honey: 100% unprocessed, natural floral honey sustainably harvested from the Sundarbans and local organic beekeepers.",
-          "Nutritious Premium Honey Nuts: A power-packed fusion of hand-roasted cashews, almonds, walnuts, and pistachios steeped in pure raw honey.",
-          "Cold-Pressed Virgin Black Seed Oil: 100% pure therapeutic oil extracted with cold-press methods to ensure peak health benefits.",
-          "Imported Royal Dates: Hand-selected authentic Medjool, Ajwa, and Maryam dates delivered in hygienic airtight packaging."
+      bn: {
+        overviewTitle: "Overview & Vision / পরিচিতি ও ভিশন",
+        overview: [
+          "উন্নত খাবার (Unnoto Khabar) হলো বাংলাদেশের মানুষের কাছে ভেজালমুক্ত খাঁটি ও অর্গানিক খাদ্যপণ্য পৌঁছে দেওয়ার জন্য শাকিল আহাম্মেদ দ্বারা গ্রাউন্ড-আপ থেকে ডিজাইন ও ডেভেলপ করা একটি পূর্ণাঙ্গ ফুল-স্ট্যাক ই-কমার্স প্ল্যাটফর্ম। এটি প্রচলিত জটিল অনলাইন শপিংয়ের বিকল্প হিসেবে নির্মিত, যেখানে কোনো অপ্রয়োজনীয় অ্যাকাউন্ট রেজিস্ট্রেশন বা পাসওয়ার্ডের ঝামেলা ছাড়াই যে কেউ মাত্র এক ক্লিকে ক্যাশ অন ডেলিভারিতে অর্ডার করতে পারেন।",
+          "বাংলাদেশে আধুনিক কৃষিপণ্য ও গ্রামীণ খাঁটি খাদ্যসামগ্রীকে সরাসরি ক্রেতার দোরগোড়ায় পৌঁছে দেওয়ার ক্ষেত্রে আস্থার সংকট দূর করা এবং সুপার-ফাস্ট ডিজিটাল আর্কিটেকচারের মাধ্যমে একটি স্বয়ংসম্পূর্ণ নিরাপদ খাদ্য সরবরাহ বলয় গড়ে তোলা।"
         ],
-        techDetails: [
-          "Next.js App Router & TypeScript: Ultra-responsive edge rendering with instant hydration and high-speed page loads.",
-          "1-Click Quick Order: Frictionless guest checkout modal without mandatory upfront sign-in.",
-          "64 Districts Delivery Engine: Automated district delivery calculations with real-time tracking and PostgreSQL database safety."
+        problemTitle: "The Problem / বাস্তব সমস্যা",
+        problem: "সাধারণ ই-কমার্স প্ল্যাটফর্মে অতিরিক্ত স্টেপযুক্ত চেকআউট ফানেল (যেমন: ওটিপি ভেরিফিকেশন, প্রোফাইল ক্রিয়েশন ও জটিল ফর্ম ফিলিং)-এর কারণে প্রায় ৬৮% এর বেশি গ্রাহক মাঝপথেই কার্ট ছেড়ে চলে যায়। এছাড়া ধীরগতির পেজ লোড এবং অস্বচ্ছ ডেলিভারি ট্র্যাকিংয়ের ফলে অর্গানিক ফুড সার্ভিসে গ্রাহকের আস্থার সংকট তৈরি হয়।",
+        solutionTitle: "The Solution / প্রকৌশলগত সমাধান",
+        solution: "Next.js অ্যাপ রাউটার এবং আধুনিক সার্ভার কম্পোনেন্টস আর্কিটেকচার ব্যবহার করে সাব-সেকেন্ড পেজ লোড নিশ্চিত করা হয়েছে। ১-ক্লিক এক্সপ্রেস চেকআউট মডেল, রিয়েল-টাইম ডেলিভারি ক্যালকুলেশন এবং সেলফ-হিলিং প্রিজমা ডেটাবেজ ম্যানেজমেন্ট দিয়ে একটি বিরামহীন ও অত্যন্ত দ্রুতগতির গ্রাহক অভিজ্ঞতা গড়ে তোলা হয়েছে।",
+        systemsTitle: "Core Engineering Systems / মূল প্রযুক্তিগত কাঠামো",
+        systems: [
+          {
+            num: "01",
+            title: "১-ক্লিক এক্সপ্রেস চেকআউট ইঞ্জিন",
+            sub: "Frictionless Instant Checkout Modal",
+            desc: "কোনো সাইন-আপ, ওটিপি বা পাসওয়ার্ড মনে রাখার প্রয়োজন নেই। শুধু নাম, ফোন নাম্বার এবং ঠিকানা দিলেই তাৎক্ষণিক ক্যাশ অন ডেলিভারি অর্ডার প্রস্তুত হয়ে যায়।",
+            points: [
+              "জিরো-ফ্রিকশন ৩-ফিল্ড চেকআউট ফানেল",
+              "অটোমেটিক ঢাকা ও ঢাকার বাইরের কুরিয়ার ফি গণনা",
+              "কুপন কোড ও ইনস্ট্যান্ট ডিসকাউন্ট রিক্যালকুলেশন"
+            ]
+          },
+          {
+            num: "02",
+            title: "রিয়েল-টাইম লাইভ অর্ডার ট্র্যাকার",
+            sub: "Dedicated /track Pipeline & State Machine",
+            desc: "গ্রাহক তার মোবাইল নাম্বার অথবা অর্ডার আইডি ইনপুট করে মুহূর্তের মধ্যে অর্ডারের লাইভ অগ্রগতি ট্র্যাক করতে পারেন।",
+            points: [
+              "৪-ধাপের ভিজ্যুয়াল পাইপলাইন (অর্ডার গৃহীত > প্যাকিং > কুরিয়ার > ডেলিভার্ড)",
+              "স্বচ্ছ ডেলিভারি টাইমলাইন ও কুরিয়ার পার্টনার স্ট্যাটাস",
+              "গ্রাহকের আস্থাবৃদ্ধিতে লাইভ হেল্পলাইন ইন্টিগ্রেশন"
+            ]
+          },
+          {
+            num: "03",
+            title: "ইন্টেলিজেন্ট কার্ট ও ভ্যারিয়েশন প্রাইসিং",
+            sub: "Dynamic Tiered Weight & Variation Engine",
+            desc: "পণ্যভেদে ওজন ও সাইজ পরিবর্তনের সাথে সাথে রিয়েল-টাইমে প্রাইস আপডেট হয় (যেমন: খাঁটি মধু বা ঘিয়ে ১ কেজি, ৫০০ গ্রাম, ২৫০ গ্রাম)।",
+            points: [
+              "স্লাইড-ইন কার্ট ড্রয়ার ও ফ্লোটিং কার্ট ট্রিগার ট্যাব",
+              "ভ্যারিয়েশন ভিত্তিক স্টক লিমিট ও স্বয়ংক্রিয় সাবটোটাল ক্যালকুলেশন",
+              "লোকাল স্টোরেজ সিনক্রোনাইজেশন ও কার্ট পারসিস্টেন্স"
+            ]
+          },
+          {
+            num: "04",
+            title: "সেন্ট্রাল অ্যাডমিন অপারেশনাল ড্যাশবোর্ড",
+            sub: "Executive Operations & Inventory Control (/admin)",
+            desc: "ব্যবসার সার্বিক অপারেশন পরিচালনার জন্য নির্মিত পূর্ণাঙ্গ অ্যাডমিন কন্ট্রোল সেন্টার।",
+            points: [
+              "রিয়েল-টাইম সেলস রেভিনিউ, আজকের অর্ডার ও ট্রানজ্যাকশন মেট্রিক্স",
+              "১-ক্লিকে অর্ডার স্ট্যাটাস ট্রানজিশন ও ফিল্টারিং",
+              "ইনভেন্টরি স্টক অ্যালার্ট ও প্রোডাক্ট ক্যাটালগ ম্যানেজমেন্ট"
+            ]
+          },
+          {
+            num: "05",
+            title: "ফুল-স্ট্যাক রিলেশনাল ডেটাবেজ ও প্রিজমা ওআরএম",
+            sub: "Type-Safe High-Performance Data Layer",
+            desc: "প্রিজমা ওআরএম ব্যবহারের মাধ্যমে টাইপ-সেফ কুয়েরি এবং রিলেশনাল মডেলের নিরাপত্তা নিশ্চিত করা হয়েছে।",
+            points: [
+              "নর্মালাইজড রিলেশনাল স্কিমা (Order, OrderItem, Product, Customer)",
+              "সাব-১৫ মিলিসেকেন্ড আল্ট্রা-ফাস্ট কোয়েরি এক্সিকিউশন",
+              "ক্লাউড ডেটাবেজ ও ব্যাকআপ রেপ্লিকেশন রেডি"
+            ]
+          },
+          {
+            num: "06",
+            title: "সার্ভার অ্যাকশনস ও সিকিউরিটি আর্কিটেকচার",
+            sub: "Next.js 16 Server Components & Data Integrity",
+            desc: "ক্লায়েন্ট সাইডের কোনো সেনসিটিভ লজিক এক্সপোজ না করে সম্পূর্ণ সার্ভার অ্যাকশনসের মাধ্যমে অর্ডার প্রসেসিং সম্পন্ন হয়।",
+            points: [
+              "কড়া ইনপুট স্যানিটাইজেশন ও স্প্যাম অর্ডার প্রিভেনশন",
+              "জিরো লেআউট শিফট (CLS: 0) ও অপ্টিমাইজড ইমেজ অ্যাসেটস",
+              "ক্লাউডফ্লেয়ার ওয়ার্কার্স ও এজ-রেডি রেসপন্সিভনেস"
+            ]
+          }
+        ],
+        techTitle: "Technologies Used / ব্যবহৃত প্রযুক্তি",
+        techList: [
+          "Next.js 16 (App Router)",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS v4",
+          "Prisma ORM",
+          "SQLite / PostgreSQL",
+          "Bun Engine",
+          "Cloudflare Workers / OpenNext",
+          "Lucide Icons"
         ]
       },
-      bn: {
-        intro: "উন্নত খাবার (Unnoto Khabar) - সুস্থ ও সুন্দর জীবনের জন্য শতভাগ খাঁটি, প্রাকৃতিক ও নির্ভেজাল পুষ্টিকর খাদ্যের এক অনন্য বিশ্বস্ত সমাহার। আধুনিক প্রযুক্তি ও স্বাস্থ্যকর খাদ্যসংস্কৃতির সমন্বয়ে সারা বাংলাদেশের মানুষের কাছে নিরাপদ ও নির্ভেজাল খাদ্যপণ্য দ্রুত পৌঁছে দেওয়ার লক্ষ্য নিয়ে এই পূর্ণাঙ্গ ই-কমার্স প্ল্যাটফর্মটি তৈরি করা হয়েছে।",
-        categories: [
-          "খাঁটি প্রাকৃতিক মধু (Pure Honey): কোনো কৃত্রিম চিনি বা কেমিক্যাল প্রসেসিং ছাড়া সুন্দরবন ও বিভিন্ন ফুলের শতভাগ খাঁটি কাঁচা মধু।",
-          "পুষ্টিকর প্রিমিয়াম হানি নাট (Honey Nuts): কাজুবাদাম, কাঠবাদাম, পেস্তাবাদাম ও আখরোটের পুষ্টিকর সংমিশ্রণে প্রস্তুত প্রিমিয়াম হেলথ ফুড।",
-          "কোল্ড-প্রেসড কালোজিরা তেল (Black Seed Oil): রোগপ্রতিরোধ ক্ষমতা বৃদ্ধি ও সুস্বাস্থ্যের জন্য শতভাগ নির্ভেজাল ফার্স্ট-কোল্ড-প্রেসড তেল।",
-          "আমদানি করা প্রিমিয়াম খেজুর (Premium Dates): আজওয়া, মেদজুল, মরিয়ম ও আম্বর খেজুরের বিশেষ ফ্রেশ কালেকশন।"
+      en: {
+        overviewTitle: "Overview & Vision",
+        overview: [
+          "Unnoto Khabar (উন্নত খাবার) is a full-stack organic e-commerce platform architected and developed from the ground up by Sakil Ahammed to deliver pure, unadulterated, and natural food items directly to families across Bangladesh. Built as a frictionless alternative to complex online shopping, enabling anyone to place instant Cash on Delivery orders in a single click without upfront sign-up or passwords.",
+          "Bridging the trust deficit between modern agriculture and consumer doorsteps while creating an autonomous, super-fast food delivery ecosystem through resilient digital architecture."
         ],
-        techDetails: [
-          "নেক্সট.জেএস (Next.js) ও টাইপস্ক্রিপ্ট: সর্বাধুনিক এজ আর্কিটেকচার যা প্রতিটি পেজকে চোখের পলকে লোড করে।",
-          "১-ক্লিকে কুইক অর্ডার সিস্টেম: অ্যাকাউন্ট খোলার ঝামেলা ছাড়াই সরাসরি নাম, ফোন ও ঠিকানা দিয়ে চোখের পলকে অর্ডার করার সুবিধা।",
-          "৬৪ জেলার স্বয়ংক্রিয় ডেলিভারি: কুরিয়ার চার্জ স্বয়ংক্রিয় হিসাব, রিয়েল-টাইম কার্ট এবং প্রিজমা ও পোস্টগ্রেসকিউএল ডেটাবেস নিরাপত্তা।"
+        problemTitle: "The Problem",
+        problem: "Traditional e-commerce platforms suffer from bloated checkout funnels (OTP verifications, mandatory profile creation, tedious forms) causing over 68% cart abandonment. Slow page loads and opaque delivery tracking further erode customer trust in organic food delivery.",
+        solutionTitle: "The Solution",
+        solution: "Engineered sub-second page loads leveraging Next.js App Router and modern React Server Components. Created a 1-click express checkout model, real-time courier calculations, and self-healing Prisma database operations for a high-converting, frictionless experience.",
+        systemsTitle: "Core Engineering Systems",
+        systems: [
+          {
+            num: "01",
+            title: "1-Click Express Checkout Engine",
+            sub: "Frictionless Instant Checkout Modal",
+            desc: "Zero sign-up, OTP, or password barriers. Customers place instant Cash on Delivery orders simply by entering their name, phone number, and delivery address.",
+            points: [
+              "Zero-friction 3-field instant checkout funnel",
+              "Automated Dhaka & nationwide courier fee computation",
+              "Dynamic coupon code validation & instant discount recalculation"
+            ]
+          },
+          {
+            num: "02",
+            title: "Real-Time Live Order Tracker",
+            sub: "Dedicated /track Pipeline & State Machine",
+            desc: "Customers instantly track order milestones by entering their phone number or Order ID.",
+            points: [
+              "4-stage visual pipeline (Order Placed > Packing > In Courier > Delivered)",
+              "Transparent timeline tracking with courier partner status",
+              "Live customer support helpline integration for trust"
+            ]
+          },
+          {
+            num: "03",
+            title: "Intelligent Cart & Tiered Variations",
+            sub: "Dynamic Tiered Weight & Variation Engine",
+            desc: "Instant dynamic price updates as customers select different weights and sizes (e.g., 1kg, 500g, 250g pure honey or ghee).",
+            points: [
+              "Slide-in interactive cart drawer & floating trigger tab",
+              "Variation-specific inventory limits & subtotal recalculation",
+              "Local storage synchronization and cart session persistence"
+            ]
+          },
+          {
+            num: "04",
+            title: "Central Admin Operational Dashboard",
+            sub: "Executive Operations & Inventory Control (/admin)",
+            desc: "Comprehensive operational mission control engineered for business management.",
+            points: [
+              "Real-time revenue metrics, daily orders & transaction analytics",
+              "1-click status transitions and live filtering",
+              "Low-stock inventory alerts and full catalog management"
+            ]
+          },
+          {
+            num: "05",
+            title: "Type-Safe Relational Database & Prisma ORM",
+            sub: "Type-Safe High-Performance Data Layer",
+            desc: "Guaranteed type safety and relational data integrity using Prisma ORM.",
+            points: [
+              "Normalized relational schema (Order, OrderItem, Product, Customer)",
+              "Sub-15ms high-speed query execution",
+              "Cloud database replication & automated backup ready"
+            ]
+          },
+          {
+            num: "06",
+            title: "Server Actions & Security Architecture",
+            sub: "Next.js 16 Server Components & Data Integrity",
+            desc: "Server Actions execute secure server-side mutations without exposing sensitive business logic to the client.",
+            points: [
+              "Strict input sanitization and anti-spam order rate limiting",
+              "Zero Cumulative Layout Shift (CLS: 0) & optimized media assets",
+              "Cloudflare Workers & OpenNext edge deployment readiness"
+            ]
+          }
+        ],
+        techTitle: "Technologies Used",
+        techList: [
+          "Next.js 16 (App Router)",
+          "React 19",
+          "TypeScript",
+          "Tailwind CSS v4",
+          "Prisma ORM",
+          "SQLite / PostgreSQL",
+          "Bun Engine",
+          "Cloudflare Workers / OpenNext",
+          "Lucide Icons"
         ]
       }
     },
