@@ -79,24 +79,13 @@ export default function ProjectsPage({ language }) {
         <div className="absolute w-full h-full bg-grid"></div>
 
         <div className="absolute w-full h-full p-6 flex flex-col items-center justify-between gap-3 border border-neutral-300">
-          {/* Top Bar: Back Button & Title */}
+          {/* Top Bar: Title & Date */}
           <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80">
-            <button
-              onClick={() => {
-                setSelectedProject(null);
-                setActiveImageIndex(0);
-              }}
-              className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-neutral-200/90 shadow-md shadow-neutral-400 hover:scale-105 transition-transform border border-neutral-50 text-base md:text-xl font-bold cursor-pointer"
-            >
-              <BsArrowLeft className="w-5 h-5 md:w-6 md:h-6" />
-              <span>{t.back}</span>
-            </button>
-
-            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-neutral-900 truncate px-2">
+            <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-neutral-900 truncate px-1">
               {selectedProject.title}
             </h1>
 
-            <span className="text-base md:text-xl text-neutral-600 font-medium">
+            <span className="text-base md:text-xl text-neutral-600 font-medium px-1">
               {selectedProject.date?.[language] || selectedProject.date?.en}
             </span>
           </div>
