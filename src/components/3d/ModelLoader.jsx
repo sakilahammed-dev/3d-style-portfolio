@@ -78,17 +78,8 @@ export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
           }
         }
       } else if (child.name.endsWith("_Red_Text_Target")) {
-        // Distinct gorgeous colors for each button text
-        const colorMap = {
-          Projects_Red_Text_Target: 0x00f5ff, // Electric Cyan
-          Games_Red_Text_Target: 0x00ff88, // Neon Mint
-          Music_Red_Text_Target: 0xff3888, // Cyber Pink / Rose
-          Contact_Red_Text_Target: 0xffb703, // Sunset Amber
-          AboutMe_Red_Text_Target: 0x38bdf8, // Sky Blue
-        };
-        child.material = new THREE.MeshBasicMaterial({
-          color: colorMap[child.name] || 0x00f5ff,
-        });
+        // Elegant, crisp pure white text inside the red outline boxes
+        child.material = new THREE.MeshBasicMaterial({ color: 0xffffff });
       } else if (child.name.includes("Red")) {
         child.material = new THREE.MeshBasicMaterial({ color: 0xff2222 });
       } else if (child.name.includes("White")) {

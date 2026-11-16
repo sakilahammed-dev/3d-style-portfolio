@@ -46,10 +46,10 @@ export default function RaycastHandler({
       ? object.userData.initialScale.clone().multiplyScalar(1.1)
       : object.userData.initialScale;
 
-    // Turns pure white (#ffffff) on hover, returns to initial color
+    // Idle is pure white (#ffffff), on hover turns vibrant neon red (#ff2222)
     const targetColor = on
-      ? { r: 1, g: 1, b: 1 }
-      : (object.userData.initialColor || { r: 0, g: 0.96, b: 1 });
+      ? { r: 1, g: 0.133, b: 0.133 }
+      : { r: 1, g: 1, b: 1 };
 
     gsap.to(object.scale, {
       x: targetScale.x,
