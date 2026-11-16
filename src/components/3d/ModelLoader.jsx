@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
   const groupRef = useRef();
-  const { scene } = useGLTF("models/3dPortfolio.glb");
+  const { scene } = useGLTF("models/3dPortfolio.glb?v=pristine_v1");
 
   const manager = new THREE.LoadingManager();
 
@@ -16,7 +16,7 @@ export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
   const textures = useMemo(() => {
     const loader = new THREE.TextureLoader(manager);
     const textureMap = {
-      First: "textures/First.webp",
+      First: "textures/First.webp?v=pristine_v1",
       Second: "textures/Second.webp",
       Third: "textures/Third.webp",
     };
