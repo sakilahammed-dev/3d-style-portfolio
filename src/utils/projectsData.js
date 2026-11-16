@@ -28,6 +28,8 @@ import {
   SiPrisma,
   SiRedis,
   SiJavascript,
+  SiTelegram,
+  SiGooglesheets,
 } from "react-icons/si";
 
 /* ==========================================================================
@@ -782,6 +784,194 @@ const coffeeHouseDetails_en = {
   ]
 };
 
+
+/* ==========================================================================
+   5. SS IQRA PURE FOOD (এস এস ইকরা পিওর ফুড) - DETAILED ARCHITECTURE
+   ========================================================================== */
+const ssIqraDetails_bn = {
+  overviewTitle: "পরিচিতি ও ভিশন (Overview & Vision)",
+  overview: [
+    "এস এস ইকরা পিওর ফুড (SS Iqra Pure Food) হলো সুন্দরবনের খাঁটি মধু ও প্রিমিয়াম ড্রাই ফ্রুটসের সমন্বয়ে তৈরি ১ কেজি মেগা ফ্যামিলি জার হানি-নাট এবং সম্পূর্ণ স্বয়ংক্রিয় ক্লাউড-অপারেশনাল ই-কমার্স সিস্টেম। এটি শাকিল আহাম্মেদ দ্বারা ডিজাইন ও ডেভেলপ করা হয়েছে।",
+    "প্রচলিত জটিল ই-কমার্সের বিশাল সার্ভার খরচ ও অতিরিক্ত জটিলতা দূর করে সম্পূর্ণ জিরো-হোস্টিং কস্টে গিটহাব পেজেস, পাইথন ব্যাকগ্রাউন্ড ডেমন, টেলিগ্রাম বট এবং স্বয়ংক্রিয় গুগল শিট ও সিএসভি লেজারের মাধ্যমে একটি সম্পূর্ণ স্বয়ংসম্পূর্ণ আধুনিক ব্যবসায়িক অপারেশনাল পাইপলাইন পরিচালনা করাই এর মূল লক্ষ্য।"
+  ],
+  problemTitle: "বাস্তব সমস্যা (The Problem)",
+  problem: "ছোট ও মাঝারি খাদ্য উদ্যোক্তাদের ক্ষেত্রে প্রচলিত ই-কমার্স শপগুলোতে ব্যয়বহুল হোস্টিং খরচ, জটিল ডাটাবেজ মেইনটেন্যান্স এবং অর্ডার আসার পর তাৎক্ষণিক নোটিফিকেশন না পাওয়ার কারণে কাস্টমার সার্ভিস ব্যাহত হয়। মেসেঞ্জারে ম্যানুয়াল অর্ডার নেওয়ার ফলে ঠিকানা ভুল হওয়া, ডেলিভারি ট্র্যাকিং জটিলতা এবং কুরিয়ার বুকিংয়ে প্রচুর সময় নষ্ট হয়।",
+  solutionTitle: "প্রকৌশলগত সমাধান (The Solution)",
+  solution: "লাইভ ফ্রন্টএন্ড ওয়েব অর্ডার পোর্টাল (গিটহাব পেজেসে আজীবন ফ্রি), পাইথন চালিত টেলিগ্রাম অর্ডার প্রসেসর বট (@ssiqrapurefood_bot) যা সাউন্ড অ্যালার্ট সহ তাৎক্ষণিক নোটিফিকেশন পাঠায়, ১-ক্লিক হোয়াটসঅ্যাপ কাস্টমার কল ভেরিফিকেশন, স্টিডফাস্ট কুরিয়ার বুকিং স্লিপ জেনারেশন এবং স্বয়ংক্রিয় সিএসভি কাস্টমার অ্যাকাউন্টিং লেজার।",
+  systemsTitle: "মূল প্রযুক্তিগত কাঠামো (Core Engineering Systems)",
+  systems: [
+    {
+      num: "01",
+      title: "ইনস্ট্যান্ট জিরো-ল্যাটেন্সি ওয়েব চেকআউট",
+      sub: "Zero-Friction Client-Side Order Portal",
+      desc: "মোবাইল ব্রাউজারে দ্রুততম সময়ে লোড হওয়া ৩-ফিল্ড চেকআউট ফর্ম, যেখানে কোনো সাইন-আপ ছাড়াই অর্ডার করা যায়।",
+      points: [
+        "ঢাকা (৳৮০) ও ঢাকার বাইরে (৳১৫০) স্বয়ংক্রিয় ডেলিভারি চার্জ ক্যালকুলেশন",
+        "ডাইনামিক কার্ট কোয়ান্টিটি ও অফার প্রমোশনাল ডিসকাউন্ট ইঞ্জিন",
+        "অর্ডার সাবমিটের সাথে সাথে কাস্টমারের স্ক্রিনে ডিজিটাল ইনভয়েস স্লিপ"
+      ]
+    },
+    {
+      num: "02",
+      title: "টেলিগ্রাম অর্ডার ম্যানেজার ইঞ্জিন (Python Daemon)",
+      sub: "24/7 Automated Notification & Dispatch Bot",
+      desc: "পাইথন ৩.১২ দিয়ে নির্মিত ব্যাকগ্রাউন্ড ডেমন বট যা প্রতিটি অর্ডার আসার ১ সেকেন্ডের মধ্যে সাউন্ড সহ অ্যাডমিনের ফোনে অ্যালার্ট পাঠায়।",
+      points: [
+        "অর্ডারের সম্পূর্ণ বিবরণ সহ রিয়েল-টাইম পুশ নোটিফিকেশন",
+        "ইনলাইন বাটন: ১-ক্লিকে কাস্টমারের সাথে সরাসরি WhatsApp চ্যাট ওপেন",
+        "অর্ডার স্ট্যাটাস ট্র্যাকিং ও অ্যাডমিন কনফার্মেশন ট্র্রিগার"
+      ]
+    },
+    {
+      num: "03",
+      title: "স্টিডফাস্ট কুরিয়ার এপিআই বুকিং স্লিপ",
+      sub: "Steadfast Courier Integration & Waybill Pipeline",
+      desc: "অর্ডার নিশ্চিত হওয়ার সাথে সাথে কুরিয়ার পার্সেল বুকিংয়ের জন্য প্রয়োজনীয় ডাটা স্বয়ংক্রিয়ভাবে প্রস্তুত করে দেয়।",
+      points: [
+        "কুরিয়ার বুকিং ফ্রেন্ডলি ডেটা এক্সট্রাকশন ও প্রিভিউ",
+        "ডেলিভারি ট্র্যাকিং কোড ও ট্র্যাকিং স্ট্যাটাস ম্যাপিং",
+        "ক্যাশ অন ডেলিভারি (COD) অ্যামাউন্ট ও চার্জ ভ্যালিডেশন"
+      ]
+    },
+    {
+      num: "04",
+      title: "স্বয়ংক্রিয় সিএসভি ও ক্লাউড লেজার",
+      sub: "Immutable Customer Accounting & CSV Database",
+      desc: "প্রতিটি সফল অর্ডারের ইনভয়েস আইডি, তারিখ, কাস্টমার তথ্য এবং পেমেন্ট স্ট্যাটাস স্বয়ংক্রিয়ভাবে লেজারে রেকর্ড থাকে।",
+      points: [
+        "02_Customer_Orders_Log.csv স্বয়ংক্রিয় রিয়েল-টাইম ডেটা পারসিস্টেন্স",
+        "গুগল শিট ও গুগল ড্রাইভ ব্যাকআপ সিনক্রোনাইজেশন স্ক্রিপ্ট",
+        "দৈনিক ও মাসিক সেলস রেভিনিউ হিসাব এবং অডিট-রেডি এক্সপোর্ট"
+      ]
+    },
+    {
+      num: "05",
+      title: "ব্র্যান্ডিং, সোশ্যাল মিডিয়া ও কন্টেন্ট ইঞ্জিন",
+      sub: "End-to-End Visual Brand Architecture",
+      desc: "অফিসিয়াল জার স্টিকার, ফেসবুক কভার ব্যানার, সোশ্যাল মিডিয়া পোস্ট টেমপ্লেট এবং ৩০ দিনের অটোমেটেড কন্টেন্ট ক্যালেন্ডার।",
+      points: [
+        "১ কেজি মেগা ফ্যামিলি জার প্রিমিয়াম প্যাকেজিং ডিজাইন",
+        "৩০ দিনের সম্পূর্ণ সেলস ও এনগেজমেন্ট কন্টেন্ট প্ল্যান",
+        "চ্যাটবট অটোমেটেড মেসেজিং ও এফএকিউ রেসপন্স স্ক্রিপ্ট"
+      ]
+    },
+    {
+      num: "06",
+      title: "জিরো-কস্ট ইনফিনিট ক্লাউড হোস্টিং",
+      sub: "Zero Infrastructure Cost & Serverless Resilience",
+      desc: "কোনো মাসিক হোস্টিং ফি বা সার্ভার চার্জ ছাড়াই আজীবন নিরবচ্ছিন্নভাবে চলার মতো আর্কিটেকচার।",
+      points: [
+        "গিটহাব পেজেস ও এজ সিডিএন-এ গ্লোবাল হাই-স্পিড ডেপ্লয়মেন্ট",
+        "সিওআরএস (CORS) সিকিউর ক্লায়েন্ট-টু-টেলিগ্রাম সরাসরি এপিআই সংযোগ",
+        "৯৯.৯৯% আপটাইম সহ সম্পূর্ণ ফল্ট-টলারেন্ট আর্কিটেকচার"
+      ]
+    }
+  ],
+  techTitle: "ব্যবহৃত প্রযুক্তি (Technologies Used)",
+  techList: [
+    "Python 3.12",
+    "Telegram Bot API",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "Google Apps Script",
+    "CSV Data Engine",
+    "GitHub Pages"
+  ]
+};
+
+const ssIqraDetails_en = {
+  overviewTitle: "Overview & Vision",
+  overview: [
+    "SS Iqra Pure Food is an end-to-end automated e-commerce and operational workflow system engineered by Sakil Ahammed for a premium 1kg Mega Family Jar Honey-Nut brand combining pure Sundarbans honey with premium dry fruits and nuts.",
+    "Architected to eliminate bloated monthly hosting fees and server overhead, it couples a high-speed GitHub Pages frontend with a 24/7 Python Telegram daemon, direct WhatsApp customer verification, and an automated accounting ledger for frictionless business operations."
+  ],
+  problemTitle: "The Problem",
+  problem: "Small and medium food enterprises frequently struggle with costly cloud hosting fees, complex server maintenance, and delayed order notifications that damage customer retention. Taking manual orders over Facebook Messenger leads to address typos, lost parcels, and tedious courier booking overhead.",
+  solutionTitle: "The Solution",
+  solution: "Engineered a zero-cost, high-reliability architecture: a lightning-fast responsive web order portal hosted on GitHub Pages, an automated 24/7 Python Telegram daemon (@ssiqrapurefood_bot) delivering audible push alerts, 1-click WhatsApp customer verification, Steadfast Courier dispatch integration, and an immutable CSV accounting ledger.",
+  systemsTitle: "Core Engineering Systems",
+  systems: [
+    {
+      num: "01",
+      title: "Instant Zero-Latency Web Checkout",
+      sub: "Zero-Friction Client-Side Order Portal",
+      desc: "High-converting 3-field order portal optimized for mobile networks with sub-3s initial load and zero registration barriers.",
+      points: [
+        "Dynamic delivery calculation (Inside Dhaka ৳80, Outside Dhaka ৳150)",
+        "Interactive quantity toggles and real-time discount computation",
+        "Instant digital invoice slip generated in-browser upon order submission"
+      ]
+    },
+    {
+      num: "02",
+      title: "Python Telegram Order Daemon",
+      sub: "24/7 Automated Notification & Dispatch Bot",
+      desc: "Python 3.12 background service streaming live order events directly to admin mobile devices with audible chimes.",
+      points: [
+        "Full customer and order payload dispatched in under 1 second",
+        "Inline Action: 1-click WhatsApp chat launch with pre-filled greeting",
+        "Order state confirmation and ledger synchronization triggers"
+      ]
+    },
+    {
+      num: "03",
+      title: "Steadfast Courier Booking Slip Pipeline",
+      sub: "Logistics Automation & Dispatch Integration",
+      desc: "Automatically transforms incoming order data into Steadfast Courier booking formats for express parcel dispatch.",
+      points: [
+        "Standardized shipping label and receiver address parser",
+        "Consignment tracking ID mapping and tracking history",
+        "Cash-on-Delivery (COD) reconciliation and delivery validation"
+      ]
+    },
+    {
+      num: "04",
+      title: "Automated CSV & Cloud Accounting Ledger",
+      sub: "Immutable Customer Accounting & CSV Database",
+      desc: "Persists every confirmed order with invoice ID, customer timestamp, items, and net revenue into structured data logs.",
+      points: [
+        "Real-time writeback to 02_Customer_Orders_Log.csv ledger",
+        "Google Apps Script bridge syncing rows to cloud spreadsheets",
+        "Daily and monthly financial summaries ready for operational audit"
+      ]
+    },
+    {
+      num: "05",
+      title: "Brand System & Content Engine",
+      sub: "End-to-End Visual Brand Architecture",
+      desc: "Complete visual identity encompassing jar labels, official social media banners, and an automated 30-day marketing plan.",
+      points: [
+        "1kg Mega Family Jar premium packaging and die-cut sticker design",
+        "30-day viral content schedule and educational health posts",
+        "Automated messenger FAQ scripts and customer support workflows"
+      ]
+    },
+    {
+      num: "06",
+      title: "Zero-Cost Serverless Resilience",
+      sub: "Zero Infrastructure Cost & Serverless Resilience",
+      desc: "Production-ready enterprise workflow operating entirely with zero monthly infrastructure or hosting expenditures.",
+      points: [
+        "Edge-cached global delivery via GitHub Pages and CDN",
+        "Secure CORS API connection linking client forms to Telegram endpoints",
+        "Fault-tolerant, zero-maintenance operational pipeline"
+      ]
+    }
+  ],
+  techTitle: "Technologies Used",
+  techList: [
+    "Python 3.12",
+    "Telegram Bot API",
+    "HTML5",
+    "CSS3",
+    "JavaScript",
+    "Google Apps Script",
+    "CSV Data Engine",
+    "GitHub Pages"
+  ]
+};
+
 export const projects = [
   {
     title: "Unnoto Khabar",
@@ -973,5 +1163,53 @@ export const projects = [
     date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
     github: "https://github.com/sakilahammed-dev/coffee-house",
     homepage: "https://sakilahammed-dev.github.io/coffee-house/",
+  },
+
+  {
+    title: "SS Iqra Pure Food",
+    can: "images/projects/SSIqraPureFood/SSIqraCan.webp",
+    images: [
+      { src: "images/projects/SSIqraPureFood/1.webp", alt: "SS Iqra Pure Food - 1-Click Live Web Order Portal" },
+      { src: "images/projects/SSIqraPureFood/2.webp", alt: "Premium Honey-Nut Mega Family Jar Product Showcase" },
+      { src: "images/projects/SSIqraPureFood/3.webp", alt: "100% Pure Sundarbans Raw Honey & Nutrition Profile" },
+      { src: "images/projects/SSIqraPureFood/4.webp", alt: "Quality Assurance, Packaging & Customer Trust" },
+    ],
+    description: {
+      en: "SS Iqra Pure Food is an end-to-end automated e-commerce and operational workflow system engineered by Sakil Ahammed for a premium 1kg Mega Family Jar Honey-Nut brand. Combines a high-speed GitHub Pages order portal with a 24/7 Python Telegram bot daemon, 1-click WhatsApp customer verification, and an automated CSV/Sheets accounting ledger.",
+      es: "SS Iqra Pure Food es un sistema de comercio electrónico y flujo de trabajo operativo automatizado de extremo a extremo diseñado por Sakil Ahammed con portal de pedidos web, bot de Telegram en Python y libro contable automatizado.",
+      bn: "এস এস ইকরা পিওর ফুড (SS Iqra Pure Food) - সুন্দরবনের খাঁটি মধু ও প্রিমিয়াম ড্রাই ফ্রুটস হানি-নাটের জন্য শাকিল আহাম্মেদ দ্বারা নির্মিত সম্পূর্ণ স্বয়ংক্রিয় ক্লাউড-অপারেশনাল ই-কমার্স সিস্টেম। এতে রয়েছে হাই-স্পিড ওয়েব অর্ডার পোর্টাল, ২৪/৭ পাইথন টেলিগ্রাম বট অ্যালার্ট, ১-ক্লিক হোয়াটসঅ্যাপ ভেরিফিকেশন এবং স্বয়ংক্রিয় কাস্টমার একাউন্টিং লেজার।",
+    },
+    detailedDescription: {
+      bn: ssIqraDetails_bn,
+      en: ssIqraDetails_en,
+      es: ssIqraDetails_en,
+    },
+    tech: [SiPython, SiTelegram, SiHtml5, SiCss3, SiJavascript, SiGooglesheets],
+    features: {
+      en: [
+        "1-Click high-converting web order portal with dynamic district courier rates.",
+        "24/7 Python Telegram daemon delivering instant audible order push notifications.",
+        "1-Click direct WhatsApp customer verification and confirmation modal.",
+        "Steadfast Courier API booking data generator and logistics slip pipeline.",
+        "Automated accounting ledger persisting orders to CSV and Google Sheets.",
+      ],
+      es: [
+        "Portal de pedidos web de alta conversión con cálculo dinámico de envío.",
+        "Demonio de Telegram en Python 24/7 con notificaciones push sonoras instantáneas.",
+        "Verificación de clientes por WhatsApp con un solo clic.",
+        "Generador de boletas de envío para Steadfast Courier.",
+        "Libro contable automatizado en CSV y Google Sheets.",
+      ],
+      bn: [
+        "ডাইনামিক ডেলিভারি চার্জ ক্যালকুলেশন সহ ১-ক্লিক ফাস্ট ওয়েব অর্ডার পোর্টাল।",
+        "অর্ডার আসার সাথে সাথে সাউন্ড অ্যালার্ট সহ ২৪/৭ পাইথন টেলিগ্রাম বট পুশ নোটিফিকেশন।",
+        "১-ক্লিকে কাস্টমারের সাথে সরাসরি হোয়াটসঅ্যাপ কল ও চ্যাট ভেরিফিকেশন।",
+        "স্টিডফাস্ট কুরিয়ার পার্সেল বুকিং স্লিপ ও ট্র্যাকিং কোড জেনারেশন।",
+        "স্বয়ংক্রিয় সিএসভি এবং গুগল শিট ক্লাউড অ্যাকাউন্টিং লেজার।",
+      ],
+    },
+    date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
+    github: "https://github.com/sakilahammed-dev/ss-iqra-pure-food",
+    homepage: "https://sakilahammed-dev.github.io/ss-iqra-pure-food/",
   },
 ];
