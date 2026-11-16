@@ -38,14 +38,18 @@ export default function RaycastHandler({
       object.userData.initialScale = object.scale.clone();
     }
 
+    if (!object.userData.initialColor && object.material.color) {
+      object.userData.initialColor = object.material.color.clone();
+    }
+
     const targetScale = on
       ? object.userData.initialScale.clone().multiplyScalar(1.1)
       : object.userData.initialScale;
 
-    // Turns pure white (#ffffff) on hover, returns to red (#ff2222)
+    // Turns pure white (#ffffff) on hover, returns to initial color
     const targetColor = on
       ? { r: 1, g: 1, b: 1 }
-      : { r: 1, g: 0.133, b: 0.133 };
+      : (object.userData.initialColor || { r: 0, g: 0.96, b: 1 });
 
     gsap.to(object.scale, {
       x: targetScale.x,

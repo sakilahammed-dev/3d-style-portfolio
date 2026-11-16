@@ -62,6 +62,33 @@ export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
           clearcoat: 1,
           clearcoatRoughness: 0,
         });
+
+        // Add red border lines to the navigation button boxes
+        if (child.name.endsWith("_Glass_Target")) {
+          const existingLine = child.children.find((c) => c.isLineSegments);
+          if (!existingLine) {
+            const edges = new THREE.EdgesGeometry(child.geometry, 20);
+            const lineMat = new THREE.LineBasicMaterial({
+              color: 0xff1525,
+              linewidth: 2,
+            });
+            const line = new THREE.LineSegments(edges, lineMat);
+            line.raycast = () => {};
+            child.add(line);
+          }
+        }
+      } else if (child.name.endsWith("_Red_Text_Target")) {
+        // Distinct gorgeous colors for each button text
+        const colorMap = {
+          Projects_Red_Text_Target: 0x00f5ff, // Electric Cyan
+          Games_Red_Text_Target: 0x00ff88, // Neon Mint
+          Music_Red_Text_Target: 0xff3888, // Cyber Pink / Rose
+          Contact_Red_Text_Target: 0xffb703, // Sunset Amber
+          AboutMe_Red_Text_Target: 0x38bdf8, // Sky Blue
+        };
+        child.material = new THREE.MeshBasicMaterial({
+          color: colorMap[child.name] || 0x00f5ff,
+        });
       } else if (child.name.includes("Red")) {
         child.material = new THREE.MeshBasicMaterial({ color: 0xff2222 });
       } else if (child.name.includes("White")) {
