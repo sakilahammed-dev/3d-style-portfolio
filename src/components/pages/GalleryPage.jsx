@@ -83,24 +83,48 @@ export default function GalleryPage({ language = "en" }) {
             {t.selectVideo}
           </p>
 
-          <div className="grid grid-cols-3 gap-2 w-full">
+          <div
+            className={`grid gap-2 w-full ${
+              galleryVideos.length === 1
+                ? "grid-cols-1"
+                : galleryVideos.length === 2
+                ? "grid-cols-2"
+                : "grid-cols-3"
+            }`}
+          >
             {galleryVideos.map((video) => {
-              const isSelected = video.id === selectedVideo.id;
+              const isSelected = selectedVideo && video.id === selectedVideo.id;
               return (
                 <button
                   key={video.id}
                   onClick={() => handleSelectVideo(video)}
-                  className={`flex flex-col items-center p-2 rounded-xl text-left transition-all cursor-pointer ${
+                  className={`flex ${
+                    galleryVideos.length === 1
+                      ? "flex-row items-center justify-between px-4 py-2.5"
+                      : "flex-col items-center p-2"
+                  } rounded-xl text-left transition-all cursor-pointer ${
                     isSelected
-                      ? "bg-neutral-800 text-white shadow-md shadow-neutral-500 scale-[1.02]"
+                      ? "bg-neutral-800 text-white shadow-md shadow-neutral-500 scale-[1.01]"
                       : "bg-neutral-100/90 text-neutral-700 hover:bg-neutral-300/80 border border-neutral-50"
                   }`}
                 >
-                  <div className="w-full flex items-center justify-between text-xs mb-1">
-                    <span className="font-bold truncate">#{video.id}</span>
+                  <div
+                    className={`${
+                      galleryVideos.length === 1
+                        ? "flex items-center gap-2 text-xs"
+                        : "w-full flex items-center justify-between text-xs mb-1"
+                    }`}
+                  >
+                    <span className="font-bold">#{video.id}</span>
                     <BsCollectionPlayFill className="w-3.5 h-3.5 opacity-80" />
                   </div>
-                  <span className="text-[11px] md:text-xs font-medium line-clamp-2 w-full">
+                  <span
+                    className={`${
+                      galleryVideos.length === 1
+                        ? "text-xs md:text-sm font-semibold truncate text-right ml-2"
+                        : "text-[11px] md:text-xs font-medium line-clamp-2 w-full"
+                    }`}
+                  >
                     {video.title[language] || video.title.en}
                   </span>
                 </button>
