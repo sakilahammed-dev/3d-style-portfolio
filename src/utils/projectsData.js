@@ -972,6 +972,193 @@ const ssIqraDetails_en = {
   ]
 };
 
+/* ==========================================================================
+   6. JIBONGORI (জীবনগড়ি) - DETAILED ARCHITECTURE
+   ========================================================================== */
+const jibonGoriDetails_bn = {
+  overviewTitle: "পরিচিতি ও ভিশন (Overview & Vision)",
+  overview: [
+    "জীবনগড়ি (JibonGori) হলো বাংলাদেশের ৪টি সর্ববৃহৎ ডিজিটাল সেবা ইকোসিস্টেমের (Caretutors, 10 Minute School, Live MCQ এবং Bdjobs) একটি সমন্বিত, আধুনিক ও উচ্চক্ষমতাসম্পন্ন ইউনিফাইড ওয়েব প্ল্যাটফর্ম।",
+    "প্রতিটি প্ল্যাটফর্মের সকল ফিচার, খাঁটি ডিজাইন সিস্টেম, উপাদান ও কার্যপ্রণালী নিখুঁতভাবে রিভার্স ইঞ্জিনিয়ারিং করে শাকিল আহাম্মেদ একটি একক, দ্রুতগতির নেক্সট.জেএস (Next.js 14 App Router) আর্কিটেকচারে একীভূত করেছেন। একজন শিক্ষার্থীর পড়াশোনার শুরু (গৃহশিক্ষক নিয়োগ), প্রাতিষ্ঠানিক ও অনলাইন একাডেমিক মেন্টরিং, সরকারি চাকরি ও বিসিএস পরীক্ষার রিয়েল-টাইম প্রস্তুতি থেকে শুরু করে কর্মজীবনে সফল প্রবেশ পর্যন্ত পুরো জীবনচক্রকে একটি একক জাতীয় প্ল্যাটফর্মে নিয়ে আসাই এর ভিশন।"
+  ],
+  problemTitle: "বাস্তব সমস্যা (The Problem)",
+  problem: "বাংলাদেশের শিক্ষার্থীদের ভিন্ন ভিন্ন সময়ে ৪টি আলাদা প্ল্যাটফর্ম ব্যবহার করতে হয়, যেখানে প্রতিটি সাইটের আলাদা অ্যাকাউন্ট, ভিন্ন ইন্টারফেস এবং বিচ্ছিন্ন ডেটাবেজের কারণে প্রচুর সময় অপচয় হয়। প্রযুক্তিগতভাবে ৪টি ভিন্ন ডিজাইন ল্যাঙ্গুয়েজ এবং সিএসএস ফ্রেমওয়ার্ককে একই প্ল্যাটফর্মে এনে স্টাইল কনফ্লিক্ট ছাড়া ৩৭টি রুট পরিচালনা করা ছিল একটি অন্যতম বড় ইঞ্জিনিয়ারিং চ্যালেঞ্জ।",
+  solutionTitle: "প্রকৌশলগত সমাধান (The Solution)",
+  solution: "শাকিল আহাম্মেদ একটি অত্যাধুনিক ইন্টিগ্রেটেড আর্কিটেকচার গড়ে তুলেছেন: (১) ৩৭টি প্রোডাকশন রুট সম্পন্ন সম্পূর্ণ টাইপসেফ নেক্সট.জেএস ১৪ অ্যাপ, (২) সুনির্দিষ্ট স্কোপড সিএসএস ও পোস্ট-সিএসএস আইসোলেশন যার মাধ্যমে প্রতিটি প্ল্যাটফর্মের খাঁটি লুক-অ্যান্ড-ফিল ১০০% অক্ষুণ্ণ থাকে, (৩) প্রতিটি পেজের শীর্ষে একটি গ্লোবাল ইকোসিস্টেম ব্রিজ বার (Ecosystem Bridge Bar) যার সাহায্যে ব্যবহারকারী পলকের মধ্যে ১ ক্লিকে এক পোর্টাল থেকে অন্য পোর্টালে নিরবচ্ছিন্নভাবে ট্রানজিশন করতে পারেন।",
+  systemsTitle: "মূল প্রযুক্তিগত কাঠামো (Core Engineering Systems)",
+  systems: [
+    {
+      num: "01",
+      title: "৪টি জাতীয় ইকোসিস্টেমের ইউনিফাইড কোর",
+      sub: "Unified 4-Ecosystem National Architecture",
+      desc: "একক কোডবেসে বাংলাদেশের শীর্ষ ৪টি এডুটেক ও জব প্ল্যাটফর্মের সকল মূল মডিউল একীভূতকরণ।",
+      points: [
+        "৩৭টি প্রোডাকশন রুট (Next.js 14 App Router) — ১০০% টাইপ-সেফ ও জিরো বিল্ড এরর",
+        "৪টি স্বতন্ত্র প্ল্যাটফর্মের জন্য ইউনিফাইড ইউজার অ্যাকাউন্ট ও সেশন ম্যানেজমেন্ট",
+        "হাইড্রেটেশন সুরক্ষিত ও হাই-স্পিড সার্ভার কম্পোনেন্টস অপ্টিমাইজেশন"
+      ]
+    },
+    {
+      num: "02",
+      title: "টিউটর হাব (Tutor Hub — Caretutors Parity)",
+      sub: "Verified Home & Online Tutor Marketplace",
+      desc: "অভিভাবকদের জন্য স্টেপ-বাই-স্টেপ গৃহশিক্ষক নিয়োগ ফানেল, ৬৪ জেলার টিউশন বোর্ড ও টিউটর ভেরিফিকেশন।",
+      points: [
+        "অভিভাবকদের জন্য ৩-ধাপের দ্রুত গৃহশিক্ষক রিক্রুটমেন্ট উইজার্ড",
+        "শিক্ষকদের সরাসরি আবেদন ও রিয়েল-টাইম লাইভ টিউশন বোর্ড",
+        "বুয়েট, ঢাবি ও মেডিকেলসহ স্বনামধন্য প্রতিষ্ঠানের ভেরিফাইড শিক্ষক নেটওয়ার্ক"
+      ]
+    },
+    {
+      num: "03",
+      title: "স্কিলস একাডেমি (Skills Academy — 10 Minute School Parity)",
+      sub: "Dynamic Learning Hub & Live Batches",
+      desc: "ক্লাস ৫-১০ ও এইচএসসি শিক্ষার্থীদের জন্য লাইভ অনলাইন ব্যাচ মেন্টরিং, স্পোকেন ইংলিশ ও ক্যারিয়ার কোর্স।",
+      points: [
+        "ক্লাস ৫ থেকে এইচএসসি পর্যন্ত ডেডিকেটেড রুটিন ও লাইভ ব্যাচ পোর্টাল",
+        "ভার্সিটি ও মেডিকেল অ্যাডমিশন টেস্ট এবং স্কিল ডেভেলপমেন্ট পাথওয়েজ",
+        "১০ মিনিট স্কুলের খাঁটি কালার প্যালেট ও ইন্টারঅ্যাক্টিভ কম্পোনেন্ট আইসোলেশন"
+      ]
+    },
+    {
+      num: "04",
+      title: "এক্সাম এরিনা (Exam Arena — Live MCQ Parity)",
+      sub: "Competitive Exam & Live OMR Evaluation Arena",
+      desc: "৪৭তম বিসিএস, ব্যাংক জবস, প্রাইমারি শিক্ষক ও জুডিশিয়াল সার্ভিসের লাইভ প্রতিযোগিতামূলক মডেল টেস্ট।",
+      points: [
+        "লাইভ এক্সাম কাউন্টার ও মিলি-সেকেন্ড অ্যাকুরেসি ওএমআর (OMR) শিট ইঞ্জিন",
+        "দেশসেরা মেধা তালিকা (National Merit Ranking) ও পারফরম্যান্স অ্যানালিটিক্স",
+        "বিষয়ভিত্তিক আর্কাইভ, প্র্যাকটিস প্রশ্নব্যাংক ও স্পেশাল মডেল টেস্ট"
+      ]
+    },
+    {
+      num: "05",
+      title: "ক্যারিয়ার হাব (Career Hub — Bdjobs Parity)",
+      sub: "National Job Circular & Recruitment System",
+      desc: "সরকারি, বেসরকারি ও বৈদেশিক চাকরির বিশাল লাইভ ডেটাবেজ, ক্যাটাগরি ফিল্টার এবং Bdjobs Pro ট্র্যাকিং।",
+      points: [
+        "হট জবস ও সরকারি চাকরির সার্কুলার লাইভ ডেটাবেজ ও ফিল্টারিং",
+        "চাকরিপ্রার্থীদের জন্য প্রফেশনাল অনলাইন সিভি বিল্ডার ও ১-ক্লিক অ্যাপ্লিকেশন",
+        "Bdjobs Pro প্রিমিয়াম ক্যারিয়ার ট্র্যাকিং ও এমপ্লয়ার অ্যানালিটিক্স"
+      ]
+    },
+    {
+      num: "06",
+      title: "গ্লোবাল ইকোসিস্টেম ব্রিজ বার ও স্কোপড সিএসএস",
+      sub: "Ecosystem Bridge Bar & Scoped CSS Isolation",
+      desc: "কোনো গ্লোবাল স্টাইল ক্ল্যাশ ছাড়াই প্রতিটি প্ল্যাটফর্মের খাঁটি রূপ বজায় রেখে তাৎক্ষণিক সুইচিং সুবিধা।",
+      points: [
+        "টপ-লেভেল গ্লোবাল ব্রিজ বার দিয়ে ১-ক্লিকে ৪টি পোর্টালে নিরবচ্ছিন্ন জাম্প",
+        "কঠোর Scoped CSS Isolation — সম্পূর্ণ স্বতন্ত্র সিএসএস নেমস্পেসিং",
+        "জিরো রিফ্রেশ ও জিরো মেমরি লিক সহ স্মুথ ক্লায়েন্ট সাইড ট্রানজিশন"
+      ]
+    }
+  ],
+  techTitle: "ব্যবহৃত প্রযুক্তি (Technologies Used)",
+  techList: [
+    "Next.js 14 (App Router)",
+    "React 18",
+    "TypeScript",
+    "Tailwind CSS",
+    "PostCSS & Scoped CSS",
+    "Zustand State Management",
+    "Lucide React Icons",
+    "Vercel Edge Platform"
+  ]
+};
+
+const jibonGoriDetails_en = {
+  overviewTitle: "Overview & Vision",
+  overview: [
+    "JibonGori (জীবনগড়ি) is a national-scale, unified education-to-career ecosystem engineered by Sakil Ahammed, seamlessly integrating Bangladesh's four largest digital service platforms—Caretutors, 10 Minute School, Live MCQ, and Bdjobs—into a single high-performance Next.js 14 architecture.",
+    "Reverse-engineered from the ground up, the platform guides individuals through every milestone of their academic and professional journey: from early home tutoring and academic foundation to high-stakes competitive examinations (BCS/Bank) and lifelong corporate recruitment."
+  ],
+  problemTitle: "The Problem",
+  problem: "Students and professionals in Bangladesh are forced to navigate fragmented, isolated platforms with redundant registrations, incompatible interfaces, and disconnected progress tracking. Technically, unifying four distinctly styled multi-brand platforms with conflicting CSS frameworks and design languages across 37 production routes represented an extraordinary engineering barrier.",
+  solutionTitle: "The Solution",
+  solution: "Sakil Ahammed engineered an enterprise integrated architecture: (1) 37 type-safe production routes on Next.js 14 App Router with zero build errors, (2) strict Scoped CSS Isolation guaranteeing 100% brand fidelity without global styling conflicts, and (3) a persistent Global Ecosystem Bridge Bar allowing users to transition between national platforms in a single click with zero layout shift.",
+  systemsTitle: "Core Engineering Systems",
+  systems: [
+    {
+      num: "01",
+      title: "Unified 4-Ecosystem National Architecture",
+      sub: "End-to-End Codebase Integration Core",
+      desc: "Monolithic unification of 4 premier Bangladeshi educational and employment platforms within an ultra-fast Next.js 14 stack.",
+      points: [
+        "37 Production Routes across App Router with 100% TypeScript type safety",
+        "Unified session tokens and state synchronization across all four verticals",
+        "Hydration-safe architecture eliminating SSR/CSR discrepancies"
+      ]
+    },
+    {
+      num: "02",
+      title: "Tutor Hub (Caretutors Parity)",
+      sub: "Verified Home & Online Tutor Marketplace",
+      desc: "Multi-step tutor hiring wizard for guardians, comprehensive 64-district live job boards, and verified educator onboarding.",
+      points: [
+        "High-conversion 3-step guardian tutor hiring wizard",
+        "Live tuition circulars board with district, class, and salary filters",
+        "Verification pipeline for premier universities (BUET, DU, Medical)"
+      ]
+    },
+    {
+      num: "03",
+      title: "Skills Academy (10 Minute School Parity)",
+      sub: "Dynamic Learning Hub & Live Batches",
+      desc: "Live batch mentoring for Classes 5–10 and HSC, spoken English masterclasses, and career development programs.",
+      points: [
+        "Dedicated routine, live class scheduler, and lecture note repository",
+        "Admission test preparation tracks (Engineering, Medical, University)",
+        "Authentic 10 Minute School color harmony and interactive component isolation"
+      ]
+    },
+    {
+      num: "04",
+      title: "Exam Arena (Live MCQ Parity)",
+      sub: "Competitive Exam & Live OMR Evaluation Arena",
+      desc: "Real-time competitive model exams for 47th BCS, Bank Jobs, Primary Teachers, and Judicial Services (BJS).",
+      points: [
+        "Synchronized live exam timers with sub-second accurate OMR bubble sheet",
+        "Instant National Merit Ranking computation and diagnostic percentile graphs",
+        "Topic-wise question bank archive and targeted subject revision tests"
+      ]
+    },
+    {
+      num: "05",
+      title: "Career Hub (Bdjobs Parity)",
+      sub: "National Job Circular & Recruitment System",
+      desc: "National employment engine aggregating government notices, corporate listings, and international opportunities.",
+      points: [
+        "Hot Jobs feed, government circulars, and advanced categorical filtering",
+        "Professional digital CV builder with 1-click job application pipeline",
+        "Bdjobs Pro career progress tracking and employer applicant management"
+      ]
+    },
+    {
+      num: "06",
+      title: "Ecosystem Bridge Bar & Scoped CSS Isolation",
+      sub: "Zero-Clash Multi-Brand Design System",
+      desc: "Eliminates CSS collisions while granting seamless instant 1-click navigation across the entire quadruple ecosystem.",
+      points: [
+        "Persistent Ecosystem Bridge Bar for zero-reload portal jumping",
+        "Strict Scoped CSS and PostCSS isolation preserving unique visual brands",
+        "Optimized client-side transitions with zero memory leaks"
+      ]
+    }
+  ],
+  techTitle: "Technologies Used",
+  techList: [
+    "Next.js 14 (App Router)",
+    "React 18",
+    "TypeScript",
+    "Tailwind CSS",
+    "PostCSS & Scoped CSS",
+    "Zustand State Management",
+    "Lucide React Icons",
+    "Vercel Edge Platform"
+  ]
+};
+
 export const projects = [
   {
     title: "Unnoto Khabar",
@@ -1211,5 +1398,54 @@ export const projects = [
     date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
     github: "https://github.com/sakilahammed-dev/ss-iqra-pure-food",
     homepage: "https://sakilahammed-dev.github.io/ss-iqra-pure-food/",
+  },
+
+  {
+    title: "JibonGori",
+    can: "images/projects/JibonGori/JibonGoriCan.webp",
+    images: [
+      { src: "images/projects/JibonGori/1.webp", alt: "JibonGori - Unified National Education-to-Career Platform" },
+      { src: "images/projects/JibonGori/2.webp", alt: "4 Integrated Ecosystems: Tutor Hub, Skills Academy, Exam Arena, Career Hub" },
+    ],
+    description: {
+      en: "JibonGori is a national-scale digital platform engineered by Sakil Ahammed, unifying Bangladesh's 4 largest digital service ecosystems—Caretutors, 10 Minute School, Live MCQ, and Bdjobs—into a high-performance Next.js 14 App Router architecture with 37 production routes and strict scoped CSS isolation.",
+      es: "JibonGori es una plataforma digital a escala nacional diseñada por Sakil Ahammed que unifica los 4 ecosistemas digitales más grandes de Bangladesh (Caretutors, 10 Minute School, Live MCQ y Bdjobs) en una arquitectura Next.js 14.",
+      bn: "জীবনগড়ি (JibonGori) - বাংলাদেশের ৪টি সর্ববৃহৎ ডিজিটাল সেবা ইকোসিস্টেম (Caretutors, 10 Minute School, Live MCQ এবং Bdjobs) একীভূত করে শাকিল আহাম্মেদ দ্বারা নির্মিত জাতীয় পর্যায়ের সমন্বিত এডুকেশন-টু-ক্যারিয়ার ওয়েব প্ল্যাটফর্ম। এতে রয়েছে ৩৭টি প্রোডাকশন রুট, স্কোপড সিএসএস আইসোলেশন এবং গ্লোবাল ইকোসিস্টেম ব্রিজ বার।",
+    },
+    detailedDescription: {
+      bn: jibonGoriDetails_bn,
+      en: jibonGoriDetails_en,
+      es: jibonGoriDetails_en,
+    },
+    tech: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss],
+    features: {
+      en: [
+        "Unified 4-ecosystem national architecture across 37 type-safe production routes.",
+        "Persistent Ecosystem Bridge Bar for seamless 1-click cross-portal navigation.",
+        "Tutor Hub parity: 3-step guardian tutor hiring funnel & 64-district tuition board.",
+        "Skills Academy parity: Class 5–10 & HSC live batches, routines & English masterclasses.",
+        "Exam Arena parity: 47th BCS, Bank Jobs live MCQ with sub-second OMR & merit rankings.",
+        "Career Hub parity: National Hot Jobs, government circulars & digital CV engine.",
+      ],
+      es: [
+        "Arquitectura unificada de 4 ecosistemas en 37 rutas de producción con tipado seguro.",
+        "Barra de puente de ecosistema para navegación fluida en un solo clic.",
+        "Tutor Hub: embudo de contratación de tutores y bolsa de tutorías en 64 distritos.",
+        "Skills Academy: clases en vivo para grados 5-10 y bachillerato.",
+        "Exam Arena: simulacros en vivo de BCS y banca con hoja OMR y ranking nacional.",
+        "Career Hub: bolsa nacional de empleo, vacantes públicas y motor de currículum.",
+      ],
+      bn: [
+        "৩৭টি প্রোডাকশন রুট সম্পন্ন ৪টি জাতীয় ইকোসিস্টেমের সমন্বিত একক প্ল্যাটফর্ম।",
+        "১-ক্লিকে যেকোনো পোর্টালে যাওয়ার জন্য গ্লোবাল ইকোসিস্টেম ব্রিজ বার।",
+        "টিউটর হাব: অভিভাবকদের জন্য ৩-ধাপের গৃহশিক্ষক নিয়োগ ফানেল ও ৬৪ জেলার টিউশন বোর্ড।",
+        "স্কিলস একাডেমি: ক্লাস ৫-১০ ও এইচএসসি লাইভ ব্যাচ, রুটিন ও স্পোকেন ইংলিশ।",
+        "এক্সাম এরিনা: ৪৭তম বিসিএস ও ব্যাংক জবস লাইভ MCQ, রিয়েল-টাইম OMR ও জাতীয় মেধা তালিকা।",
+        "ক্যারিয়ার হাব: হট জবস, সরকারি চাকরির সার্কুলার ও প্রফেশনাল অনলাইন সিভি বিল্ডার।",
+      ],
+    },
+    date: { en: "November 2026", es: "Noviembre 2026", bn: "নভেম্বর ২০২৬" },
+    github: "https://github.com/sakilahammed-dev/JibonGori",
+    homepage: "https://github.com/sakilahammed-dev/JibonGori",
   },
 ];
