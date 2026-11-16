@@ -14,12 +14,10 @@ export default function RaycastHandler({
   setIsAnimating,
 }) {
   const raycaster = useRef(new THREE.Raycaster());
-  const pointer = useRef(new THREE.Vector2());
-  const hovered = useRef(null);
-  const hoverTargets = useRef([]);
+  const pointer = useRef(new THREE.Vector2(-9999, -9999));
+  const hoveredNavEntry = useRef(null);
   const { camera, gl } = useThree();
   const [animating, setAnimating] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
 
   // --- helpers ---
   const findNavEntryBy = useCallback(
@@ -34,26 +32,39 @@ export default function RaycastHandler({
   );
 
   const playHoverAnimation = useCallback((object, on) => {
-    if (!object) return;
+    if (!object || !object.material) return;
+
+    if (!object.userData.initialScale) {
+      object.userData.initialScale = object.scale.clone();
+    }
+
     const targetScale = on
       ? object.userData.initialScale.clone().multiplyScalar(1.1)
       : object.userData.initialScale;
-    const targetColor = on ? "#ffffff" : "#ff4444";
+
+    // Turns pure white (#ffffff) on hover, returns to red (#ff2222)
+    const targetColor = on
+      ? { r: 1, g: 1, b: 1 }
+      : { r: 1, g: 0.133, b: 0.133 };
 
     gsap.to(object.scale, {
       x: targetScale.x,
       y: targetScale.y,
       z: targetScale.z,
-      duration: 0.4,
+      duration: 0.25,
       ease: "back.out(1.8)",
       overwrite: "auto",
     });
 
-    gsap.to(object.material.color, {
-      ...new THREE.Color(targetColor),
-      duration: 0.4,
-      overwrite: "auto",
-    });
+    if (object.material.color) {
+      gsap.to(object.material.color, {
+        r: targetColor.r,
+        g: targetColor.g,
+        b: targetColor.b,
+        duration: 0.25,
+        overwrite: "auto",
+      });
+    }
   }, []);
 
   const focusCameraOnObject = useCallback(
@@ -103,38 +114,43 @@ export default function RaycastHandler({
         },
       });
     },
-    [camera, controlsRef, findNavEntryBy, currentTarget],
+    [camera, controlsRef, findNavEntryBy, currentTarget, setIsAnimating],
   );
 
-  // detect touch devices
-  useEffect(() => {
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
-
   // update pointer coordinates relative to canvas
-  const updatePointer = (clientX, clientY) => {
+  const updatePointer = useCallback((clientX, clientY) => {
+    if (!gl.domElement) return;
     const rect = gl.domElement.getBoundingClientRect();
     pointer.current.x = ((clientX - rect.left) / rect.width) * 2 - 1;
     pointer.current.y = -((clientY - rect.top) / rect.height) * 2 + 1;
-  };
+  }, [gl]);
 
-  // handle hover movement (desktop only)
+  // handle pointer and mouse movement
   useEffect(() => {
     const handleMove = (e) => {
-      if (isTouch) return; // skip hover on mobile
+      if (e.pointerType === "touch") return;
       updatePointer(e.clientX, e.clientY);
     };
-    window.addEventListener("pointermove", handleMove);
-    return () => window.removeEventListener("pointermove", handleMove);
-  }, [isTouch]);
 
-  useEffect(() => {
-    hoverTargets.current = targets.filter((t) =>
-      Object.values(navConfig).some(
-        (conf) => conf.glass === t.name || conf.text === t.name,
-      ),
-    );
-  }, [targets]);
+    const handleLeave = () => {
+      pointer.current.set(-9999, -9999);
+      if (hoveredNavEntry.current) {
+        playHoverAnimation(findTargetByName(hoveredNavEntry.current.text), false);
+        hoveredNavEntry.current = null;
+      }
+      document.body.style.cursor = "default";
+    };
+
+    window.addEventListener("pointermove", handleMove, { passive: true });
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    document.addEventListener("mouseleave", handleLeave);
+
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("mousemove", handleMove);
+      document.removeEventListener("mouseleave", handleLeave);
+    };
+  }, [updatePointer, findTargetByName, playHoverAnimation]);
 
   useEffect(() => {
     return () => {
@@ -142,9 +158,9 @@ export default function RaycastHandler({
     };
   }, []);
 
-  // hover logic (desktop only)
+  // hover logic in render loop
   useFrame(() => {
-    if (isTouch) return;
+    if (animating) return;
 
     raycaster.current.setFromCamera(pointer.current, camera);
     const intersects = raycaster.current.intersectObjects(targets);
@@ -152,36 +168,24 @@ export default function RaycastHandler({
     if (intersects.length > 0) {
       const hit = intersects[0].object;
 
-      if (hoverTargets.current.includes(hit)) {
-        const navEntry =
-          findNavEntryBy("glass", hit.name) ||
-          findNavEntryBy("text", hit.name);
-        if (!navEntry) return;
+      // Find if this hit is part of a nav button (glass box or 3D text)
+      const navEntry = Object.values(navConfig).find(
+        (conf) => conf.glass === hit.name || conf.text === hit.name,
+      );
 
-        if (hovered.current !== hit) {
-          if (hovered.current) {
-            const prevEntry =
-              findNavEntryBy("glass", hovered.current.name) ||
-              findNavEntryBy("text", hovered.current.name);
-            if (prevEntry) {
-              playHoverAnimation(findTargetByName(prevEntry.text), false);
-            }
+      if (navEntry) {
+        if (hoveredNavEntry.current !== navEntry) {
+          if (hoveredNavEntry.current) {
+            playHoverAnimation(findTargetByName(hoveredNavEntry.current.text), false);
           }
-
-          hovered.current = hit;
+          hoveredNavEntry.current = navEntry;
           playHoverAnimation(findTargetByName(navEntry.text), true);
         }
-
         document.body.style.cursor = "pointer";
       } else {
-        if (hovered.current) {
-          const prevEntry =
-            findNavEntryBy("glass", hovered.current.name) ||
-            findNavEntryBy("text", hovered.current.name);
-          if (prevEntry) {
-            playHoverAnimation(findTargetByName(prevEntry.text), false);
-          }
-          hovered.current = null;
+        if (hoveredNavEntry.current) {
+          playHoverAnimation(findTargetByName(hoveredNavEntry.current.text), false);
+          hoveredNavEntry.current = null;
         }
 
         if (hit.name.includes("Screen") && hit !== screenMesh) {
@@ -191,12 +195,9 @@ export default function RaycastHandler({
         }
       }
     } else {
-      if (hovered.current) {
-        const prevEntry = findNavEntryBy("glass", hovered.current.name);
-        if (prevEntry) {
-          playHoverAnimation(findTargetByName(prevEntry.text), false);
-        }
-        hovered.current = null;
+      if (hoveredNavEntry.current) {
+        playHoverAnimation(findTargetByName(hoveredNavEntry.current.text), false);
+        hoveredNavEntry.current = null;
       }
       document.body.style.cursor = "default";
     }
@@ -211,7 +212,7 @@ export default function RaycastHandler({
       setIsAnimating(true);
       focusCameraOnObject(screenMesh);
     }
-  }, [screenMesh, currentTarget, focusCameraOnObject]);
+  }, [screenMesh, currentTarget, focusCameraOnObject, controlsRef, setIsAnimating]);
 
   // Global navigation helper for direct targeting & automated testing
   useEffect(() => {
@@ -264,21 +265,16 @@ export default function RaycastHandler({
           setScreenMesh?.(screenTarget);
           setTarget(navEntry.text);
         }
-      } else if (clicked.name.includes("Glass")) {
-        const navEntry = findNavEntryBy("glass", clicked.name);
-        if (!navEntry) return;
-        const screenTarget = findTargetByName(navEntry.target);
-        if (screenTarget) {
-          setScreenMesh?.(screenTarget);
-          setTarget(navEntry.text);
-        }
-      } else if (clicked.name.includes("Text") || clicked.name.includes("Red")) {
-        const navEntry = findNavEntryBy("text", clicked.name);
-        if (!navEntry) return;
-        const screenTarget = findTargetByName(navEntry.target);
-        if (screenTarget) {
-          setScreenMesh?.(screenTarget);
-          setTarget(navEntry.text);
+      } else {
+        const navEntry = Object.values(navConfig).find(
+          (conf) => conf.glass === clicked.name || conf.text === clicked.name,
+        );
+        if (navEntry) {
+          const screenTarget = findTargetByName(navEntry.target);
+          if (screenTarget) {
+            setScreenMesh?.(screenTarget);
+            setTarget(navEntry.text);
+          }
         }
       }
     };
@@ -309,6 +305,7 @@ export default function RaycastHandler({
     findNavEntryBy,
     findTargetByName,
     animating,
+    updatePointer,
   ]);
 
   return null;
