@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
   const groupRef = useRef();
-  const { scene } = useGLTF("models/3dPortfolio.glb?v=pristine_v1");
+  const { scene } = useGLTF("models/3dPortfolio.glb?v=gallery_v2");
 
   const manager = new THREE.LoadingManager();
 
