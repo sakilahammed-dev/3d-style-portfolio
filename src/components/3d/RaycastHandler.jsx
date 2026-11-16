@@ -130,7 +130,9 @@ export default function RaycastHandler({
 
   useEffect(() => {
     hoverTargets.current = targets.filter((t) =>
-      Object.values(navConfig).some((conf) => conf.glass === t.name),
+      Object.values(navConfig).some(
+        (conf) => conf.glass === t.name || conf.text === t.name,
+      ),
     );
   }, [targets]);
 
@@ -151,12 +153,16 @@ export default function RaycastHandler({
       const hit = intersects[0].object;
 
       if (hoverTargets.current.includes(hit)) {
-        const navEntry = findNavEntryBy("glass", hit.name);
+        const navEntry =
+          findNavEntryBy("glass", hit.name) ||
+          findNavEntryBy("text", hit.name);
         if (!navEntry) return;
 
         if (hovered.current !== hit) {
           if (hovered.current) {
-            const prevEntry = findNavEntryBy("glass", hovered.current.name);
+            const prevEntry =
+              findNavEntryBy("glass", hovered.current.name) ||
+              findNavEntryBy("text", hovered.current.name);
             if (prevEntry) {
               playHoverAnimation(findTargetByName(prevEntry.text), false);
             }
@@ -169,7 +175,9 @@ export default function RaycastHandler({
         document.body.style.cursor = "pointer";
       } else {
         if (hovered.current) {
-          const prevEntry = findNavEntryBy("glass", hovered.current.name);
+          const prevEntry =
+            findNavEntryBy("glass", hovered.current.name) ||
+            findNavEntryBy("text", hovered.current.name);
           if (prevEntry) {
             playHoverAnimation(findTargetByName(prevEntry.text), false);
           }
@@ -204,6 +212,21 @@ export default function RaycastHandler({
       focusCameraOnObject(screenMesh);
     }
   }, [screenMesh, currentTarget, focusCameraOnObject]);
+
+  // Global navigation helper for direct targeting & automated testing
+  useEffect(() => {
+    window.__navigateToTarget = (targetName) => {
+      const screenTarget = findTargetByName(targetName);
+      if (screenTarget) {
+        setScreenMesh?.(screenTarget);
+        const navEntry = findNavEntryBy("target", targetName);
+        if (navEntry) setTarget(navEntry.text);
+      }
+    };
+    return () => {
+      delete window.__navigateToTarget;
+    };
+  }, [targets, setScreenMesh, setTarget, findTargetByName, findNavEntryBy]);
 
   // handle click / tap
   useEffect(() => {
@@ -243,6 +266,14 @@ export default function RaycastHandler({
         }
       } else if (clicked.name.includes("Glass")) {
         const navEntry = findNavEntryBy("glass", clicked.name);
+        if (!navEntry) return;
+        const screenTarget = findTargetByName(navEntry.target);
+        if (screenTarget) {
+          setScreenMesh?.(screenTarget);
+          setTarget(navEntry.text);
+        }
+      } else if (clicked.name.includes("Text") || clicked.name.includes("Red")) {
+        const navEntry = findNavEntryBy("text", clicked.name);
         if (!navEntry) return;
         const screenTarget = findTargetByName(navEntry.target);
         if (screenTarget) {

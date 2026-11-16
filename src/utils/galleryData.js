@@ -2,23 +2,23 @@ export const galleryVideos = [
   {
     id: 1,
     title: {
-      en: "AI Workflow & Automation Systems",
-      es: "Sistemas de Automatización y Flujo de IA",
-      bn: "এআই ওয়ার্কফ্লো ও অটোমেশন সিস্টেম",
+      en: "n8n Business Workflow Automation",
+      es: "Automatización de Negocios con n8n",
+      bn: "n8n বিজনেস ওয়ার্কফ্লো অটোমেশন",
     },
     category: {
       en: "Workflow Automation",
       es: "Automatización",
       bn: "ওয়ার্কফ্লো অটোমেশন",
     },
-    src: "videos/demo-automation.mp4",
-    poster: "images/projects/ArcfaceBackbones/ArcfaceCan.webp",
+    src: "videos/N8N_automation_workflow.mp4",
+    poster: "images/projects/n8n_automation_thumb.webp",
     description: {
-      en: "End-to-end automated operations, multi-agent orchestration, and seamless webhook integration for businesses.",
-      es: "Operaciones automatizadas de extremo a extremo, orquestación de multi-agentes e integración de webhooks.",
-      bn: "বিজনেস অপারেশন অটোমেশন, মাল্টি-এজেন্ট অর্কেস্ট্রেশন এবং রুট-কজ সমাধানের লাইভ সিস্টেম ডেমো।",
+      en: "Live demonstration by Sakil Ahammed: Autonomous enterprise operations, multi-agent AI decision systems, and seamless workflow automation.",
+      es: "Demostración en vivo por Sakil Ahammed: Operaciones autónomas empresariales, sistemas de decisión de IA multi-agente y automatización de flujos.",
+      bn: "শাকিল আহাম্মেদ-এর লাইভ ডেমো: স্বয়ংক্রিয় বিজনেস অপারেশন, মাল্টি-এজেন্ট এআই ডিসিশন ইঞ্জিন এবং এন্টারপ্রাইজ ওয়ার্কফ্লো অটোমেশন।",
     },
-    tags: ["n8n", "Python", "FastAPI", "Webhooks", "AI Agents"],
+    tags: ["n8n", "AI Agents", "Python", "FastAPI", "Webhooks", "Enterprise Automation"],
   },
   {
     id: 2,
