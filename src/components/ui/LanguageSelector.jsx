@@ -38,10 +38,11 @@ export default function LanguageSelector({ selected, onChange }) {
       })}
     >
       <button
-        onClick={() => isTouch && setOpen((prev) => !prev)}
+        onClick={() => setOpen((prev) => !prev)}
         className={`pointer-events-auto p-4 backdrop-blur-xs ${
           open ? "bg-neutral-800 rounded-t-xl" : "bg-neutral-800/40 rounded-xl"
         } cursor-pointer hover:bg-neutral-800`}
+        aria-label="Select Language"
       >
         <BsTranslate className="w-6 h-6 md:w-8 md:h-8" />
       </button>

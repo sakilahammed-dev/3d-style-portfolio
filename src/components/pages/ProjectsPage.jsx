@@ -354,11 +354,11 @@ export default function ProjectsPage({ language }) {
     );
   }
 
-  // Grid view (3x3 Vending Machine Cans - 100% matches original reference screenshot)
+  // Grid view (3x3 Vending Machine Shelves - 1st 3 projects)
   return (
     <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-2xl md:text-3xl text-center">
       <div className="absolute w-full h-full bg-grid"></div>
-      <div className="absolute w-full h-full font-mono p-8 flex flex-col items-center gap-6">
+      <div className="absolute w-full h-full font-mono p-8 flex flex-col items-center justify-between gap-4">
         <div className="w-full h-full grid grid-cols-3 grid-rows-3 gap-4">
           {currentProjects.map((project, index) => (
             <div
@@ -367,20 +367,24 @@ export default function ProjectsPage({ language }) {
                 setSelectedProject(project);
                 setActiveImageIndex(0);
               }}
-              className="flex flex-col shadow-lg shadow-neutral-500 bg-neutral-200/60 backdrop-blur-xs items-center justify-center rounded-2xl cursor-pointer hover:scale-105 transition-transform border border-neutral-50"
+              className="flex flex-col shadow-lg shadow-neutral-400/70 bg-neutral-100/90 backdrop-blur-xs items-center justify-between p-3 rounded-2xl cursor-pointer hover:scale-105 hover:shadow-2xl transition-all border border-neutral-300/80 group"
             >
-              <img
-                src={project.can}
-                alt={project.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="p-2 font-mono">{project.title}</div>
+              <div className="w-full h-[76%] rounded-xl overflow-hidden flex items-center justify-center bg-white/60 border border-neutral-200/80">
+                <img
+                  src={project.can}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
+              <div className="h-[24%] flex items-center justify-center p-1 font-mono font-bold text-base md:text-2xl text-neutral-800 tracking-tight truncate w-full">
+                {project.title}
+              </div>
             </div>
           ))}
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex gap-4 mt-4">
+        <div className="flex gap-4 mt-2">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
@@ -393,7 +397,7 @@ export default function ProjectsPage({ language }) {
             {t.prev}
           </button>
 
-          <span className="flex items-center">
+          <span className="flex items-center text-lg md:text-xl">
             {t.page} {currentPage} {t.of} {totalPages}
           </span>
 
