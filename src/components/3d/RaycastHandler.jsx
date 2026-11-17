@@ -79,21 +79,32 @@ export default function RaycastHandler({
       const size = box.getSize(new THREE.Vector3());
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
-      let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * 1.5;
+      const isMobile = window.innerWidth < 768;
+      const isArcade =
+        object.name === "Jackbox_Screen_White_Target" ||
+        object.name === "ArcadeMachine_Screen_White_Target";
+
+      const distanceMult = isMobile && isArcade ? 2.05 : 1.5;
+      let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * distanceMult;
 
       const configEntry = findNavEntryBy("target", object.name);
       const offsetArray = configEntry?.cameraOffset || [0, 0, 1];
       const offsetDirection = new THREE.Vector3(...offsetArray).normalize();
-      const newCameraPos = center
+      const targetCenter = center.clone();
+      if (isMobile && isArcade) {
+        // Center the arcade cabinet cleanly in mobile portrait
+        targetCenter.y -= 0.015;
+      }
+      const newCameraPos = targetCenter
         .clone()
         .add(offsetDirection.multiplyScalar(cameraZ));
 
       gsap.killTweensOf([controlsRef.current.target, camera.position]);
 
       gsap.to(controlsRef.current.target, {
-        x: center.x,
-        y: center.y,
-        z: center.z,
+        x: targetCenter.x,
+        y: targetCenter.y,
+        z: targetCenter.z,
         duration: 2,
         ease: "power2.out",
         overwrite: "auto",
