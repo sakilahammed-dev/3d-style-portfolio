@@ -10,7 +10,7 @@ import { useThree } from "@react-three/fiber";
 import AboutMe from "../pages/AboutMe";
 import ProjectsPage from "../pages/ProjectsPage";
 import GalleryPage from "../pages/GalleryPage";
-import MusicPage from "../pages/MusicPage";
+import ServicesPage from "../pages/ServicesPage";
 import ContactPage from "../pages/ContactPage";
 
 export default function SceneWrapper({
@@ -115,7 +115,7 @@ export default function SceneWrapper({
 
       {jackboxScreen && (
         <AttachHtmlToMesh mesh={jackboxScreen}>
-          <MusicPage language={language} audioRef={audioRef} />
+          <ServicesPage language={language} setTarget={setTarget} />
         </AttachHtmlToMesh>
       )}
 
