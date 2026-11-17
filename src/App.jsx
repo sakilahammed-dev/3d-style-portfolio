@@ -75,7 +75,7 @@ export default function App() {
             >
               <BsFillHouseDoorFill className="w-6 h-6 md:w-8 md:h-8" />
             </button>
-            <div className="h-full flex gap-2">
+            <div className="h-full flex items-start gap-2">
               <LanguageSelector selected={language} onChange={handleLanguageChange} />
               <audio
                 ref={audioRef}
