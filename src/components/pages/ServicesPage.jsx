@@ -15,6 +15,7 @@ import {
 export default function ServicesPage({ language = "bn", setTarget }) {
   // null = 3-service catalog cards; serviceId = inside detail view
   const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [hoveredServiceId, setHoveredServiceId] = useState(null);
 
   const selectedService = servicesData.find((s) => s.id === selectedServiceId);
 
@@ -282,46 +283,127 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                 svc.coreHighlight?.en ||
                 svc.tags;
 
+              const isHovered = hoveredServiceId === svc.id;
+
               return (
                 <div
                   key={svc.id}
                   onClick={() => setSelectedServiceId(svc.id)}
-                  className="group relative flex-1 p-4 md:p-5 bg-white/95 hover:bg-gradient-to-r hover:from-blue-50/80 hover:via-white hover:to-blue-50/40 rounded-2xl border-2 border-neutral-300 hover:border-blue-500 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-2xl hover:shadow-blue-500/25 hover:scale-[1.012] flex items-center justify-between gap-4 overflow-hidden"
+                  onMouseEnter={() => setHoveredServiceId(svc.id)}
+                  onMouseLeave={() => setHoveredServiceId(null)}
+                  className={`group relative flex-1 p-4 md:p-5 bg-white/95 rounded-2xl border-2 transition-colors duration-300 cursor-pointer shadow-sm flex items-center justify-between gap-4 overflow-hidden transform-none ${
+                    isHovered
+                      ? "border-cyan-500 shadow-md shadow-cyan-500/20"
+                      : "border-neutral-300 hover:border-cyan-500 hover:shadow-md hover:shadow-cyan-500/20"
+                  }`}
                 >
-                  {/* Left Accent Glow Bar on Hover */}
-                  <div className="absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full bg-transparent group-hover:bg-gradient-to-b group-hover:from-blue-500 group-hover:to-indigo-600 transition-all duration-300"></div>
+                  {/* LIQUID WAVE EFFECT: Fills bottom ~55-58% with animated colorful waves on hover */}
+                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-0">
+                    <div
+                      className={`absolute inset-x-0 bottom-0 h-[58%] transition-transform duration-600 ease-out flex flex-col justify-end ${
+                        isHovered
+                          ? "translate-y-0"
+                          : "translate-y-[102%] group-hover:translate-y-0"
+                      }`}
+                    >
+                      {/* Animated Wave Crests (Water surface waves) */}
+                      <div className="relative w-full h-7 overflow-hidden shrink-0">
+                        {/* Back Wave (Deep Ocean Sapphire) */}
+                        <svg
+                          className="absolute bottom-0 left-0 w-[200%] h-7 animate-liquid-wave-back opacity-50"
+                          viewBox="0 0 1200 120"
+                          preserveAspectRatio="none"
+                        >
+                          <path
+                            d="M 0 50 C 100 50, 200 10, 300 10 C 400 10, 500 50, 600 50 C 700 50, 800 10, 900 10 C 1000 10, 1100 50, 1200 50 L 1200 120 L 0 120 Z"
+                            fill="#1e40af"
+                          />
+                        </svg>
 
-                  {/* Left: Icon & Big Bold Title + Tagline (NO RED LINE, NO HIBIJIBI) */}
-                  <div className="flex items-center gap-4 md:gap-6 min-w-0 pl-1">
-                    {/* Large Service Icon with Royal Blue Glow on Hover */}
-                    <div className="p-3.5 md:p-4 bg-neutral-900 text-white rounded-2xl shadow-md group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:shadow-lg group-hover:shadow-blue-500/40 transition-all duration-300 shrink-0">
+                        {/* Front Wave (Vibrant Aqua / Cyan Liquid) */}
+                        <svg
+                          className="absolute bottom-0 left-0 w-[200%] h-7 animate-liquid-wave-front opacity-85"
+                          viewBox="0 0 1200 120"
+                          preserveAspectRatio="none"
+                        >
+                          <path
+                            d="M 0 30 C 100 5, 200 5, 300 30 C 400 55, 500 55, 600 30 C 700 5, 800 5, 900 30 C 1000 55, 1100 55, 1200 30 L 1200 120 L 0 120 Z"
+                            fill="#06b6d4"
+                          />
+                        </svg>
+                      </div>
+
+                      {/* Liquid Body (Gradient Cyan to Deep Royal Blue Water) */}
+                      <div className="w-full flex-1 bg-gradient-to-b from-cyan-500/85 via-blue-600/90 to-blue-900/95"></div>
+                    </div>
+                  </div>
+
+                  {/* Left Accent Glow Bar on Hover */}
+                  <div
+                    className={`absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full transition-all duration-300 z-10 ${
+                      isHovered
+                        ? "bg-gradient-to-b from-cyan-400 to-blue-600 opacity-100"
+                        : "bg-transparent group-hover:bg-gradient-to-b group-hover:from-cyan-400 group-hover:to-blue-600"
+                    }`}
+                  ></div>
+
+                  {/* Left: Icon & Big Bold Title + Tagline (z-10 sits on top of water) */}
+                  <div className="relative z-10 flex items-center gap-4 md:gap-6 min-w-0 pl-1">
+                    {/* Large Service Icon with Vibrant Ocean Glow on Hover */}
+                    <div
+                      className={`p-3.5 md:p-4 rounded-2xl shadow-md transition-all duration-300 shrink-0 ${
+                        isHovered
+                          ? "bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/40 text-white"
+                          : "bg-neutral-900 text-white group-hover:bg-gradient-to-br group-hover:from-cyan-500 group-hover:to-blue-600 group-hover:shadow-lg group-hover:shadow-cyan-500/40"
+                      }`}
+                    >
                       {getServiceIcon(
                         svc.icon,
-                        "w-7 h-7 md:w-9 md:h-9 text-blue-400 group-hover:text-white group-hover:scale-105 transition-all duration-300",
+                        `w-7 h-7 md:w-9 md:h-9 transition-colors duration-300 ${
+                          isHovered
+                            ? "text-white"
+                            : "text-cyan-400 group-hover:text-white"
+                        }`,
                       )}
                     </div>
 
                     <div className="min-w-0">
                       {/* BIG EYE-CATCHING TITLE (চোখে পড়ার মতো অনেক বড় ফন্ট) */}
-                      <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 tracking-tight leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate">
+                      <h2
+                        className={`text-xl md:text-2xl lg:text-3xl font-black tracking-tight leading-tight transition-colors duration-300 truncate ${
+                          isHovered
+                            ? "text-blue-600"
+                            : "text-neutral-900 group-hover:text-blue-600"
+                        }`}
+                      >
                         {title}
                       </h2>
 
-                      {/* Clean Sub-line / Tagline (রাখা হয়েছে সুন্দরভাবে) */}
-                      <p className="text-xs md:text-sm text-neutral-500 group-hover:text-neutral-700 font-medium leading-relaxed mt-1.5 transition-colors duration-300 truncate">
+                      {/* Clean Sub-line / Tagline: Pure crisp white on water */}
+                      <p
+                        className={`text-xs md:text-sm font-semibold leading-relaxed mt-1.5 transition-colors duration-200 truncate ${
+                          isHovered
+                            ? "text-white"
+                            : "text-neutral-500 group-hover:text-white"
+                        }`}
+                      >
                         {highlight}
                       </p>
                     </div>
                   </div>
 
-                  {/* Right: Gorgeous Action Button with Royal Blue Gradient Glow */}
-                  <div className="shrink-0 flex items-center">
+                  {/* Right: Gorgeous Action Button with Ocean Glow (z-10 sits on top) */}
+                  <div className="relative z-10 shrink-0 flex items-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedServiceId(svc.id);
                       }}
-                      className="px-4 md:px-6 py-2.5 md:py-3.5 bg-neutral-900 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-indigo-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md group-hover:shadow-xl group-hover:shadow-blue-500/35 flex items-center gap-2 cursor-pointer shrink-0"
+                      className={`px-4 md:px-6 py-2.5 md:py-3.5 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md flex items-center gap-2 cursor-pointer shrink-0 ${
+                        isHovered
+                          ? "bg-gradient-to-r from-blue-600 to-cyan-600 shadow-xl shadow-cyan-500/35"
+                          : "bg-neutral-900 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 group-hover:shadow-xl group-hover:shadow-cyan-500/35"
+                      }`}
                     >
                       <span className="hidden sm:inline">{t.exploreDetails}</span>
                       <span className="sm:hidden">বিস্তারিত</span>

@@ -28,3 +28,31 @@
     -webkit-user-drag: none;
   }
 }
+
+@keyframes liquidWaveFront {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes liquidWaveBack {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-liquid-wave-front {
+  animation: liquidWaveFront 5s linear infinite;
+  will-change: transform;
+}
+
+.animate-liquid-wave-back {
+  animation: liquidWaveBack 8s linear infinite;
+  will-change: transform;
+}
