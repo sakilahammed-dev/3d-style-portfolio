@@ -79,7 +79,7 @@ export default function App() {
               <LanguageSelector selected={language} onChange={handleLanguageChange} />
               <audio
                 ref={audioRef}
-                src={"music/hamon.wav"}
+                src={"music/mustafa.mp3"}
                 className="hidden"
                 autoPlay
               />

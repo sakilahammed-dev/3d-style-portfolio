@@ -1,52 +1,22 @@
 export const tracks = [
   {
-    title: "Hamon",
-    src: "music/hamon.wav",
-    image: "images/music/hamon.jpg",
+    title: "Mustafa Mustafa - Mishary Rashid Alafasy",
+    src: "music/mustafa.mp3",
+    image: "images/music/mustafa.webp",
   },
   {
-    title: "Denno",
-    src: "music/denno.wav",
-    image: "images/music/denno.jpg",
+    title: "Mawlaya Salli wa Sallim - Maher Zain (Vocals)",
+    src: "music/mawlaya.mp3",
+    image: "images/music/mawlaya.webp",
   },
   {
-    title: "Hikari",
-    src: "music/hikari.wav",
-    image: "images/music/hikari.webp",
+    title: "Rahman Ya Rahman - Mishary Rashid Alafasy",
+    src: "music/rahman_ya_rahman.mp3",
+    image: "images/music/rahman_ya_rahman.webp",
   },
   {
-    title: "Kuttenete",
-    src: "music/kuttenete.wav",
-    image: "images/music/kuttenete.jpg",
-  },
-  {
-    title: "Night",
-    src: "music/night.wav",
-    image: "images/music/night.webp",
-  },
-  {
-    title: "Rojiura",
-    src: "music/rojiura.wav",
-    image: "images/music/rojiura.webp",
-  },
-  {
-    title: "Sabaku",
-    src: "music/sabaku.wav",
-    image: "images/music/sabaku.webp",
-  },
-  {
-    title: "Shinkirou",
-    src: "music/shinkirou.wav",
-    image: "images/music/shinkirou.webp",
-  },
-  {
-    title: "Shizuka No Umi",
-    src: "music/shizuka_no_umi.wav",
-    image: "images/music/shizuka_no_umi.webp",
-  },
-  {
-    title: "Yorugao",
-    src: "music/yorugao.wav",
-    image: "images/music/yorugao.webp",
+    title: "Hasbi Rabbi Jallallah - Sami Yusuf (Vocals)",
+    src: "music/hasbi_rabbi.mp3",
+    image: "images/music/hasbi_rabbi.webp",
   },
 ];
