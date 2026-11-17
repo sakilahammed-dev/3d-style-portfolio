@@ -9,10 +9,11 @@ import {
   BsStars,
   BsArrowRight,
   BsArrowLeft,
+  BsAwardFill,
 } from "react-icons/bs";
 
 export default function ServicesPage({ language = "bn", setTarget }) {
-  // null means show the 3-service catalog cards; a service id means show that service's inside detail view
+  // null = 3-service catalog cards; serviceId = inside detail view
   const [selectedServiceId, setSelectedServiceId] = useState(null);
 
   const selectedService = servicesData.find((s) => s.id === selectedServiceId);
@@ -20,7 +21,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
   const content = {
     bn: {
       catalogTitle: "Services",
-      exploreDetails: "বিস্তারিত ও সুফল দেখুন",
+      exploreDetails: "বিস্তারিত দেখুন",
       backToList: "← সকল সার্ভিসে ফিরে যান",
       overviewHeading: "সহজ কথায় (Executive Overview)",
       deliverablesHeading: "আমি কী কী তৈরি ও ডেলিভারি করব (Key Deliverables)",
@@ -29,11 +30,13 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       discussProject: "এই সার্ভিসটি নিয়ে আলোচনা করুন",
       contactNotice: "সরাসরি যোগাযোগ ও বাজেট আলোচনার জন্য ক্লিক করুন",
       bottomBackHint: "অন্যান্য সার্ভিস দেখতে ব্যাক বাটনে ক্লিক করুন",
+      bottomNotice: "যে কোনো সার্ভিসে ক্লিক করে ভেতরে বিস্তারিত জানুন",
+      catalogSubNotice: "৩টি প্রিমিয়ার সার্ভিস ক্যাটালগ",
       serviceNumber: "সার্ভিস",
     },
     en: {
       catalogTitle: "Services",
-      exploreDetails: "Explore Details & ROI",
+      exploreDetails: "Explore Details",
       backToList: "← Back to All Services",
       overviewHeading: "In Plain Words (Executive Overview)",
       deliverablesHeading: "What I Build & Deliver (Key Deliverables)",
@@ -42,11 +45,13 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       discussProject: "Discuss This Project / Hire Me",
       contactNotice: "Connect directly to launch your project or get a free estimate",
       bottomBackHint: "Click back to explore other services",
+      bottomNotice: "Click on any service to explore full capabilities & details",
+      catalogSubNotice: "3 Premium Offerings Catalog",
       serviceNumber: "SERVICE",
     },
     es: {
       catalogTitle: "Servicios",
-      exploreDetails: "Ver Detalles y Beneficios",
+      exploreDetails: "Ver Detalles",
       backToList: "← Volver a Todos los Servicios",
       overviewHeading: "En palabras simples",
       deliverablesHeading: "Servicios y Capacidades Clave",
@@ -55,6 +60,8 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       discussProject: "Consultar por este servicio",
       contactNotice: "Contáctame para iniciar tu proyecto o solicitar presupuesto",
       bottomBackHint: "Haz clic atrás para ver otros servicios",
+      bottomNotice: "Haz clic en cualquier servicio para conocer los detalles",
+      catalogSubNotice: "Catálogo de 3 Servicios Principales",
       serviceNumber: "SERVICIO",
     },
   };
@@ -83,7 +90,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
   };
 
   // =========================================================================
-  // VIEW 2: SERVICE DETAIL VIEW (ভেতরের বিস্তারিত ভিউ — স্পষ্ট ব্যাক বাটন সহ)
+  // VIEW 2: SERVICE DETAIL VIEW (ভেতরের বিস্তারিত ভিউ — নো ইমোজি, প্রিমিয়াম লুক)
   // =========================================================================
   if (selectedService) {
     const title =
@@ -114,15 +121,15 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           <div className="w-full flex items-center justify-between pb-2.5 border-b border-neutral-300/80 shrink-0">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-red-600 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all hover:scale-105 cursor-pointer group"
-              title="Return to 3 Services List"
+              className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-blue-600 text-white rounded-xl text-xs md:text-sm font-bold shadow-md hover:shadow-blue-500/25 transition-all duration-200 hover:scale-105 cursor-pointer group"
+              title="Return to Services List"
             >
-              <BsArrowLeft className="w-4 h-4 text-red-400 group-hover:text-white transition-colors" />
+              <BsArrowLeft className="w-4 h-4 text-blue-400 group-hover:text-white transition-colors" />
               <span>{t.backToList}</span>
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="text-[10px] md:text-xs font-extrabold px-2 py-0.5 rounded bg-red-600 text-white tracking-wider">
+              <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-blue-600 text-white tracking-wider">
                 {t.serviceNumber} #{selectedService.number}
               </span>
               <span className="text-xs font-bold text-neutral-700 uppercase tracking-wider hidden sm:inline-block">
@@ -137,10 +144,10 @@ export default function ServicesPage({ language = "bn", setTarget }) {
             <div className="p-3 md:p-3.5 bg-white/95 rounded-2xl border border-neutral-300/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
               <div className="flex items-center gap-3">
                 <div className="p-2.5 bg-neutral-900 text-white rounded-xl shadow-xs shrink-0">
-                  {getServiceIcon(selectedService.icon, "w-6 h-6 text-red-500")}
+                  {getServiceIcon(selectedService.icon, "w-6 h-6 text-blue-500")}
                 </div>
                 <div>
-                  <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider block">
+                  <span className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider block">
                     {category}
                   </span>
                   <h1 className="text-base md:text-xl font-black text-neutral-900 leading-tight">
@@ -152,7 +159,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
               {/* Direct Hire / Discuss Button */}
               <button
                 onClick={handleDiscussClick}
-                className="self-start sm:self-auto px-4 py-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center gap-2 shrink-0"
+                className="self-start sm:self-auto px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md hover:shadow-blue-500/30 cursor-pointer flex items-center gap-2 shrink-0"
               >
                 <span>{t.discussProject}</span>
                 <BsArrowRight className="w-3.5 h-3.5" />
@@ -160,8 +167,8 @@ export default function ServicesPage({ language = "bn", setTarget }) {
             </div>
 
             {/* Overview / "সহজ কথায়" Highlight Card */}
-            <div className="p-3 bg-neutral-100/90 rounded-xl border-l-4 border-red-500 border-neutral-300 shadow-xs">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-red-600 uppercase tracking-wider mb-1">
+            <div className="p-3 bg-neutral-100/90 rounded-xl border-l-4 border-blue-500 border-neutral-300 shadow-xs">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
                 <BsStars className="w-3.5 h-3.5" />
                 <span>{t.overviewHeading}</span>
               </div>
@@ -173,7 +180,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
             {/* Key Deliverables - 2x2 Clean Grid */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 uppercase tracking-wider px-1">
-                <BsLightningChargeFill className="w-3.5 h-3.5 text-red-600" />
+                <BsLightningChargeFill className="w-3.5 h-3.5 text-blue-600" />
                 <span>{t.deliverablesHeading}</span>
               </div>
 
@@ -184,7 +191,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                   return (
                     <div
                       key={idx}
-                      className="p-2.5 md:p-3 bg-white/90 rounded-xl border border-neutral-300/80 shadow-2xs hover:border-red-400 transition-colors flex flex-col gap-1"
+                      className="p-2.5 md:p-3 bg-white/90 rounded-xl border border-neutral-300/80 shadow-2xs hover:border-blue-400 transition-colors flex flex-col gap-1"
                     >
                       <div className="flex items-start gap-2">
                         <BsCheckCircleFill className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
@@ -201,20 +208,22 @@ export default function ServicesPage({ language = "bn", setTarget }) {
               </div>
             </div>
 
-            {/* Client ROI Callout Banner */}
+            {/* Client ROI Callout Banner (NO EMOJI) */}
             <div className="p-2.5 md:p-3 bg-amber-500/10 border-l-4 border-amber-500 rounded-r-xl border border-amber-500/30 shadow-2xs">
-              <span className="text-[11px] md:text-xs font-black text-amber-900 uppercase tracking-wider block mb-0.5">
-                🏆 {t.clientRoiHeading}
+              <span className="text-[11px] md:text-xs font-black text-amber-900 uppercase tracking-wider flex items-center gap-1.5 mb-0.5">
+                <BsAwardFill className="w-3.5 h-3.5 text-amber-600" />
+                <span>{t.clientRoiHeading}</span>
               </span>
               <p className="text-xs md:text-sm text-amber-950 font-semibold leading-relaxed">
                 {roi}
               </p>
             </div>
 
-            {/* Tech Stack Pills */}
+            {/* Tech Stack Pills (NO EMOJI) */}
             <div className="p-2.5 bg-white/80 rounded-xl border border-neutral-300 flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider mr-1">
-                {t.techStackHeading}:
+              <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider mr-1 flex items-center gap-1">
+                <BsCpu className="w-3.5 h-3.5 text-neutral-600" />
+                <span>{t.techStackHeading}:</span>
               </span>
               {selectedService.techStack.map((tech, idx) => (
                 <span
@@ -231,9 +240,9 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           <div className="w-full pt-2 border-t border-neutral-300/80 shrink-0 flex items-center justify-between">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 hover:bg-red-600 text-white rounded-lg text-xs font-bold transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all cursor-pointer"
             >
-              <BsArrowLeft className="w-3.5 h-3.5 text-red-400" />
+              <BsArrowLeft className="w-3.5 h-3.5 text-blue-400" />
               <span>{t.backToList}</span>
             </button>
             <span className="text-[11px] text-neutral-500 hidden sm:inline">
@@ -246,7 +255,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
   }
 
   // =========================================================================
-  // VIEW 1: SERVICES CATALOG (৩টি সার্ভিসের মূল সুন্দর ক্যাটালগ কার্ডস)
+  // VIEW 1: SERVICES CATALOG (একটার নিচে আরেকটা — বোল্ড, বড়, গর্জিয়াস ব্লু হোভার)
   // =========================================================================
   return (
     <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-neutral-800 overflow-hidden">
@@ -262,12 +271,11 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           </h1>
         </div>
 
-        {/* 3 Services Cards - Stacked Vertically (একটার নিচে আরেকটা) */}
+        {/* 3 Services Cards - Stacked Vertically with Gorgeous Royal Blue Hover */}
         <div className="w-full flex-1 my-2.5 min-h-0 overflow-y-auto pr-1">
           <div className="flex flex-col gap-3 md:gap-3.5 h-full justify-between">
             {servicesData.map((svc) => {
               const title = svc.title[language] || svc.title.bn || svc.title.en;
-              const category = svc.category[language] || svc.category.bn || svc.category.en;
               const highlight =
                 svc.coreHighlight?.[language] ||
                 svc.coreHighlight?.bn ||
@@ -278,52 +286,46 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                 <div
                   key={svc.id}
                   onClick={() => setSelectedServiceId(svc.id)}
-                  className="group relative flex-1 p-3.5 md:p-5 bg-white/95 rounded-2xl border-2 border-neutral-300 hover:border-red-600 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-xl hover:scale-[1.01] flex items-center justify-between gap-4"
+                  className="group relative flex-1 p-4 md:p-5 bg-white/95 hover:bg-gradient-to-r hover:from-blue-50/80 hover:via-white hover:to-blue-50/40 rounded-2xl border-2 border-neutral-300 hover:border-blue-500 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-2xl hover:shadow-blue-500/25 hover:scale-[1.012] flex items-center justify-between gap-4 overflow-hidden"
                 >
-                  {/* Left: Icon, Badge, Big Title & Core Scope */}
-                  <div className="flex items-center gap-3.5 md:gap-5 min-w-0">
-                    {/* Large Service Icon */}
-                    <div className="p-3 md:p-3.5 bg-neutral-900 text-white rounded-2xl shadow-md group-hover:bg-red-600 transition-colors shrink-0">
+                  {/* Left Accent Glow Bar on Hover */}
+                  <div className="absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full bg-transparent group-hover:bg-gradient-to-b group-hover:from-blue-500 group-hover:to-indigo-600 transition-all duration-300"></div>
+
+                  {/* Left: Icon & Big Bold Title + Tagline (NO RED LINE, NO HIBIJIBI) */}
+                  <div className="flex items-center gap-4 md:gap-6 min-w-0 pl-1">
+                    {/* Large Service Icon with Royal Blue Glow on Hover */}
+                    <div className="p-3.5 md:p-4 bg-neutral-900 text-white rounded-2xl shadow-md group-hover:bg-gradient-to-br group-hover:from-blue-600 group-hover:to-indigo-600 group-hover:shadow-lg group-hover:shadow-blue-500/40 transition-all duration-300 shrink-0">
                       {getServiceIcon(
                         svc.icon,
-                        "w-6 h-6 md:w-8 md:h-8 text-red-500 group-hover:text-white transition-colors",
+                        "w-7 h-7 md:w-9 md:h-9 text-blue-400 group-hover:text-white group-hover:scale-105 transition-all duration-300",
                       )}
                     </div>
 
                     <div className="min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-neutral-900 text-white tracking-wider group-hover:bg-red-600 transition-colors">
-                          #{svc.number}
-                        </span>
-                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200 truncate">
-                          {category}
-                        </span>
-                      </div>
-
-                      {/* BIG BOLD TITLE (চোখে পড়ার মতো বড়) */}
-                      <h2 className="text-base md:text-xl lg:text-2xl font-black text-neutral-900 tracking-tight leading-snug group-hover:text-red-600 transition-colors truncate">
+                      {/* BIG EYE-CATCHING TITLE (চোখে পড়ার মতো অনেক বড় ফন্ট) */}
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 tracking-tight leading-tight group-hover:text-blue-600 transition-colors duration-300 truncate">
                         {title}
                       </h2>
 
-                      {/* Main Core Highlight / Scope */}
-                      <p className="text-xs md:text-sm text-neutral-600 font-medium leading-relaxed mt-1 truncate">
+                      {/* Clean Sub-line / Tagline (রাখা হয়েছে সুন্দরভাবে) */}
+                      <p className="text-xs md:text-sm text-neutral-500 group-hover:text-neutral-700 font-medium leading-relaxed mt-1.5 transition-colors duration-300 truncate">
                         {highlight}
                       </p>
                     </div>
                   </div>
 
-                  {/* Right: Eye-Catching Action Button */}
+                  {/* Right: Gorgeous Action Button with Royal Blue Gradient Glow */}
                   <div className="shrink-0 flex items-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedServiceId(svc.id);
                       }}
-                      className="px-3.5 md:px-5 py-2.5 md:py-3 bg-neutral-900 group-hover:bg-red-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all shadow-md group-hover:shadow-lg flex items-center gap-2 cursor-pointer shrink-0"
+                      className="px-4 md:px-6 py-2.5 md:py-3.5 bg-neutral-900 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-indigo-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md group-hover:shadow-xl group-hover:shadow-blue-500/35 flex items-center gap-2 cursor-pointer shrink-0"
                     >
                       <span className="hidden sm:inline">{t.exploreDetails}</span>
                       <span className="sm:hidden">বিস্তারিত</span>
-                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
                     </button>
                   </div>
                 </div>
@@ -332,10 +334,12 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           </div>
         </div>
 
-        {/* Bottom Status / Guidance Bar */}
+        {/* Bottom Guidance Bar - 100% Clean, NO EMOJIS */}
         <div className="w-full pt-1.5 border-t border-neutral-300/80 shrink-0 flex items-center justify-between text-[11px] text-neutral-600 font-semibold">
-          <span>💡 যেকোনো সার্ভিসের পূর্ণাঙ্গ তথ্য ও লাভ দেখতে কার্ডে ক্লিক করুন</span>
-          <span className="hidden sm:inline text-neutral-500">৩টি প্রিমিয়ার সার্ভিস ক্যাটালগ</span>
+          <span>{t.bottomNotice}</span>
+          <span className="hidden sm:inline text-neutral-500 font-medium">
+            {t.catalogSubNotice}
+          </span>
         </div>
       </div>
     </div>
