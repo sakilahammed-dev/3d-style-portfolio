@@ -10,7 +10,6 @@ import {
   BsArrowRight,
   BsArrowLeft,
 } from "react-icons/bs";
-import { MdOutlineMiscellaneousServices } from "react-icons/md";
 
 export default function ServicesPage({ language = "bn", setTarget }) {
   // null means show the 3-service catalog cards; a service id means show that service's inside detail view
@@ -20,9 +19,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
 
   const content = {
     bn: {
-      catalogBadge: "সলিউশন ও সার্ভিসেস ক্যাটালগ",
-      catalogTitle: "সার্ভিসেস ও সলিউশনস",
-      catalogSub: "আপনার ব্যবসার প্রবৃদ্ধি, সফটওয়্যার ও অটোমেশনের ৩টি বিশেষায়িত সেবা",
+      catalogTitle: "Services",
       exploreDetails: "বিস্তারিত ও সুফল দেখুন",
       backToList: "← সকল সার্ভিসে ফিরে যান",
       overviewHeading: "সহজ কথায় (Executive Overview)",
@@ -35,9 +32,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       serviceNumber: "সার্ভিস",
     },
     en: {
-      catalogBadge: "Solutions & Services Catalog",
-      catalogTitle: "Services & Solutions",
-      catalogSub: "High-impact web engineering, intelligent AI workflows & media production",
+      catalogTitle: "Services",
       exploreDetails: "Explore Details & ROI",
       backToList: "← Back to All Services",
       overviewHeading: "In Plain Words (Executive Overview)",
@@ -50,9 +45,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       serviceNumber: "SERVICE",
     },
     es: {
-      catalogBadge: "Catálogo de Servicios y Soluciones",
-      catalogTitle: "Servicios y Soluciones",
-      catalogSub: "Ingeniería web de alto impacto, automatización con IA y producción multimedia",
+      catalogTitle: "Servicios",
       exploreDetails: "Ver Detalles y Beneficios",
       backToList: "← Volver a Todos los Servicios",
       overviewHeading: "En palabras simples",
@@ -262,26 +255,11 @@ export default function ServicesPage({ language = "bn", setTarget }) {
 
       {/* Main Container - Full Bleed */}
       <div className="absolute inset-0 p-3 md:p-5 flex flex-col justify-between border border-neutral-300">
-        {/* Top Header Bar */}
+        {/* Top Header Bar - Clean & Minimalist */}
         <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80 shrink-0">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 bg-neutral-800 rounded-lg text-white">
-              <MdOutlineMiscellaneousServices className="w-5 h-5 md:w-6 md:h-6 text-red-500" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-[10px] md:text-xs font-bold px-2 py-0.5 rounded bg-red-600 text-white uppercase tracking-wider">
-                  {t.catalogBadge}
-                </span>
-                <h1 className="text-lg md:text-2xl font-black tracking-tight text-neutral-900 leading-none">
-                  {t.catalogTitle}
-                </h1>
-              </div>
-              <p className="text-[11px] md:text-xs text-neutral-600 truncate max-w-xl mt-0.5">
-                {t.catalogSub}
-              </p>
-            </div>
-          </div>
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-900">
+            {t.catalogTitle}
+          </h1>
         </div>
 
         {/* 3 Services Cards Grid - Full Height Utilization */}
