@@ -89,7 +89,7 @@ export default function ModelLoader({ onMeshReady, onFansReady, setLoaded }) {
       // Collect fans and interactive objects
       if (child.name.includes("Fan")) fans.push(child);
 
-      if (child.name.includes("Target") || child.name.includes("First")) {
+      if (child.name.includes("Target")) {
         if (!child.userData.initialScale) {
           child.userData.initialScale = child.scale.clone();
         }

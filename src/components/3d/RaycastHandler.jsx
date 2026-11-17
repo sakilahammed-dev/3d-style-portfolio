@@ -16,8 +16,12 @@ export default function RaycastHandler({
   const raycaster = useRef(new THREE.Raycaster());
   const pointer = useRef(new THREE.Vector2(-9999, -9999));
   const hoveredNavEntry = useRef(null);
+  const animatingRef = useRef(false);
   const { camera, gl } = useThree();
   const [animating, setAnimating] = useState(false);
+
+  // Pointer/touch tracking for clean tap detection
+  const pointerDownPos = useRef({ x: 0, y: 0, time: 0 });
 
   // --- helpers ---
   const findNavEntryBy = useCallback(
@@ -73,7 +77,7 @@ export default function RaycastHandler({
 
   const focusCameraOnObject = useCallback(
     (object) => {
-      if (!currentTarget) return;
+      if (!object) return;
       const box = new THREE.Box3().setFromObject(object);
       const center = box.getCenter(new THREE.Vector3());
       const size = box.getSize(new THREE.Vector3());
@@ -99,6 +103,14 @@ export default function RaycastHandler({
         .clone()
         .add(offsetDirection.multiplyScalar(cameraZ));
 
+      animatingRef.current = true;
+      setAnimating(true);
+      setIsAnimating(true);
+      if (controlsRef.current) {
+        controlsRef.current.enabled = false;
+        controlsRef.current.enableZoom = false;
+      }
+
       gsap.killTweensOf([controlsRef.current.target, camera.position]);
 
       gsap.to(controlsRef.current.target, {
@@ -122,14 +134,17 @@ export default function RaycastHandler({
           controlsRef.current.update();
         },
         onComplete: () => {
-          controlsRef.current.enabled = true;
-          controlsRef.current.enableZoom = true;
+          if (controlsRef.current) {
+            controlsRef.current.enabled = true;
+            controlsRef.current.enableZoom = true;
+          }
+          animatingRef.current = false;
           setAnimating(false);
           setIsAnimating(false);
         },
       });
     },
-    [camera, controlsRef, findNavEntryBy, currentTarget, setIsAnimating],
+    [camera, controlsRef, findNavEntryBy, setIsAnimating],
   );
 
   // update pointer coordinates relative to canvas
@@ -140,7 +155,65 @@ export default function RaycastHandler({
     pointer.current.y = -((clientY - rect.top) / rect.height) * 2 + 1;
   }, [gl]);
 
-  // handle pointer and mouse movement
+  // Robust target finding with touch proximity tolerance
+  const findIntersectedTarget = useCallback(
+    (clientX, clientY, isTouch = false) => {
+      if (!gl.domElement) return null;
+
+      // 1. Direct hit testing
+      updatePointer(clientX, clientY);
+      raycaster.current.setFromCamera(pointer.current, camera);
+      let intersects = raycaster.current.intersectObjects(targets);
+
+      let navHit = intersects.find((i) => {
+        const name = i.object.name;
+        return (
+          name.includes("Screen") ||
+          Object.values(navConfig).some(
+            (conf) => conf.glass === name || conf.text === name
+          )
+        );
+      });
+
+      if (navHit) return navHit.object;
+
+      // 2. Radial proximity search for touch/mobile devices
+      // Catches taps near thin signs like AboutMe_Glass_Target
+      const offsets = isTouch
+        ? [
+            [-10, 0], [10, 0], [0, -10], [0, 10],
+            [-18, 0], [18, 0], [0, -18], [0, 18],
+            [-14, -14], [14, -14], [-14, 14], [14, 14],
+            [-26, 0], [26, 0], [0, -26], [0, 26],
+            [-34, 0], [34, 0],
+          ]
+        : [
+            [-6, 0], [6, 0], [0, -6], [0, 6],
+            [-12, 0], [12, 0],
+          ];
+
+      for (const [dx, dy] of offsets) {
+        updatePointer(clientX + dx, clientY + dy);
+        raycaster.current.setFromCamera(pointer.current, camera);
+        intersects = raycaster.current.intersectObjects(targets);
+        navHit = intersects.find((i) => {
+          const name = i.object.name;
+          return (
+            name.includes("Screen") ||
+            Object.values(navConfig).some(
+              (conf) => conf.glass === name || conf.text === name
+            )
+          );
+        });
+        if (navHit) return navHit.object;
+      }
+
+      return null;
+    },
+    [camera, gl, targets, updatePointer],
+  );
+
+  // handle pointer and mouse movement (hover on desktop)
   useEffect(() => {
     const handleMove = (e) => {
       if (e.pointerType === "touch") return;
@@ -173,15 +246,32 @@ export default function RaycastHandler({
     };
   }, []);
 
-  // hover logic in render loop
+  // hover logic in render loop (desktop only)
   useFrame(() => {
-    if (animating) return;
+    if (animatingRef.current) return;
 
     raycaster.current.setFromCamera(pointer.current, camera);
     const intersects = raycaster.current.intersectObjects(targets);
 
     if (intersects.length > 0) {
-      const hit = intersects[0].object;
+      const hit = intersects.find((i) => {
+        const name = i.object.name;
+        return (
+          name.includes("Screen") ||
+          Object.values(navConfig).some(
+            (conf) => conf.glass === name || conf.text === name
+          )
+        );
+      })?.object;
+
+      if (!hit) {
+        if (hoveredNavEntry.current) {
+          playHoverAnimation(findTargetByName(hoveredNavEntry.current.text), false);
+          hoveredNavEntry.current = null;
+        }
+        document.body.style.cursor = "default";
+        return;
+      }
 
       // Find if this hit is part of a nav button (glass box or 3D text)
       const navEntry = Object.values(navConfig).find(
@@ -221,13 +311,9 @@ export default function RaycastHandler({
   // focus camera when screenMesh changes
   useEffect(() => {
     if (screenMesh) {
-      controlsRef.current.enabled = false;
-      controlsRef.current.enableZoom = false;
-      setAnimating(true);
-      setIsAnimating(true);
       focusCameraOnObject(screenMesh);
     }
-  }, [screenMesh, currentTarget, focusCameraOnObject, controlsRef, setIsAnimating]);
+  }, [screenMesh, focusCameraOnObject]);
 
   // Global navigation helper for direct targeting & automated testing
   useEffect(() => {
@@ -254,36 +340,69 @@ export default function RaycastHandler({
         if (nav) setTarget(nav.text);
       }
     };
+
+    window.__debugRaycast = (clientX, clientY) => {
+      updatePointer(clientX, clientY);
+      raycaster.current.setFromCamera(pointer.current, camera);
+      const hits = raycaster.current.intersectObjects(targets);
+      return {
+        pointer: { x: pointer.current.x, y: pointer.current.y },
+        hits: hits.map((h) => ({ name: h.object.name, distance: h.distance })),
+        targets: targets.map((t) => t.name),
+      };
+    };
+
     return () => {
       delete window.__navigateToTarget;
+      delete window.__debugRaycast;
     };
-  }, [targets, setScreenMesh, setTarget, findTargetByName, findNavEntryBy]);
+  }, [targets, setScreenMesh, setTarget, findTargetByName, findNavEntryBy, updatePointer, camera]);
 
-  // handle click / tap
+  // Handle click / tap with drag tolerance
   useEffect(() => {
-    const handleClick = (e) => {
+    const handleDown = (e) => {
       let clientX, clientY;
       if (e.touches && e.touches.length > 0) {
         clientX = e.touches[0].clientX;
         clientY = e.touches[0].clientY;
-      } else if (e.changedTouches && e.changedTouches.length > 0) {
+      } else {
+        clientX = e.clientX;
+        clientY = e.clientY;
+      }
+      pointerDownPos.current = { x: clientX, y: clientY, time: Date.now() };
+    };
+
+    const handleUp = (e) => {
+      if (animatingRef.current) return;
+
+      let clientX, clientY;
+      if (e.changedTouches && e.changedTouches.length > 0) {
         clientX = e.changedTouches[0].clientX;
         clientY = e.changedTouches[0].clientY;
+      } else if (e.touches && e.touches.length > 0) {
+        clientX = e.touches[0].clientX;
+        clientY = e.touches[0].clientY;
       } else {
         clientX = e.clientX;
         clientY = e.clientY;
       }
 
-      updatePointer(clientX, clientY);
-      raycaster.current.setFromCamera(pointer.current, camera);
+      if (clientX === undefined || clientY === undefined) return;
 
-      const intersects = raycaster.current.intersectObjects(targets);
-      if (intersects.length === 0) return;
+      const isTouch = e.type.startsWith("touch") || e.pointerType === "touch";
+      const dx = clientX - pointerDownPos.current.x;
+      const dy = clientY - pointerDownPos.current.y;
+      const dist = Math.hypot(dx, dy);
+      const duration = Date.now() - pointerDownPos.current.time;
 
-      const clicked = intersects[0].object;
+      // If user dragged to orbit scene (> 20px), do not treat as tap
+      if (dist > 20 && duration > 80) return;
+
+      const clicked = findIntersectedTarget(clientX, clientY, isTouch);
+      if (!clicked) return;
 
       if (clicked.name.includes("Screen")) {
-        if (clicked === screenMesh) {
+        if (clicked === screenMesh && controlsRef.current) {
           controlsRef.current.enabled = false;
         }
 
@@ -309,33 +428,22 @@ export default function RaycastHandler({
       }
     };
 
-    const handlePointerUp = () => {
-      if (animating) return;
-      controlsRef.current.enabled = true;
-    };
-
-    window.addEventListener("pointerdown", handleClick);
-    window.addEventListener("touchstart", handleClick);
-    window.addEventListener("pointerup", handlePointerUp);
-    window.addEventListener("touchend", handlePointerUp);
+    window.addEventListener("pointerdown", handleDown, { passive: true });
+    window.addEventListener("pointerup", handleUp);
 
     return () => {
-      window.removeEventListener("pointerdown", handleClick);
-      window.removeEventListener("touchstart", handleClick);
-      window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("touchend", handlePointerUp);
+      window.removeEventListener("pointerdown", handleDown);
+      window.removeEventListener("pointerup", handleUp);
     };
   }, [
     targets,
-    camera,
+    screenMesh,
     controlsRef,
     setScreenMesh,
-    screenMesh,
     setTarget,
     findNavEntryBy,
     findTargetByName,
-    animating,
-    updatePointer,
+    findIntersectedTarget,
   ]);
 
   return null;
