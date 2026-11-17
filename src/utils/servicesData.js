@@ -9,6 +9,11 @@ export const servicesData = [
       es: "Desarrollo Full-Stack",
     },
     tags: "Next.js • React • E-Commerce",
+    coreHighlight: {
+      bn: "প্রফেশনাল ওয়েবসাইট • পূর্ণাঙ্গ ই-কমার্স • প্রতিষ্ঠান ম্যানেজমেন্ট ওয়েব পোর্টাল • ক্লাউড ডেপ্লয়মেন্ট",
+      en: "High-Speed Websites • Full E-Commerce • Management Web Portals • Cloud Deployment",
+      es: "Sitios Web Profesionales • E-Commerce Completo • Portales Web • Despliegue Cloud",
+    },
     category: {
       bn: "ওয়েব ও সফটওয়্যার সলিউশন",
       en: "Web & Software Engineering",
@@ -105,6 +110,11 @@ export const servicesData = [
       es: "Automatización",
     },
     tags: "n8n • Chatbots • Courier API",
+    coreHighlight: {
+      bn: "অমনিচ্যানেল এআই চ্যাটবট • স্বয়ংক্রিয় অর্ডার ও কুরিয়ার বুকিং • লিড ও মার্কেটিং অটোমেশন",
+      en: "Omnichannel AI Chatbots • Automated Orders & Courier Booking • Lead & Marketing Funnels",
+      es: "Chatbots Inteligentes • Pedidos y Envíos Automatizados • Automatización de Marketing",
+    },
     category: {
       bn: "স্মার্ট অপারেশন ও অটোমেশন",
       en: "Intelligent Operations & Workflows",
@@ -201,6 +211,11 @@ export const servicesData = [
       es: "Video y Medios IA",
     },
     tags: "Video Ads • Voiceover • Reels",
+    coreHighlight: {
+      bn: "প্রমোশনাল ভিডিও বিজ্ঞাপন • মানুষের মতো এআই ভয়েসওভার ও স্ক্রিপ্ট • ভাইরাল রিলস ও শর্টস তৈরি",
+      en: "Promotional Video Ads • Realistic AI Voiceovers & Scripts • Viral Reels & Shorts Production",
+      es: "Videos Publicitarios • Locución con IA y Guiones Persuasivos • Reels y Shorts Virales",
+    },
     category: {
       bn: "ভিজ্যুয়াল ব্র্যান্ডিং ও এআই মিডিয়া",
       en: "Visual Branding & AI Media",

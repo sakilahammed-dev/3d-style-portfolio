@@ -262,72 +262,68 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           </h1>
         </div>
 
-        {/* 3 Services Cards Grid - Full Height Utilization */}
+        {/* 3 Services Cards - Stacked Vertically (একটার নিচে আরেকটা) */}
         <div className="w-full flex-1 my-2.5 min-h-0 overflow-y-auto pr-1">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 h-full">
+          <div className="flex flex-col gap-3 md:gap-3.5 h-full justify-between">
             {servicesData.map((svc) => {
               const title = svc.title[language] || svc.title.bn || svc.title.en;
               const category = svc.category[language] || svc.category.bn || svc.category.en;
-              const shortSum =
-                svc.shortSummary[language] || svc.shortSummary.bn || svc.shortSummary.en;
+              const highlight =
+                svc.coreHighlight?.[language] ||
+                svc.coreHighlight?.bn ||
+                svc.coreHighlight?.en ||
+                svc.tags;
 
               return (
                 <div
                   key={svc.id}
                   onClick={() => setSelectedServiceId(svc.id)}
-                  className="group relative p-3 md:p-4 bg-white/95 rounded-2xl border border-neutral-300 hover:border-red-500 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-lg flex flex-col justify-between"
+                  className="group relative flex-1 p-3.5 md:p-5 bg-white/95 rounded-2xl border-2 border-neutral-300 hover:border-red-600 transition-all duration-200 cursor-pointer shadow-sm hover:shadow-xl hover:scale-[1.01] flex items-center justify-between gap-4"
                 >
-                  <div>
-                    {/* Top Bar with Number & Icon */}
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-extrabold text-xs px-2 py-0.5 rounded bg-neutral-900 text-white group-hover:bg-red-600 transition-colors tracking-wider">
-                        #{svc.number}
-                      </span>
-                      <div className="p-1.5 bg-neutral-100 rounded-lg group-hover:bg-red-50 transition-colors">
-                        {getServiceIcon(svc.icon, "w-5 h-5 text-red-500")}
-                      </div>
+                  {/* Left: Icon, Badge, Big Title & Core Scope */}
+                  <div className="flex items-center gap-3.5 md:gap-5 min-w-0">
+                    {/* Large Service Icon */}
+                    <div className="p-3 md:p-3.5 bg-neutral-900 text-white rounded-2xl shadow-md group-hover:bg-red-600 transition-colors shrink-0">
+                      {getServiceIcon(
+                        svc.icon,
+                        "w-6 h-6 md:w-8 md:h-8 text-red-500 group-hover:text-white transition-colors",
+                      )}
                     </div>
 
-                    {/* Category Pill */}
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-100 block w-fit mb-1.5">
-                      {category}
-                    </span>
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-neutral-900 text-white tracking-wider group-hover:bg-red-600 transition-colors">
+                          #{svc.number}
+                        </span>
+                        <span className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-red-600 bg-red-50 px-2 py-0.5 rounded border border-red-200 truncate">
+                          {category}
+                        </span>
+                      </div>
 
-                    {/* Title */}
-                    <h3 className="text-sm md:text-base font-extrabold text-neutral-900 mb-2 leading-snug group-hover:text-red-600 transition-colors">
-                      {title}
-                    </h3>
+                      {/* BIG BOLD TITLE (চোখে পড়ার মতো বড়) */}
+                      <h2 className="text-base md:text-xl lg:text-2xl font-black text-neutral-900 tracking-tight leading-snug group-hover:text-red-600 transition-colors truncate">
+                        {title}
+                      </h2>
 
-                    {/* Summary */}
-                    <p className="text-[11px] md:text-xs text-neutral-600 leading-relaxed mb-3 line-clamp-3">
-                      {shortSum}
-                    </p>
-
-                    {/* Key Capability Points */}
-                    <div className="space-y-1.5 pt-2 border-t border-neutral-200 text-[11px] text-neutral-700 font-medium">
-                      {svc.features.slice(0, 3).map((f, i) => {
-                        const fTitle = f.title[language] || f.title.bn || f.title.en;
-                        return (
-                          <div key={i} className="flex items-start gap-1.5">
-                            <BsCheckCircleFill className="w-3 h-3 text-emerald-600 shrink-0 mt-0.5" />
-                            <span className="truncate leading-tight">{fTitle}</span>
-                          </div>
-                        );
-                      })}
+                      {/* Main Core Highlight / Scope */}
+                      <p className="text-xs md:text-sm text-neutral-600 font-medium leading-relaxed mt-1 truncate">
+                        {highlight}
+                      </p>
                     </div>
                   </div>
 
-                  {/* Prominent Action Button: Click to Go Inside */}
-                  <div className="mt-3 pt-2.5 border-t border-neutral-200">
+                  {/* Right: Eye-Catching Action Button */}
+                  <div className="shrink-0 flex items-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedServiceId(svc.id);
                       }}
-                      className="w-full py-2 px-3 bg-neutral-900 group-hover:bg-red-600 text-white text-xs font-bold rounded-xl transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                      className="px-3.5 md:px-5 py-2.5 md:py-3 bg-neutral-900 group-hover:bg-red-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all shadow-md group-hover:shadow-lg flex items-center gap-2 cursor-pointer shrink-0"
                     >
-                      <span>{t.exploreDetails}</span>
-                      <BsArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      <span className="hidden sm:inline">{t.exploreDetails}</span>
+                      <span className="sm:hidden">বিস্তারিত</span>
+                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
