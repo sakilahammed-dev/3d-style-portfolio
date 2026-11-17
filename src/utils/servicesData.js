@@ -3,15 +3,21 @@ export const servicesData = [
     id: "full-stack-web",
     icon: "code",
     number: "01",
+    shortTitle: {
+      bn: "Full-Stack ডেভেলপমেন্ট",
+      en: "Full-Stack Web & Apps",
+      es: "Desarrollo Full-Stack",
+    },
+    tags: "Next.js • React • E-Commerce",
     category: {
       bn: "ওয়েব ও সফটওয়্যার সলিউশন",
       en: "Web & Software Engineering",
       es: "Ingeniería Web y Software",
     },
     title: {
-      bn: "Full Stack Developer (AI-assisted)",
-      en: "Full Stack Developer (AI-assisted)",
-      es: "Desarrollador Full Stack (con IA)",
+      bn: "১. Full Stack Developer (AI-assisted)",
+      en: "01. Full Stack Developer (AI-assisted)",
+      es: "01. Desarrollador Full Stack (con IA)",
     },
     shortSummary: {
       bn: "আধুনিক এআই টুলসের সাহায্য নিয়ে একজন সিনিয়র ডেভেলপারের গতিতে ফ্রন্টএন্ড থেকে ব্যাকএন্ড পর্যন্ত পূর্ণাঙ্গ ওয়েবসাইট ও সফটওয়্যার তৈরি।",
@@ -93,15 +99,21 @@ export const servicesData = [
     id: "business-automation",
     icon: "gear",
     number: "02",
+    shortTitle: {
+      bn: "বিজনেস অটোমেশন",
+      en: "Business Automation",
+      es: "Automatización",
+    },
+    tags: "n8n • Chatbots • Courier API",
     category: {
       bn: "স্মার্ট অপারেশন ও অটোমেশন",
       en: "Intelligent Operations & Workflows",
       es: "Operaciones Inteligentes y Automatización",
     },
     title: {
-      bn: "Business Automation Executive",
-      en: "Business Automation Executive",
-      es: "Ejecutivo de Automatización de Negocios",
+      bn: "২. Business Automation Executive",
+      en: "02. Business Automation Executive",
+      es: "02. Ejecutivo de Automatización de Negocios",
     },
     shortSummary: {
       bn: "প্রতিষ্ঠানের প্রতিদিনের পুনরাবৃত্তিমূলক একঘেয়ে কাজগুলো এআই ও অটোমেশন দিয়ে স্বয়ংক্রিয় করা—যাতে মানুষ ছাড়াই ২৪ ঘণ্টা ব্যবসা চলে।",
@@ -183,15 +195,21 @@ export const servicesData = [
     id: "ai-content-video",
     icon: "video",
     number: "03",
+    shortTitle: {
+      bn: "এআই মিডিয়া ও ভিডিও",
+      en: "AI Media & Video",
+      es: "Video y Medios IA",
+    },
+    tags: "Video Ads • Voiceover • Reels",
     category: {
       bn: "ভিজ্যুয়াল ব্র্যান্ডিং ও এআই মিডিয়া",
       en: "Visual Branding & AI Media",
       es: "Branding Visual y Medios con IA",
     },
     title: {
-      bn: "AI Content & Motion Video Creator",
-      en: "AI Content & Motion Video Creator",
-      es: "Creador de Contenido y Video Motion con IA",
+      bn: "৩. AI Content & Motion Video Creator",
+      en: "03. AI Content & Motion Video Creator",
+      es: "03. Creador de Contenido y Video Motion con IA",
     },
     shortSummary: {
       bn: "আধুনিক জেনারেটিভ এআই এবং ভিডিও টুলস দিয়ে পণ্য বা সেবার প্রচারের জন্য চোখ ধাঁধানো মোশন গ্রাফিক্স, প্রমোশনাল ভিডিও ও সোশ্যাল মিডিয়া বিজ্ঞাপন তৈরি।",
