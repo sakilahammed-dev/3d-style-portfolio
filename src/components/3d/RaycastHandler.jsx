@@ -221,11 +221,26 @@ export default function RaycastHandler({
   // Global navigation helper for direct targeting & automated testing
   useEffect(() => {
     window.__navigateToTarget = (targetName) => {
+      const navEntry = Object.values(navConfig).find(
+        (conf) =>
+          conf.glass === targetName ||
+          conf.text === targetName ||
+          conf.target === targetName ||
+          conf.text.toLowerCase().includes(targetName.toLowerCase()),
+      );
+      if (navEntry) {
+        const screenTarget = findTargetByName(navEntry.target);
+        if (screenTarget) {
+          setScreenMesh?.(screenTarget);
+          setTarget(navEntry.text);
+          return;
+        }
+      }
       const screenTarget = findTargetByName(targetName);
       if (screenTarget) {
         setScreenMesh?.(screenTarget);
-        const navEntry = findNavEntryBy("target", targetName);
-        if (navEntry) setTarget(navEntry.text);
+        const nav = findNavEntryBy("target", targetName);
+        if (nav) setTarget(nav.text);
       }
     };
     return () => {
