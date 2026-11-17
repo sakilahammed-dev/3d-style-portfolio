@@ -26,9 +26,9 @@ export const navConfig = {
     htmlSizeAxis: ["x", "y"],
     htmlOffset: [0, 0, -0.001],
   },
-  Music: {
-    glass: "Music_Glass_Target",
-    text: "Music_Red_Text_Target",
+  Services: {
+    glass: "Services_Glass_Target",
+    text: "Services_Red_Text_Target",
     target: "Jackbox_Screen_White_Target",
     cameraOffset: [0, 0, -1.2],
     htmlRotation: [0, Math.PI, 0],
