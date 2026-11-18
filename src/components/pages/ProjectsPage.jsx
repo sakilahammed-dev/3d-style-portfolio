@@ -20,6 +20,7 @@ export default function ProjectsPage({ language }) {
 
   const content = {
     en: {
+      projectsTitle: "Projects",
       back: "Back",
       prev: "Prev",
       next: "Next",
@@ -29,6 +30,7 @@ export default function ProjectsPage({ language }) {
       liveDemo: "Live Website",
     },
     es: {
+      projectsTitle: "Proyectos",
       back: "Volver",
       prev: "Anterior",
       next: "Siguiente",
@@ -38,6 +40,7 @@ export default function ProjectsPage({ language }) {
       liveDemo: "Sitio Web",
     },
     bn: {
+      projectsTitle: "Projects",
       back: "Back",
       prev: "পূর্ববর্তী",
       next: "পরবর্তী",
@@ -356,10 +359,17 @@ export default function ProjectsPage({ language }) {
 
   // Grid view (3x3 Vending Machine Shelves - 1st 3 projects)
   return (
-    <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-2xl md:text-3xl text-center">
-      <div className="absolute w-full h-full bg-grid"></div>
-      <div className="absolute w-full h-full font-mono p-8 flex flex-col items-center justify-between gap-4">
-        <div className="w-full h-full grid grid-cols-3 grid-rows-3 gap-4">
+    <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-2xl md:text-3xl text-center overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+      <div className="absolute inset-0 font-mono p-6 md:p-8 flex flex-col justify-between gap-3 border border-neutral-300">
+        {/* Top Header Bar - Exact Match with Services */}
+        <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80 shrink-0 text-left">
+          <h1 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-900">
+            {t.projectsTitle || "Projects"}
+          </h1>
+        </div>
+
+        <div className="w-full flex-1 grid grid-cols-3 grid-rows-3 gap-3 md:gap-4 min-h-0">
           {currentProjects.map((project, index) => (
             <div
               key={index}
@@ -384,7 +394,7 @@ export default function ProjectsPage({ language }) {
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex gap-4 mt-2">
+        <div className="flex gap-4 justify-center items-center mt-1 shrink-0">
           <button
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
