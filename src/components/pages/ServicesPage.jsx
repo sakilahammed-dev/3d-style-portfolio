@@ -122,15 +122,15 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           <div className="w-full flex items-center justify-between pb-2.5 border-b border-neutral-300/80 shrink-0">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-blue-600 text-white rounded-xl text-xs md:text-sm font-bold shadow-md hover:shadow-blue-500/25 transition-all duration-200 hover:scale-105 cursor-pointer group"
+              className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all duration-200 hover:scale-105 cursor-pointer group border border-slate-700/60"
               title="Return to Services List"
             >
-              <BsArrowLeft className="w-4 h-4 text-blue-400 group-hover:text-white transition-colors" />
+              <BsArrowLeft className="w-4 h-4 text-slate-300 group-hover:text-white transition-colors" />
               <span>{t.backToList}</span>
             </button>
 
             <div className="flex items-center gap-2">
-              <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-blue-600 text-white tracking-wider">
+              <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-neutral-900 text-white tracking-wider border border-slate-700/50">
                 {t.serviceNumber} #{selectedService.number}
               </span>
               <span className="text-xs font-bold text-neutral-700 uppercase tracking-wider hidden sm:inline-block">
@@ -144,11 +144,11 @@ export default function ServicesPage({ language = "bn", setTarget }) {
             {/* Service Title Bar */}
             <div className="p-3 md:p-3.5 bg-white/95 rounded-2xl border border-neutral-300/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-neutral-900 text-white rounded-xl shadow-xs shrink-0">
-                  {getServiceIcon(selectedService.icon, "w-6 h-6 text-blue-500")}
+                <div className="p-2.5 bg-neutral-900 text-white rounded-xl shadow-xs shrink-0 border border-slate-800">
+                  {getServiceIcon(selectedService.icon, "w-6 h-6 text-slate-200")}
                 </div>
                 <div>
-                  <span className="text-[10px] md:text-xs font-bold text-blue-600 uppercase tracking-wider block">
+                  <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider block">
                     {category}
                   </span>
                   <h1 className="text-base md:text-xl font-black text-neutral-900 leading-tight">
@@ -160,17 +160,17 @@ export default function ServicesPage({ language = "bn", setTarget }) {
               {/* Direct Hire / Discuss Button */}
               <button
                 onClick={handleDiscussClick}
-                className="self-start sm:self-auto px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md hover:shadow-blue-500/30 cursor-pointer flex items-center gap-2 shrink-0"
+                className="self-start sm:self-auto px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md cursor-pointer flex items-center gap-2 shrink-0 border border-slate-700/60"
               >
                 <span>{t.discussProject}</span>
-                <BsArrowRight className="w-3.5 h-3.5" />
+                <BsArrowRight className="w-3.5 h-3.5 text-slate-300" />
               </button>
             </div>
 
             {/* Overview / "সহজ কথায়" Highlight Card */}
-            <div className="p-3 bg-neutral-100/90 rounded-xl border-l-4 border-blue-500 border-neutral-300 shadow-xs">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-blue-600 uppercase tracking-wider mb-1">
-                <BsStars className="w-3.5 h-3.5" />
+            <div className="p-3 bg-neutral-100/90 rounded-xl border-l-4 border-slate-800 border-neutral-300 shadow-xs">
+              <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-900 uppercase tracking-wider mb-1">
+                <BsStars className="w-3.5 h-3.5 text-slate-700" />
                 <span>{t.overviewHeading}</span>
               </div>
               <p className="text-xs md:text-sm text-neutral-800 leading-relaxed font-medium">
@@ -241,9 +241,9 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           <div className="w-full pt-2 border-t border-neutral-300/80 shrink-0 flex items-center justify-between">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-800 hover:bg-blue-600 text-white rounded-lg text-xs font-bold transition-all cursor-pointer"
+              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-bold transition-all cursor-pointer border border-slate-700/60"
             >
-              <BsArrowLeft className="w-3.5 h-3.5 text-blue-400" />
+              <BsArrowLeft className="w-3.5 h-3.5 text-slate-300" />
               <span>{t.backToList}</span>
             </button>
             <span className="text-[11px] text-neutral-500 hidden sm:inline">
@@ -291,50 +291,50 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                   onClick={() => setSelectedServiceId(svc.id)}
                   onMouseEnter={() => setHoveredServiceId(svc.id)}
                   onMouseLeave={() => setHoveredServiceId(null)}
-                  className={`group relative flex-1 p-4 md:p-5 bg-white/95 rounded-2xl border-2 transition-colors duration-300 cursor-pointer shadow-sm flex items-center justify-between gap-4 overflow-hidden transform-none ${
+                  className={`group relative flex-1 p-4 md:p-5 bg-white/95 rounded-2xl border-2 transition-all duration-300 cursor-pointer shadow-sm flex items-center justify-between gap-4 overflow-hidden transform-none ${
                     isHovered
-                      ? "border-cyan-500 shadow-md shadow-cyan-500/20"
-                      : "border-neutral-300 hover:border-cyan-500 hover:shadow-md hover:shadow-cyan-500/20"
+                      ? "border-slate-800 shadow-xl shadow-slate-900/10"
+                      : "border-neutral-300 hover:border-slate-800 hover:shadow-xl hover:shadow-slate-900/10"
                   }`}
                 >
-                  {/* LIQUID WAVE EFFECT: Fills bottom ~55-58% with animated colorful waves on hover */}
+                  {/* LIQUID WAVE EFFECT: Fills bottom ~40% with animated Executive Midnight Slate & Obsidian waves on hover */}
                   <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-0">
                     <div
-                      className={`absolute inset-x-0 bottom-0 h-[58%] transition-transform duration-600 ease-out flex flex-col justify-end ${
+                      className={`absolute inset-x-0 bottom-0 h-[40%] transition-transform duration-600 ease-out flex flex-col justify-end ${
                         isHovered
                           ? "translate-y-0"
                           : "translate-y-[102%] group-hover:translate-y-0"
                       }`}
                     >
-                      {/* Animated Wave Crests (Water surface waves) */}
-                      <div className="relative w-full h-7 overflow-hidden shrink-0">
-                        {/* Back Wave (Deep Ocean Sapphire) */}
+                      {/* Animated Wave Crests (Refined Midnight Slate Waves) */}
+                      <div className="relative w-full h-5 overflow-hidden shrink-0">
+                        {/* Back Wave (Deep Midnight Charcoal) */}
                         <svg
-                          className="absolute bottom-0 left-0 w-[200%] h-7 animate-liquid-wave-back opacity-50"
+                          className="absolute bottom-0 left-0 w-[200%] h-5 animate-liquid-wave-back opacity-50"
                           viewBox="0 0 1200 120"
                           preserveAspectRatio="none"
                         >
                           <path
                             d="M 0 50 C 100 50, 200 10, 300 10 C 400 10, 500 50, 600 50 C 700 50, 800 10, 900 10 C 1000 10, 1100 50, 1200 50 L 1200 120 L 0 120 Z"
-                            fill="#1e40af"
+                            fill="#1e293b"
                           />
                         </svg>
 
-                        {/* Front Wave (Vibrant Aqua / Cyan Liquid) */}
+                        {/* Front Wave (Executive Slate Graphite) */}
                         <svg
-                          className="absolute bottom-0 left-0 w-[200%] h-7 animate-liquid-wave-front opacity-85"
+                          className="absolute bottom-0 left-0 w-[200%] h-5 animate-liquid-wave-front opacity-90"
                           viewBox="0 0 1200 120"
                           preserveAspectRatio="none"
                         >
                           <path
                             d="M 0 30 C 100 5, 200 5, 300 30 C 400 55, 500 55, 600 30 C 700 5, 800 5, 900 30 C 1000 55, 1100 55, 1200 30 L 1200 120 L 0 120 Z"
-                            fill="#06b6d4"
+                            fill="#475569"
                           />
                         </svg>
                       </div>
 
-                      {/* Liquid Body (Gradient Cyan to Deep Royal Blue Water) */}
-                      <div className="w-full flex-1 bg-gradient-to-b from-cyan-500/85 via-blue-600/90 to-blue-900/95"></div>
+                      {/* Liquid Body (Deep Obsidian Slate Gradient) */}
+                      <div className="w-full flex-1 bg-gradient-to-b from-slate-800 via-slate-900 to-neutral-950"></div>
                     </div>
                   </div>
 
@@ -342,49 +342,39 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                   <div
                     className={`absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full transition-all duration-300 z-10 ${
                       isHovered
-                        ? "bg-gradient-to-b from-cyan-400 to-blue-600 opacity-100"
-                        : "bg-transparent group-hover:bg-gradient-to-b group-hover:from-cyan-400 group-hover:to-blue-600"
+                        ? "bg-gradient-to-b from-slate-400 to-slate-900 opacity-100"
+                        : "bg-transparent group-hover:bg-gradient-to-b group-hover:from-slate-400 group-hover:to-slate-900"
                     }`}
                   ></div>
 
                   {/* Left: Icon & Big Bold Title + Tagline (z-10 sits on top of water) */}
                   <div className="relative z-10 flex items-center gap-4 md:gap-6 min-w-0 pl-1">
-                    {/* Large Service Icon with Vibrant Ocean Glow on Hover */}
+                    {/* Large Service Icon with Executive Matte Obsidian Box */}
                     <div
                       className={`p-3.5 md:p-4 rounded-2xl shadow-md transition-all duration-300 shrink-0 ${
                         isHovered
-                          ? "bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/40 text-white"
-                          : "bg-neutral-900 text-white group-hover:bg-gradient-to-br group-hover:from-cyan-500 group-hover:to-blue-600 group-hover:shadow-lg group-hover:shadow-cyan-500/40"
+                          ? "bg-neutral-900 border border-slate-700/80 shadow-lg shadow-slate-900/40 text-white"
+                          : "bg-neutral-900 text-white border border-neutral-800"
                       }`}
                     >
                       {getServiceIcon(
                         svc.icon,
-                        `w-7 h-7 md:w-9 md:h-9 transition-colors duration-300 ${
-                          isHovered
-                            ? "text-white"
-                            : "text-cyan-400 group-hover:text-white"
-                        }`,
+                        "w-7 h-7 md:w-9 md:h-9 text-slate-200 transition-colors duration-300",
                       )}
                     </div>
 
                     <div className="min-w-0">
-                      {/* BIG EYE-CATCHING TITLE (চোখে পড়ার মতো অনেক বড় ফন্ট) */}
-                      <h2
-                        className={`text-xl md:text-2xl lg:text-3xl font-black tracking-tight leading-tight transition-colors duration-300 truncate ${
-                          isHovered
-                            ? "text-blue-600"
-                            : "text-neutral-900 group-hover:text-blue-600"
-                        }`}
-                      >
+                      {/* BIG EYE-CATCHING TITLE (চোখে পড়ার মতো অনেক বড় ফন্ট - অলওয়েজ ক্লাসিক বোল্ড ব্ল্যাক) */}
+                      <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 tracking-tight leading-tight transition-colors duration-300 truncate">
                         {title}
                       </h2>
 
-                      {/* Clean Sub-line / Tagline: Pure crisp white on water */}
+                      {/* Clean Sub-line / Tagline: Pure crisp white on dark fluid */}
                       <p
                         className={`text-xs md:text-sm font-semibold leading-relaxed mt-1.5 transition-colors duration-200 truncate ${
                           isHovered
-                            ? "text-white"
-                            : "text-neutral-500 group-hover:text-white"
+                            ? "!text-white drop-shadow-xs"
+                            : "text-neutral-500 group-hover:!text-white group-hover:drop-shadow-xs"
                         }`}
                       >
                         {highlight}
@@ -392,22 +382,18 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                     </div>
                   </div>
 
-                  {/* Right: Gorgeous Action Button with Ocean Glow (z-10 sits on top) */}
+                  {/* Right: Gorgeous Action Button with Executive Obsidian Look (z-10 sits on top) */}
                   <div className="relative z-10 shrink-0 flex items-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedServiceId(svc.id);
                       }}
-                      className={`px-4 md:px-6 py-2.5 md:py-3.5 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md flex items-center gap-2 cursor-pointer shrink-0 ${
-                        isHovered
-                          ? "bg-gradient-to-r from-blue-600 to-cyan-600 shadow-xl shadow-cyan-500/35"
-                          : "bg-neutral-900 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 group-hover:shadow-xl group-hover:shadow-cyan-500/35"
-                      }`}
+                      className="px-4 md:px-6 py-2.5 md:py-3.5 bg-neutral-900 hover:bg-neutral-800 group-hover:border-slate-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md border border-slate-700/60 flex items-center gap-2 cursor-pointer shrink-0"
                     >
                       <span className="hidden sm:inline">{t.exploreDetails}</span>
                       <span className="sm:hidden">বিস্তারিত</span>
-                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
+                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 text-slate-300" />
                     </button>
                   </div>
                 </div>
