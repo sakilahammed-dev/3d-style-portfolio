@@ -2,8 +2,8 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { BsTranslate } from "react-icons/bs";
 
 const LANGUAGES = [
-  { code: "bn", label: "বাংলা", native: "Bangla" },
-  { code: "en", label: "English", native: "English" },
+  { code: "bn", label: "BN" },
+  { code: "en", label: "EN" },
 ];
 
 const AUTO_CLOSE_DELAY = 4000; // 4 seconds auto-dismiss on mobile
@@ -105,34 +105,25 @@ export default function LanguageSelector({ selected, onChange }) {
 
       {open && (
         <div
-          className="absolute right-0 top-full min-w-[120px] bg-neutral-800 border border-neutral-700 rounded-b-xl shadow-xl shadow-black/50 p-1.5 z-50 flex flex-col gap-1"
+          className="absolute right-0 top-full w-full bg-neutral-800 border-x border-b border-neutral-700 rounded-b-xl shadow-xl shadow-black/50 p-1 z-50 flex flex-col gap-1 items-center"
           onPointerDown={() => {
             if (!canHover) startTimer();
           }}
         >
-          {LANGUAGES.map(({ code, label }) => {
+          {LANGUAGES.map(({ code }) => {
             const isSelected = selected === code;
             return (
               <button
                 key={code}
                 onClick={(e) => handleSelect(code, e)}
                 type="button"
-                className={`w-full py-2 px-3 text-sm md:text-base rounded-lg transition-all flex items-center justify-between gap-2 cursor-pointer font-sans ${
+                className={`w-full py-2 text-xs md:text-sm uppercase font-mono font-bold rounded-lg transition-all flex items-center justify-center cursor-pointer ${
                   isSelected
-                    ? "bg-neutral-700 text-white font-semibold shadow-inner"
-                    : "text-neutral-300 hover:bg-neutral-700/60 hover:text-white"
+                    ? "bg-red-600 text-white shadow-sm"
+                    : "text-neutral-400 hover:bg-neutral-700/70 hover:text-white"
                 }`}
               >
-                <span>{label}</span>
-                <span
-                  className={`text-xs uppercase font-mono px-1.5 py-0.5 rounded ${
-                    isSelected
-                      ? "bg-red-600 text-white"
-                      : "bg-neutral-900 text-neutral-400"
-                  }`}
-                >
-                  {code}
-                </span>
+                {code}
               </button>
             );
           })}
