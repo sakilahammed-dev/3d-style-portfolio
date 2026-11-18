@@ -1,9 +1,14 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { BsCollectionPlayFill } from "react-icons/bs";
 import { MdVideoLibrary } from "react-icons/md";
 import { galleryVideos } from "../../utils/galleryData.js";
 
-export default function GalleryPage({ language = "en" }) {
+export default function GalleryPage({
+  language = "en",
+  audioRef,
+  target,
+  cameraReset,
+}) {
   const [selectedVideo, setSelectedVideo] = useState(galleryVideos[0]);
   const videoRef = useRef(null);
 
@@ -27,8 +32,98 @@ export default function GalleryPage({ language = "en" }) {
 
   const t = content[language] || content.en;
 
+  // Helper: check if current navigation target is Gallery
+  const isGalleryTarget = useCallback((tName) => {
+    if (!tName) return false;
+    if (typeof tName === "string") {
+      return (
+        tName.includes("Games") ||
+        tName.includes("Arcade") ||
+        tName.toLowerCase().includes("gallery")
+      );
+    }
+    return false;
+  }, []);
+
+  // Native media event listeners for 100% reliable play/pause/ended detection
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onPlay = () => {
+      const bgAudio = audioRef?.current;
+      if (bgAudio) {
+        bgAudio.dataset.videoPlaying = "true";
+        bgAudio.pause();
+      }
+    };
+
+    const onPauseOrEnded = () => {
+      const bgAudio = audioRef?.current;
+      if (bgAudio) {
+        bgAudio.dataset.videoPlaying = "false";
+        if (bgAudio.dataset.userOff !== "true") {
+          bgAudio.muted = false;
+          bgAudio.play().catch(() => {});
+        }
+      }
+    };
+
+    video.addEventListener("play", onPlay);
+    video.addEventListener("pause", onPauseOrEnded);
+    video.addEventListener("ended", onPauseOrEnded);
+
+    return () => {
+      video.removeEventListener("play", onPlay);
+      video.removeEventListener("pause", onPauseOrEnded);
+      video.removeEventListener("ended", onPauseOrEnded);
+    };
+  }, [audioRef]);
+
+  // When user navigates away from Gallery (target changes or cameraReset is triggered)
+  useEffect(() => {
+    const isGallery = isGalleryTarget(target);
+    if (!isGallery) {
+      // Pause video if currently playing
+      if (videoRef.current && !videoRef.current.paused) {
+        videoRef.current.pause();
+      }
+      // Resume background music if allowed
+      const bgAudio = audioRef?.current;
+      if (bgAudio) {
+        bgAudio.dataset.videoPlaying = "false";
+        if (bgAudio.dataset.userOff !== "true") {
+          bgAudio.muted = false;
+          bgAudio.play().catch(() => {});
+        }
+      }
+    }
+  }, [target, cameraReset, audioRef, isGalleryTarget]);
+
+  // Cleanup when component unmounts
+  useEffect(() => {
+    return () => {
+      if (videoRef.current && !videoRef.current.paused) {
+        videoRef.current.pause();
+      }
+      const bgAudio = audioRef?.current;
+      if (bgAudio) {
+        bgAudio.dataset.videoPlaying = "false";
+        if (bgAudio.dataset.userOff !== "true") {
+          bgAudio.muted = false;
+          bgAudio.play().catch(() => {});
+        }
+      }
+    };
+  }, [audioRef]);
+
   const handleSelectVideo = (video) => {
     setSelectedVideo(video);
+    const bgAudio = audioRef?.current;
+    if (bgAudio) {
+      bgAudio.dataset.videoPlaying = "true";
+      bgAudio.pause();
+    }
     if (videoRef.current) {
       videoRef.current.load();
       videoRef.current.play().catch(() => {});

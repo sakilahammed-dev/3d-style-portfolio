@@ -141,7 +141,12 @@ export default function SceneWrapper({
 
       {arcadeScreen && (
         <AttachHtmlToMesh mesh={arcadeScreen}>
-          <GalleryPage language={language} />
+          <GalleryPage
+            language={language}
+            audioRef={audioRef}
+            target={target}
+            cameraReset={cameraReset}
+          />
         </AttachHtmlToMesh>
       )}
 

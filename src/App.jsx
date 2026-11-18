@@ -34,16 +34,13 @@ export default function App() {
   };
 
   const handleCameraReset = () => {
-    if (isAnimating) return;
     setCameraReset((prev) => !prev);
   };
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (!isAnimating) {
-        if (event.key === "Escape") {
-          handleCameraReset();
-        }
+      if (event.key === "Escape") {
+        handleCameraReset();
       }
     };
 
@@ -70,8 +67,10 @@ export default function App() {
         ) : (
           <div className="absolute pointer-events-none p-4 w-full h-full flex items-start justify-between">
             <button
+              id="home-btn"
+              aria-label="Home"
               onClick={handleCameraReset}
-              className="pointer-events-auto p-4  bg-neutral-800/40 backdrop-blur-xs rounded-xl cursor-pointer hover:bg-neutral-800"
+              className="pointer-events-auto p-4 bg-neutral-800/40 backdrop-blur-xs rounded-xl cursor-pointer hover:bg-neutral-800"
             >
               <BsFillHouseDoorFill className="w-6 h-6 md:w-8 md:h-8" />
             </button>

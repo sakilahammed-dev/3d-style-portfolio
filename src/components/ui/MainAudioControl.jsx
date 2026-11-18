@@ -48,12 +48,17 @@ export default function MainAudioControl({ audioRef }) {
 
     if (isOn) {
       audio.muted = false;
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+      delete audio.dataset.userOff;
+      // Only play if video is NOT playing
+      if (audio.dataset.videoPlaying !== "true") {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {});
+        }
       }
     } else {
       audio.muted = true;
+      audio.dataset.userOff = "true";
       audio.pause();
     }
   }, [isOn, audioRef]);
@@ -79,9 +84,13 @@ export default function MainAudioControl({ audioRef }) {
       audio.volume = 1.0;
       if (val) {
         audio.muted = false;
-        audio.play().catch(() => {});
+        delete audio.dataset.userOff;
+        if (audio.dataset.videoPlaying !== "true") {
+          audio.play().catch(() => {});
+        }
       } else {
         audio.muted = true;
+        audio.dataset.userOff = "true";
         audio.pause();
       }
     }
