@@ -293,88 +293,86 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                   onMouseLeave={() => setHoveredServiceId(null)}
                   className={`group relative flex-1 p-4 md:p-5 bg-white/95 rounded-2xl border-2 transition-all duration-300 cursor-pointer shadow-sm flex items-center justify-between gap-4 overflow-hidden transform-none ${
                     isHovered
-                      ? "border-slate-800 shadow-xl shadow-slate-900/10"
-                      : "border-neutral-300 hover:border-slate-800 hover:shadow-xl hover:shadow-slate-900/10"
+                      ? "border-blue-600 bg-gradient-to-r from-blue-50/70 via-white to-indigo-50/40 shadow-lg shadow-blue-500/15"
+                      : "border-neutral-300 hover:border-blue-600 hover:bg-gradient-to-r hover:from-blue-50/70 hover:via-white hover:to-indigo-50/40 hover:shadow-lg hover:shadow-blue-500/15"
                   }`}
                 >
-                  {/* LIQUID WAVE EFFECT: Fills bottom ~40% with animated Executive Midnight Slate & Obsidian waves on hover */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl z-0">
-                    <div
-                      className={`absolute inset-x-0 bottom-0 h-[40%] transition-transform duration-600 ease-out flex flex-col justify-end ${
-                        isHovered
-                          ? "translate-y-0"
-                          : "translate-y-[102%] group-hover:translate-y-0"
-                      }`}
-                    >
-                      {/* Animated Wave Crests (Refined Midnight Slate Waves) */}
-                      <div className="relative w-full h-5 overflow-hidden shrink-0">
-                        {/* Back Wave (Deep Midnight Charcoal) */}
-                        <svg
-                          className="absolute bottom-0 left-0 w-[200%] h-5 animate-liquid-wave-back opacity-50"
-                          viewBox="0 0 1200 120"
-                          preserveAspectRatio="none"
-                        >
-                          <path
-                            d="M 0 50 C 100 50, 200 10, 300 10 C 400 10, 500 50, 600 50 C 700 50, 800 10, 900 10 C 1000 10, 1100 50, 1200 50 L 1200 120 L 0 120 Z"
-                            fill="#1e293b"
-                          />
-                        </svg>
-
-                        {/* Front Wave (Executive Slate Graphite) */}
-                        <svg
-                          className="absolute bottom-0 left-0 w-[200%] h-5 animate-liquid-wave-front opacity-90"
-                          viewBox="0 0 1200 120"
-                          preserveAspectRatio="none"
-                        >
-                          <path
-                            d="M 0 30 C 100 5, 200 5, 300 30 C 400 55, 500 55, 600 30 C 700 5, 800 5, 900 30 C 1000 55, 1100 55, 1200 30 L 1200 120 L 0 120 Z"
-                            fill="#475569"
-                          />
-                        </svg>
-                      </div>
-
-                      {/* Liquid Body (Deep Obsidian Slate Gradient) */}
-                      <div className="w-full flex-1 bg-gradient-to-b from-slate-800 via-slate-900 to-neutral-950"></div>
-                    </div>
-                  </div>
-
                   {/* Left Accent Glow Bar on Hover */}
                   <div
-                    className={`absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full transition-all duration-300 z-10 ${
+                    className={`absolute left-0 top-2 bottom-2 w-1.5 rounded-r-full transition-all duration-300 z-20 ${
                       isHovered
-                        ? "bg-gradient-to-b from-slate-400 to-slate-900 opacity-100"
-                        : "bg-transparent group-hover:bg-gradient-to-b group-hover:from-slate-400 group-hover:to-slate-900"
+                        ? "bg-gradient-to-b from-blue-500 to-indigo-600 opacity-100"
+                        : "bg-transparent group-hover:bg-gradient-to-b group-hover:from-blue-500 group-hover:to-indigo-600"
                     }`}
                   ></div>
 
-                  {/* Left: Icon & Big Bold Title + Tagline (z-10 sits on top of water) */}
+                  {/* LIQUID WAVE ACCENT: Sits safely along the bottom edge (height 12px) so text is 100% CLEAR */}
+                  <div className="absolute inset-x-0 bottom-0 h-3.5 pointer-events-none overflow-hidden rounded-b-2xl z-0">
+                    <div
+                      className={`w-full h-full transition-opacity duration-300 ${
+                        isHovered ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                      }`}
+                    >
+                      {/* Back Wave */}
+                      <svg
+                        className="absolute bottom-0 left-0 w-[200%] h-3.5 animate-liquid-wave-back opacity-50"
+                        viewBox="0 0 1200 120"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M 0 50 C 100 50, 200 10, 300 10 C 400 10, 500 50, 600 50 C 700 50, 800 10, 900 10 C 1000 10, 1100 50, 1200 50 L 1200 120 L 0 120 Z"
+                          fill="#3b82f6"
+                        />
+                      </svg>
+
+                      {/* Front Wave */}
+                      <svg
+                        className="absolute bottom-0 left-0 w-[200%] h-3.5 animate-liquid-wave-front opacity-80"
+                        viewBox="0 0 1200 120"
+                        preserveAspectRatio="none"
+                      >
+                        <path
+                          d="M 0 30 C 100 5, 200 5, 300 30 C 400 55, 500 55, 600 30 C 700 5, 800 5, 900 30 C 1000 55, 1100 55, 1200 30 L 1200 120 L 0 120 Z"
+                          fill="#2563eb"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  {/* Left: Icon & Big Bold Title + Tagline (z-10 sits on clean bright card) */}
                   <div className="relative z-10 flex items-center gap-4 md:gap-6 min-w-0 pl-1">
-                    {/* Large Service Icon with Executive Matte Obsidian Box */}
+                    {/* Service Icon with Royal Blue Glow on Hover */}
                     <div
                       className={`p-3.5 md:p-4 rounded-2xl shadow-md transition-all duration-300 shrink-0 ${
                         isHovered
-                          ? "bg-neutral-900 border border-slate-700/80 shadow-lg shadow-slate-900/40 text-white"
-                          : "bg-neutral-900 text-white border border-neutral-800"
+                          ? "bg-blue-600 text-white shadow-lg shadow-blue-500/30"
+                          : "bg-neutral-900 text-white group-hover:bg-blue-600 group-hover:shadow-lg group-hover:shadow-blue-500/30"
                       }`}
                     >
                       {getServiceIcon(
                         svc.icon,
-                        "w-7 h-7 md:w-9 md:h-9 text-slate-200 transition-colors duration-300",
+                        "w-7 h-7 md:w-9 md:h-9 transition-colors duration-300 text-white",
                       )}
                     </div>
 
                     <div className="min-w-0">
-                      {/* BIG EYE-CATCHING TITLE (চোখে পড়ার মতো অনেক বড় ফন্ট - অলওয়েজ ক্লাসিক বোল্ড ব্ল্যাক) */}
-                      <h2 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 tracking-tight leading-tight transition-colors duration-300 truncate">
+                      {/* BIG EYE-CATCHING TITLE (১০০% স্পষ্ট, বড় ও বোল্ড) */}
+                      <h2
+                        className={`text-xl md:text-2xl lg:text-3xl font-black tracking-tight leading-tight transition-colors duration-300 truncate ${
+                          isHovered
+                            ? "text-blue-700"
+                            : "text-neutral-900 group-hover:text-blue-700"
+                        }`}
+                      >
                         {title}
                       </h2>
 
-                      {/* Clean Sub-line / Tagline: Pure crisp white on dark fluid */}
+                      {/* Sub-line / Tagline: ১০০% স্পষ্টভাবে পড়ার মতো ডার্ক ও শার্প টেক্সট */}
                       <p
-                        className={`text-xs md:text-sm font-semibold leading-relaxed mt-1.5 transition-colors duration-200 truncate ${
+                        className={`text-xs md:text-sm font-bold leading-relaxed mt-1.5 transition-colors duration-200 truncate ${
                           isHovered
-                            ? "!text-white drop-shadow-xs"
-                            : "text-neutral-500 group-hover:!text-white group-hover:drop-shadow-xs"
+                            ? "text-neutral-800"
+                            : "text-neutral-600 group-hover:text-neutral-800"
                         }`}
                       >
                         {highlight}
@@ -382,18 +380,22 @@ export default function ServicesPage({ language = "bn", setTarget }) {
                     </div>
                   </div>
 
-                  {/* Right: Gorgeous Action Button with Executive Obsidian Look (z-10 sits on top) */}
+                  {/* Right: Gorgeous Action Button with Royal Blue Glow (z-10) */}
                   <div className="relative z-10 shrink-0 flex items-center">
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setSelectedServiceId(svc.id);
                       }}
-                      className="px-4 md:px-6 py-2.5 md:py-3.5 bg-neutral-900 hover:bg-neutral-800 group-hover:border-slate-600 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md border border-slate-700/60 flex items-center gap-2 cursor-pointer shrink-0"
+                      className={`px-4 md:px-6 py-2.5 md:py-3.5 text-white text-xs md:text-sm font-bold rounded-xl transition-all duration-300 shadow-md flex items-center gap-2 cursor-pointer shrink-0 ${
+                        isHovered
+                          ? "bg-blue-600 shadow-xl shadow-blue-500/35"
+                          : "bg-neutral-900 group-hover:bg-blue-600 group-hover:shadow-xl group-hover:shadow-blue-500/35"
+                      }`}
                     >
                       <span className="hidden sm:inline">{t.exploreDetails}</span>
                       <span className="sm:hidden">বিস্তারিত</span>
-                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 text-slate-300" />
+                      <BsArrowRight className="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-300 text-white" />
                     </button>
                   </div>
                 </div>
