@@ -23,7 +23,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
     bn: {
       catalogTitle: "Services",
       exploreDetails: "বিস্তারিত দেখুন",
-      backToList: "← ব্যাক",
+      backToList: "ব্যাক",
       overviewHeading: "সংক্ষিপ্ত বিবরণ",
       deliverablesHeading: "যা যা অন্তর্ভুক্ত ও ডেলিভারি পাবেন",
       clientRoiHeading: "ব্যবসায়িক লাভ ও প্রভাব",
@@ -36,7 +36,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
     en: {
       catalogTitle: "Services",
       exploreDetails: "Explore Details",
-      backToList: "← Back",
+      backToList: "Back",
       overviewHeading: "Overview",
       deliverablesHeading: "What I Build & Deliver",
       clientRoiHeading: "Client ROI & Business Impact",
@@ -49,7 +49,7 @@ export default function ServicesPage({ language = "bn", setTarget }) {
     es: {
       catalogTitle: "Servicios",
       exploreDetails: "Ver Detalles",
-      backToList: "← Volver",
+      backToList: "Volver",
       overviewHeading: "Resumen General",
       deliverablesHeading: "Servicios y Entregables Clave",
       clientRoiHeading: "Impacto y ROI para el Cliente",
@@ -112,13 +112,13 @@ export default function ServicesPage({ language = "bn", setTarget }) {
 
         {/* Content Box */}
         <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between border border-neutral-300">
-          {/* Top Bar: SINGLE CLEAN BACK OPTION (ONLY TEXT & ARROW) */}
+          {/* Top Bar: SINGLE CLEAN BACK OPTION (EXACTLY 1 ARROW + SLIGHTLY BIGGER TEXT) */}
           <div className="w-full pb-3 border-b border-neutral-300/80 shrink-0">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="inline-flex items-center gap-2 text-neutral-800 hover:text-blue-600 font-bold text-sm md:text-base transition-colors cursor-pointer group"
+              className="inline-flex items-center gap-2.5 text-neutral-900 hover:text-blue-600 font-bold text-base md:text-lg lg:text-xl transition-colors cursor-pointer group select-none"
             >
-              <BsArrowLeft className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:-translate-x-1" />
+              <BsArrowLeft className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 group-hover:-translate-x-1.5 shrink-0" />
               <span>{t.backToList}</span>
             </button>
           </div>
