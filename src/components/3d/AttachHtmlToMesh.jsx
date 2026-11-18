@@ -66,6 +66,59 @@ export default function AttachHtmlToMesh({ mesh, children }) {
   const distanceFactor = isMedium ? 0.4 : 0.6; // md+ = 0.4, below md = 0.6
   const multiplier = isMedium ? 1000 : 700; // md+ = 1000px, below md = 700px
 
+  const forwardWheelToCanvas = (e) => {
+    const canvas = document.querySelector("canvas");
+    if (canvas) {
+      canvas.dispatchEvent(
+        new WheelEvent("wheel", {
+          deltaX: e.deltaX,
+          deltaY: e.deltaY,
+          deltaZ: e.deltaZ,
+          deltaMode: e.deltaMode,
+          clientX: e.clientX,
+          clientY: e.clientY,
+          screenX: e.screenX,
+          screenY: e.screenY,
+          bubbles: true,
+          cancelable: true,
+        }),
+      );
+    }
+  };
+
+  const handleWheel = (e) => {
+    // If ctrl key is pressed, it is an intentional zoom/pinch gesture -> forward to canvas
+    if (e.ctrlKey) {
+      forwardWheelToCanvas(e);
+      return;
+    }
+
+    // Traverse upwards to see if the user is scrolling inside a vertically scrollable container
+    let el = e.target;
+    let isScrollable = false;
+
+    while (el && el !== htmlRef.current && el !== document.body) {
+      if (el.scrollHeight > el.clientHeight + 2) {
+        const style = window.getComputedStyle(el);
+        const overflowY = style.overflowY;
+        if (overflowY === "auto" || overflowY === "scroll") {
+          const atTop = el.scrollTop <= 1 && e.deltaY < 0;
+          const atBottom =
+            el.scrollTop + el.clientHeight >= el.scrollHeight - 2 && e.deltaY > 0;
+          if (!atTop && !atBottom) {
+            isScrollable = true;
+            break;
+          }
+        }
+      }
+      el = el.parentElement;
+    }
+
+    if (!isScrollable) {
+      forwardWheelToCanvas(e);
+    }
+  };
+
   return (
     <Html
       ref={htmlRef}
@@ -80,7 +133,10 @@ export default function AttachHtmlToMesh({ mesh, children }) {
         height: `${size.height * multiplier}px`,
       }}
     >
-      <div className="w-full h-full flex items-center justify-center">
+      <div
+        onWheel={handleWheel}
+        className="w-full h-full flex items-center justify-center"
+      >
         {children}
       </div>
     </Html>

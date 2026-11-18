@@ -402,8 +402,10 @@ export default function RaycastHandler({
       if (!clicked) return;
 
       if (clicked.name.includes("Screen")) {
-        if (clicked === screenMesh && controlsRef.current) {
-          controlsRef.current.enabled = false;
+        // Keep controls enabled and zoom active so users can zoom with mouse wheel
+        if (controlsRef.current) {
+          controlsRef.current.enabled = true;
+          controlsRef.current.enableZoom = true;
         }
 
         const navEntry = findNavEntryBy("target", clicked.name);

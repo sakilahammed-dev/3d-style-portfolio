@@ -23,45 +23,39 @@ export default function ServicesPage({ language = "bn", setTarget }) {
     bn: {
       catalogTitle: "Services",
       exploreDetails: "বিস্তারিত দেখুন",
-      backToList: "← সকল সার্ভিসে ফিরে যান",
-      overviewHeading: "সহজ কথায় (Executive Overview)",
-      deliverablesHeading: "আমি কী কী তৈরি ও ডেলিভারি করব (Key Deliverables)",
-      clientRoiHeading: "ক্লায়েন্টের লাভ (Client ROI & Impact)",
-      techStackHeading: "ব্যবহৃত টুলস ও প্রযুক্তি",
-      discussProject: "এই সার্ভিসটি নিয়ে আলোচনা করুন",
+      backToList: "← ব্যাক",
+      overviewHeading: "সংক্ষিপ্ত বিবরণ",
+      deliverablesHeading: "যা যা অন্তর্ভুক্ত ও ডেলিভারি পাবেন",
+      clientRoiHeading: "ব্যবসায়িক লাভ ও প্রভাব",
+      techStackHeading: "ব্যবহৃত প্রযুক্তি ও টুলস",
+      discussProject: "প্রজেক্ট নিয়ে আলোচনা করুন",
       contactNotice: "সরাসরি যোগাযোগ ও বাজেট আলোচনার জন্য ক্লিক করুন",
-      bottomBackHint: "অন্যান্য সার্ভিস দেখতে ব্যাক বাটনে ক্লিক করুন",
-      bottomNotice: "যে কোনো সার্ভিসে ক্লিক করে ভেতরে বিস্তারিত জানুন",
-      catalogSubNotice: "৩টি প্রিমিয়ার সার্ভিস ক্যাটালগ",
+      catalogSubNotice: "৩টি প্রিমিয়ার সার্ভিস ক্যাটালগ",
       serviceNumber: "সার্ভিস",
     },
     en: {
       catalogTitle: "Services",
       exploreDetails: "Explore Details",
-      backToList: "← Back to All Services",
-      overviewHeading: "In Plain Words (Executive Overview)",
-      deliverablesHeading: "What I Build & Deliver (Key Deliverables)",
+      backToList: "← Back",
+      overviewHeading: "Overview",
+      deliverablesHeading: "What I Build & Deliver",
       clientRoiHeading: "Client ROI & Business Impact",
       techStackHeading: "Tools & Technologies",
-      discussProject: "Discuss This Project / Hire Me",
+      discussProject: "Discuss This Project",
       contactNotice: "Connect directly to launch your project or get a free estimate",
-      bottomBackHint: "Click back to explore other services",
-      bottomNotice: "Click on any service to explore full capabilities & details",
       catalogSubNotice: "3 Premium Offerings Catalog",
       serviceNumber: "SERVICE",
     },
     es: {
       catalogTitle: "Servicios",
       exploreDetails: "Ver Detalles",
-      backToList: "← Volver a Todos los Servicios",
-      overviewHeading: "En palabras simples",
-      deliverablesHeading: "Servicios y Capacidades Clave",
-      clientRoiHeading: "Beneficios e Impacto para el Cliente",
-      techStackHeading: "Herramientas y Tecnologías",
+      backToList: "← Volver",
+      overviewHeading: "Resumen General",
+      deliverablesHeading: "Servicios y Entregables Clave",
+      clientRoiHeading: "Impacto y ROI para el Cliente",
+      techStackHeading: "Tecnologías y Herramientas",
       discussProject: "Consultar por este servicio",
       contactNotice: "Contáctame para iniciar tu proyecto o solicitar presupuesto",
-      bottomBackHint: "Haz clic atrás para ver otros servicios",
-      bottomNotice: "Haz clic en cualquier servicio para conocer los detalles",
       catalogSubNotice: "Catálogo de 3 Servicios Principales",
       serviceNumber: "SERVICIO",
     },
@@ -112,97 +106,84 @@ export default function ServicesPage({ language = "bn", setTarget }) {
       selectedService.clientRoi.en;
 
     return (
-      <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-neutral-800 overflow-hidden">
+      <div className="w-full h-full relative bg-neutral-100 select-none font-sans text-neutral-800 overflow-hidden">
         {/* Background Grid */}
-        <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
 
         {/* Content Box */}
-        <div className="absolute inset-0 p-3 md:p-5 flex flex-col justify-between border border-neutral-300">
-          {/* Top Bar: PROMINENT BACK BUTTON TO RETURN TO SERVICES CATALOG */}
-          <div className="w-full flex items-center justify-between pb-2.5 border-b border-neutral-300/80 shrink-0">
+        <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between border border-neutral-300">
+          {/* Top Bar: SINGLE CLEAN BACK OPTION (ONLY TEXT & ARROW) */}
+          <div className="w-full pb-3 border-b border-neutral-300/80 shrink-0">
             <button
               onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3.5 py-2 bg-neutral-900 hover:bg-neutral-800 text-white rounded-xl text-xs md:text-sm font-bold shadow-md transition-all duration-200 hover:scale-105 cursor-pointer group border border-slate-700/60"
-              title="Return to Services List"
+              className="inline-flex items-center gap-2 text-neutral-800 hover:text-blue-600 font-bold text-sm md:text-base transition-colors cursor-pointer group"
             >
-              <BsArrowLeft className="w-4 h-4 text-slate-300 group-hover:text-white transition-colors" />
+              <BsArrowLeft className="w-4 h-4 md:w-5 md:h-5 transition-transform group-hover:-translate-x-1" />
               <span>{t.backToList}</span>
             </button>
-
-            <div className="flex items-center gap-2">
-              <span className="text-[10px] md:text-xs font-black px-2 py-0.5 rounded bg-neutral-900 text-white tracking-wider border border-slate-700/50">
-                {t.serviceNumber} #{selectedService.number}
-              </span>
-              <span className="text-xs font-bold text-neutral-700 uppercase tracking-wider hidden sm:inline-block">
-                {category}
-              </span>
-            </div>
           </div>
 
-          {/* Main Scrollable Body */}
-          <div className="w-full flex-1 my-2 min-h-0 overflow-y-auto pr-1 flex flex-col gap-2.5">
+          {/* Main Scrollable Body — Spacious, Highly Readable, Line-by-Line */}
+          <div className="w-full flex-1 my-3 min-h-0 overflow-y-auto pr-2 flex flex-col gap-4">
             {/* Service Title Bar */}
-            <div className="p-3 md:p-3.5 bg-white/95 rounded-2xl border border-neutral-300/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-neutral-900 text-white rounded-xl shadow-xs shrink-0 border border-slate-800">
-                  {getServiceIcon(selectedService.icon, "w-6 h-6 text-slate-200")}
-                </div>
-                <div>
-                  <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider block">
-                    {category}
-                  </span>
-                  <h1 className="text-base md:text-xl font-black text-neutral-900 leading-tight">
-                    {title}
-                  </h1>
-                </div>
+            <div className="p-4 md:p-5 bg-white rounded-2xl border border-neutral-300 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
+              <div>
+                <span className="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider block mb-1">
+                  {category}
+                </span>
+                <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 leading-tight">
+                  {title}
+                </h1>
               </div>
 
-              {/* Direct Hire / Discuss Button */}
+              {/* Direct Project Discuss / Contact Button */}
               <button
                 onClick={handleDiscussClick}
-                className="self-start sm:self-auto px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md cursor-pointer flex items-center gap-2 shrink-0 border border-slate-700/60"
+                className="self-start sm:self-auto px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md cursor-pointer flex items-center gap-2 shrink-0 border border-slate-700/60"
               >
                 <span>{t.discussProject}</span>
-                <BsArrowRight className="w-3.5 h-3.5 text-slate-300" />
+                <BsArrowRight className="w-4 h-4 text-slate-300" />
               </button>
             </div>
 
-            {/* Overview / "সহজ কথায়" Highlight Card */}
-            <div className="p-3 bg-neutral-100/90 rounded-xl border-l-4 border-slate-800 border-neutral-300 shadow-xs">
-              <div className="flex items-center gap-1.5 text-xs font-bold text-neutral-900 uppercase tracking-wider mb-1">
-                <BsStars className="w-3.5 h-3.5 text-slate-700" />
-                <span>{t.overviewHeading}</span>
-              </div>
-              <p className="text-xs md:text-sm text-neutral-800 leading-relaxed font-medium">
+            {/* Overview / সংক্ষিপ্ত বিবরণ (NO EMOJI, Large Readable Text) */}
+            <div className="p-4 md:p-5 bg-white/95 rounded-2xl border border-neutral-300 shadow-xs flex flex-col gap-2">
+              <h3 className="text-xs md:text-sm font-bold text-neutral-500 uppercase tracking-wider">
+                {t.overviewHeading}
+              </h3>
+              <p className="text-sm md:text-base text-neutral-800 leading-relaxed font-normal">
                 {easyExp}
               </p>
             </div>
 
-            {/* Key Deliverables - 2x2 Clean Grid */}
-            <div className="flex flex-col gap-1.5">
-              <div className="flex items-center gap-1.5 text-xs font-extrabold text-neutral-900 uppercase tracking-wider px-1">
-                <BsLightningChargeFill className="w-3.5 h-3.5 text-blue-600" />
-                <span>{t.deliverablesHeading}</span>
-              </div>
+            {/* Key Deliverables — Stacked Vertical Layout for Maximum Legibility */}
+            <div className="flex flex-col gap-2.5">
+              <h3 className="text-xs md:text-sm font-bold text-neutral-500 uppercase tracking-wider px-1">
+                {t.deliverablesHeading}
+              </h3>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+              <div className="flex flex-col gap-2.5">
                 {selectedService.features.map((feat, idx) => {
-                  const fTitle = feat.title[language] || feat.title.bn || feat.title.en;
-                  const fDesc = feat.desc[language] || feat.desc.bn || feat.desc.en;
+                  const fTitle =
+                    feat.title[language] || feat.title.bn || feat.title.en;
+                  const fDesc =
+                    feat.desc[language] || feat.desc.bn || feat.desc.en;
                   return (
                     <div
                       key={idx}
-                      className="p-2.5 md:p-3 bg-white/90 rounded-xl border border-neutral-300/80 shadow-2xs hover:border-blue-400 transition-colors flex flex-col gap-1"
+                      className="p-3.5 md:p-4 bg-white/95 rounded-xl border border-neutral-300/80 shadow-xs hover:border-blue-500/60 transition-colors"
                     >
-                      <div className="flex items-start gap-2">
-                        <BsCheckCircleFill className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
-                        <h4 className="text-xs md:text-sm font-bold text-neutral-900 leading-snug">
-                          {fTitle}
-                        </h4>
+                      <div className="flex items-start gap-3">
+                        <div className="w-2 h-2 rounded-full bg-blue-600 mt-2 shrink-0" />
+                        <div className="flex-1">
+                          <h4 className="text-sm md:text-base font-bold text-neutral-900 leading-snug">
+                            {fTitle}
+                          </h4>
+                          <p className="text-xs md:text-sm text-neutral-700 leading-relaxed mt-1 font-normal">
+                            {fDesc}
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-[11px] md:text-xs text-neutral-600 leading-relaxed pl-5 font-normal">
-                        {fDesc}
-                      </p>
                     </div>
                   );
                 })}
@@ -210,45 +191,32 @@ export default function ServicesPage({ language = "bn", setTarget }) {
             </div>
 
             {/* Client ROI Callout Banner (NO EMOJI) */}
-            <div className="p-2.5 md:p-3 bg-amber-500/10 border-l-4 border-amber-500 rounded-r-xl border border-amber-500/30 shadow-2xs">
-              <span className="text-[11px] md:text-xs font-black text-amber-900 uppercase tracking-wider flex items-center gap-1.5 mb-0.5">
-                <BsAwardFill className="w-3.5 h-3.5 text-amber-600" />
-                <span>{t.clientRoiHeading}</span>
-              </span>
-              <p className="text-xs md:text-sm text-amber-950 font-semibold leading-relaxed">
+            <div className="p-4 md:p-5 bg-amber-500/10 border-l-4 border-amber-500 rounded-r-2xl border border-amber-500/30 shadow-xs flex flex-col gap-1.5">
+              <h3 className="text-xs md:text-sm font-bold text-amber-900 uppercase tracking-wider">
+                {t.clientRoiHeading}
+              </h3>
+              <p className="text-sm md:text-base text-amber-950 font-medium leading-relaxed">
                 {roi}
               </p>
             </div>
 
-            {/* Tech Stack Pills (NO EMOJI) */}
-            <div className="p-2.5 bg-white/80 rounded-xl border border-neutral-300 flex flex-wrap items-center gap-1.5">
-              <span className="text-[10px] md:text-xs font-bold text-neutral-500 uppercase tracking-wider mr-1 flex items-center gap-1">
-                <BsCpu className="w-3.5 h-3.5 text-neutral-600" />
-                <span>{t.techStackHeading}:</span>
+            {/* Tech Stack (NO EMOJI) */}
+            <div className="p-3.5 md:p-4 bg-white/90 rounded-2xl border border-neutral-300 shadow-xs flex flex-wrap items-center gap-2">
+              <span className="text-xs md:text-sm font-bold text-neutral-500 uppercase tracking-wider mr-1">
+                {t.techStackHeading}:
               </span>
               {selectedService.techStack.map((tech, idx) => (
                 <span
                   key={idx}
-                  className="px-2 py-0.5 bg-neutral-800 text-white rounded-md text-[10px] md:text-[11px] font-semibold"
+                  className="px-2.5 py-1 bg-neutral-800 text-white rounded-lg text-xs md:text-sm font-medium"
                 >
                   {tech}
                 </span>
               ))}
             </div>
-          </div>
 
-          {/* Bottom Bar: Second Back Button */}
-          <div className="w-full pt-2 border-t border-neutral-300/80 shrink-0 flex items-center justify-between">
-            <button
-              onClick={() => setSelectedServiceId(null)}
-              className="flex items-center gap-2 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded-lg text-xs font-bold transition-all cursor-pointer border border-slate-700/60"
-            >
-              <BsArrowLeft className="w-3.5 h-3.5 text-slate-300" />
-              <span>{t.backToList}</span>
-            </button>
-            <span className="text-[11px] text-neutral-500 hidden sm:inline">
-              {t.bottomBackHint}
-            </span>
+            {/* Extra breathing space at bottom of scroll */}
+            <div className="h-2"></div>
           </div>
         </div>
       </div>

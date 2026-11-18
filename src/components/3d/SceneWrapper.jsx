@@ -74,6 +74,8 @@ export default function SceneWrapper({
     controlsRef.current.enablePan = false;
     controlsRef.current.minPolarAngle = 0;
     controlsRef.current.maxPolarAngle = Math.PI / 2;
+    controlsRef.current.minDistance = 0.3;
+    controlsRef.current.maxDistance = 40;
   }, []);
 
   const phoneScreen = interactives.find(
