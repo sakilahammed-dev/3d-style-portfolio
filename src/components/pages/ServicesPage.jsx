@@ -126,24 +126,13 @@ export default function ServicesPage({ language = "bn", setTarget }) {
           {/* Main Scrollable Body — Spacious, Highly Readable, Line-by-Line */}
           <div className="w-full flex-1 my-3 min-h-0 overflow-y-auto pr-2 flex flex-col gap-4">
             {/* Service Title Bar */}
-            <div className="p-4 md:p-5 bg-white rounded-2xl border border-neutral-300 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shrink-0">
-              <div>
-                <span className="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider block mb-1">
-                  {category}
-                </span>
-                <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 leading-tight">
-                  {title}
-                </h1>
-              </div>
-
-              {/* Direct Project Discuss / Contact Button */}
-              <button
-                onClick={handleDiscussClick}
-                className="self-start sm:self-auto px-4 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white font-bold text-xs md:text-sm rounded-xl transition-all shadow-md cursor-pointer flex items-center gap-2 shrink-0 border border-slate-700/60"
-              >
-                <span>{t.discussProject}</span>
-                <BsArrowRight className="w-4 h-4 text-slate-300" />
-              </button>
+            <div className="p-4 md:p-5 bg-white rounded-2xl border border-neutral-300 shadow-xs shrink-0">
+              <span className="text-xs md:text-sm font-semibold text-blue-600 uppercase tracking-wider block mb-1">
+                {category}
+              </span>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-black text-neutral-900 leading-tight">
+                {title}
+              </h1>
             </div>
 
             {/* Overview / সংক্ষিপ্ত বিবরণ (NO EMOJI, Large Readable Text) */}
