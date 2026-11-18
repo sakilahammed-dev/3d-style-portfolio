@@ -1,135 +1,169 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { BsFillVolumeMuteFill, BsFillVolumeUpFill } from "react-icons/bs";
-import VolumeSlider from "../ui/VolumeSlider.jsx";
 
-const AUTO_CLOSE_DELAY = 3500; // 3.5 seconds
+const AUTO_CLOSE_DELAY = 4000; // 4 seconds auto-dismiss on mobile
 
-const MainAudioControl = ({ audioRef }) => {
-  const [muted, setMuted] = useState(false);
-  const [volume, setVolume] = useState(0.2); // range: 0 to 1
-  const [showSlider, setShowSlider] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+const OPTIONS = [
+  { value: true, label: "ON" },
+  { value: false, label: "OFF" },
+];
+
+export default function MainAudioControl({ audioRef }) {
+  const [isOn, setIsOn] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [canHover, setCanHover] = useState(false);
   const containerRef = useRef(null);
   const timerRef = useRef(null);
 
-  // Detect touch devices
+  // Check if device supports true hover (desktop with mouse)
   useEffect(() => {
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    const mq = window.matchMedia("(hover: hover) and (pointer: fine)");
+    setCanHover(mq.matches);
+
+    const handler = (e) => setCanHover(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const clearAutoCloseTimer = useCallback(() => {
+  const clearTimer = useCallback(() => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
   }, []);
 
-  const startAutoCloseTimer = useCallback(() => {
-    clearAutoCloseTimer();
+  const startTimer = useCallback(() => {
+    clearTimer();
     timerRef.current = setTimeout(() => {
-      setShowSlider(false);
+      setOpen(false);
     }, AUTO_CLOSE_DELAY);
-  }, [clearAutoCloseTimer]);
+  }, [clearTimer]);
 
-  const handleToggleMute = () => {
-    if (audioRef.current) {
-      const nextMuted = !muted;
-      audioRef.current.muted = nextMuted;
-      setMuted(nextMuted);
-    }
-    // Show slider on click/tap and start auto-dismiss timer
-    setShowSlider(true);
-    startAutoCloseTimer();
-  };
-
-  const handleVolumeChange = (newVol) => {
-    setVolume(newVol);
-    if (audioRef.current) {
-      audioRef.current.volume = newVol;
-      if (newVol === 0) {
-        setMuted(true);
-        audioRef.current.muted = true;
-      } else {
-        setMuted(false);
-        audioRef.current.muted = false;
-      }
-    }
-    startAutoCloseTimer();
-  };
-
-  // Close when clicking or tapping outside
+  // Synchronize audio state with isOn
   useEffect(() => {
-    if (!showSlider) return;
+    const audio = audioRef?.current;
+    if (!audio) return;
 
-    const handleOutsideClick = (e) => {
+    audio.volume = 1.0; // Full volume as requested
+
+    if (isOn) {
+      audio.muted = false;
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      audio.muted = true;
+      audio.pause();
+    }
+  }, [isOn, audioRef]);
+
+  const handleToggle = (e) => {
+    e.stopPropagation();
+    setOpen((prev) => {
+      const next = !prev;
+      if (next && !canHover) {
+        startTimer();
+      } else {
+        clearTimer();
+      }
+      return next;
+    });
+  };
+
+  const handleSelect = (val, e) => {
+    e.stopPropagation();
+    setIsOn(val);
+    const audio = audioRef?.current;
+    if (audio) {
+      audio.volume = 1.0;
+      if (val) {
+        audio.muted = false;
+        audio.play().catch(() => {});
+      } else {
+        audio.muted = true;
+        audio.pause();
+      }
+    }
+    setOpen(false);
+    clearTimer();
+  };
+
+  // Close when tapping/clicking outside
+  useEffect(() => {
+    if (!open) return;
+
+    const handleOutside = (e) => {
       if (containerRef.current && !containerRef.current.contains(e.target)) {
-        setShowSlider(false);
-        clearAutoCloseTimer();
+        setOpen(false);
+        clearTimer();
       }
     };
 
-    document.addEventListener("pointerdown", handleOutsideClick);
+    document.addEventListener("pointerdown", handleOutside);
     return () => {
-      document.removeEventListener("pointerdown", handleOutsideClick);
+      document.removeEventListener("pointerdown", handleOutside);
     };
-  }, [showSlider, clearAutoCloseTimer]);
+  }, [open, clearTimer]);
 
   // Clean up timer on unmount
   useEffect(() => {
-    return () => clearAutoCloseTimer();
-  }, [clearAutoCloseTimer]);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.volume = volume;
-    }
-  }, [volume, audioRef]);
+    return () => clearTimer();
+  }, [clearTimer]);
 
   return (
     <div
       ref={containerRef}
-      className="h-1/5 relative"
-      onPointerDown={() => {
-        if (showSlider) startAutoCloseTimer();
-      }}
-      {...(!isTouch && {
-        onMouseEnter: () => {
-          clearAutoCloseTimer();
-          setShowSlider(true);
-        },
-        onMouseLeave: () => {
-          setShowSlider(false);
-          clearAutoCloseTimer();
-        },
+      id="sound-selector"
+      className="relative h-fit pointer-events-auto select-none"
+      {...(canHover && {
+        onMouseEnter: () => setOpen(true),
+        onMouseLeave: () => setOpen(false),
       })}
     >
       <button
-        onClick={handleToggleMute}
+        onClick={handleToggle}
+        className={`pointer-events-auto p-4 backdrop-blur-xs transition-all duration-200 ${
+          open
+            ? "bg-neutral-800 rounded-t-xl border-t border-x border-neutral-700"
+            : "bg-neutral-800/40 rounded-xl hover:bg-neutral-800"
+        } cursor-pointer flex items-center justify-center`}
         aria-label="Toggle Sound"
-        className={`pointer-events-auto p-4 backdrop-blur-xs transition-colors duration-200 ${
-          showSlider
-            ? "rounded-t-xl bg-neutral-800"
-            : "rounded-xl bg-neutral-800/40"
-        } cursor-pointer hover:bg-neutral-800`}
+        type="button"
       >
-        {muted ? (
-          <BsFillVolumeMuteFill className="w-6 h-6 md:w-8 md:h-8" />
+        {isOn ? (
+          <BsFillVolumeUpFill className="w-6 h-6 md:w-8 md:h-8 text-white" />
         ) : (
-          <BsFillVolumeUpFill className="w-6 h-6 md:w-8 md:h-8" />
+          <BsFillVolumeMuteFill className="w-6 h-6 md:w-8 md:h-8 text-neutral-400" />
         )}
       </button>
 
-      {/* Volume slider (vertical) */}
-      {showSlider && (
+      {open && (
         <div
-          className="h-full pointer-events-auto bg-neutral-800 rounded-b-xl px-4 pb-4 flex items-center justify-center"
-          onPointerDown={() => startAutoCloseTimer()}
+          className="absolute right-0 top-full w-full bg-neutral-800 border-x border-b border-neutral-700 rounded-b-xl shadow-xl shadow-black/50 p-1 z-50 flex flex-col gap-1 items-center"
+          onPointerDown={() => {
+            if (!canHover) startTimer();
+          }}
         >
-          <VolumeSlider volume={volume} onChange={handleVolumeChange} />
+          {OPTIONS.map(({ value, label }) => {
+            const isSelected = isOn === value;
+            return (
+              <button
+                key={label}
+                onClick={(e) => handleSelect(value, e)}
+                type="button"
+                className={`w-full py-2 text-xs md:text-sm uppercase font-mono font-bold rounded-lg transition-all flex items-center justify-center cursor-pointer ${
+                  isSelected
+                    ? "bg-red-600 text-white shadow-sm"
+                    : "text-neutral-400 hover:bg-neutral-700/70 hover:text-white"
+                }`}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
   );
-};
-
-export default MainAudioControl;
+}
