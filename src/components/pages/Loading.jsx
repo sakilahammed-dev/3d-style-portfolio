@@ -14,10 +14,6 @@ export default function Loading({ loaded, setShowLoading }) {
   const enterRef = useRef(null);
   const [exiting, setExiting] = useState(false);
   const containerRef = useRef(null);
-  const [hovered, setHovered] = useState(false);
-  const engRef = useRef(null);
-  const spaRef = useRef(null);
-  const jpRef = useRef(null);
 
   const pad = (val) => (val < 10 ? "0" + val : val);
 
@@ -193,47 +189,6 @@ export default function Loading({ loaded, setShowLoading }) {
     });
   }, [loaded]);
 
-  useEffect(() => {
-    if (!enterRef.current) return;
-
-    if (hovered) {
-      gsap.to(jpRef.current, {
-        y: -80,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-
-      gsap.to(engRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-
-      gsap.to(spaRef.current, {
-        y: 80,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    } else {
-      gsap.to([jpRef.current, spaRef.current], {
-        y: 0,
-        opacity: 0,
-        duration: 0.4,
-        ease: "power2.inOut",
-      });
-
-      gsap.to(engRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.inOut",
-      });
-    }
-  }, [hovered]);
-
   return (
     <div
       ref={containerRef}
@@ -266,29 +221,10 @@ export default function Loading({ loaded, setShowLoading }) {
           {loaded ? (
             <button
               ref={enterRef}
-              onMouseEnter={() => setHovered(true)}
-              onMouseLeave={() => setHovered(false)}
-              className="relative bg-transparent w-70 h-60 cursor-pointer text-white"
+              className="relative bg-transparent px-8 py-4 cursor-pointer text-white font-mono font-bold tracking-widest text-4xl md:text-5xl hover:scale-105 transition-transform duration-200 select-none"
               onClick={handleExit}
             >
-              <span
-                ref={jpRef}
-                className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
-              >
-                スタート
-              </span>
-              <span
-                ref={engRef}
-                className="absolute inset-0 flex items-center justify-center"
-              >
-                Start
-              </span>
-              <span
-                ref={spaRef}
-                className="absolute inset-0 flex items-center justify-center opacity-0 pointer-events-none"
-              >
-                শুরু করুন
-              </span>
+              START
             </button>
           ) : (
             <>
