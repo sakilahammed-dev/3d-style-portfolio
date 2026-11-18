@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { OrbitControls } from "@react-three/drei";
 import ModelLoader from "./ModelLoader";
 import RaycastHandler from "./RaycastHandler";
@@ -27,11 +27,18 @@ export default function SceneWrapper({
   const controlsRef = useRef();
   const [screenMesh, setScreenMesh] = useState(null);
   const [target, setTarget] = useState(null);
+  const [navKey, setNavKey] = useState(0);
   const { camera } = useThree();
+
+  const handleSetTarget = useCallback((newTarget) => {
+    setTarget(newTarget);
+    setNavKey((k) => k + 1);
+  }, []);
 
   useEffect(() => {
     setTarget(null);
     setScreenMesh(null);
+    setNavKey((k) => k + 1);
 
     const controls = controlsRef.current;
     if (!controls) return;
@@ -111,13 +118,24 @@ export default function SceneWrapper({
 
       {vendingMachineScreen && (
         <AttachHtmlToMesh mesh={vendingMachineScreen}>
-          <ProjectsPage language={language} />
+          <ProjectsPage
+            language={language}
+            target={target}
+            cameraReset={cameraReset}
+            navKey={navKey}
+          />
         </AttachHtmlToMesh>
       )}
 
       {jackboxScreen && (
         <AttachHtmlToMesh mesh={jackboxScreen}>
-          <ServicesPage language={language} setTarget={setTarget} />
+          <ServicesPage
+            language={language}
+            setTarget={handleSetTarget}
+            target={target}
+            cameraReset={cameraReset}
+            navKey={navKey}
+          />
         </AttachHtmlToMesh>
       )}
 
@@ -132,7 +150,7 @@ export default function SceneWrapper({
           targets={interactives}
           controlsRef={controlsRef}
           setScreenMesh={setScreenMesh}
-          setTarget={setTarget}
+          setTarget={handleSetTarget}
           screenMesh={screenMesh}
           currentTarget={target}
           setIsAnimating={setIsAnimating}

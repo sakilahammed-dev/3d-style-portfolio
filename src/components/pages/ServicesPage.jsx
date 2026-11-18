@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { servicesData } from "../../utils/servicesData.js";
 import {
   BsCodeSlash,
@@ -12,10 +12,22 @@ import {
   BsAwardFill,
 } from "react-icons/bs";
 
-export default function ServicesPage({ language = "bn", setTarget }) {
+export default function ServicesPage({
+  language = "bn",
+  setTarget,
+  target,
+  cameraReset,
+  navKey,
+}) {
   // null = 3-service catalog cards; serviceId = inside detail view
   const [selectedServiceId, setSelectedServiceId] = useState(null);
   const [hoveredServiceId, setHoveredServiceId] = useState(null);
+
+  // Always reset to initial 3-service catalog whenever user navigates or leaves
+  useEffect(() => {
+    setSelectedServiceId(null);
+    setHoveredServiceId(null);
+  }, [target, cameraReset, navKey]);
 
   const selectedService = servicesData.find((s) => s.id === selectedServiceId);
 

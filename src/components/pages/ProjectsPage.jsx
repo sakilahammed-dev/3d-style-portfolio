@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { projects } from "../../utils/projectsData";
 import { BsGithub, BsArrowLeft, BsGlobe } from "react-icons/bs";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -6,10 +6,21 @@ import TechCarousel from "../ui/TechCarousel.jsx";
 
 const ITEMS_PER_PAGE = 9;
 
-export default function ProjectsPage({ language }) {
+export default function ProjectsPage({
+  language,
+  target,
+  cameraReset,
+  navKey,
+}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  // Always reset to initial projects grid whenever user navigates or leaves
+  useEffect(() => {
+    setSelectedProject(null);
+    setActiveImageIndex(0);
+  }, [target, cameraReset, navKey]);
 
   const totalPages = Math.ceil(projects.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
