@@ -33,8 +33,12 @@ export default function SceneWrapper({
   const { camera, scene } = useThree();
 
   const handleCameraReset = useCallback(() => {
+    setTarget(null);
+    onTargetChange?.(null);
+    setScreenMesh(null);
     setCameraReset((prev) => !prev);
-  }, [setCameraReset]);
+    setIsAnimating(false);
+  }, [setCameraReset, onTargetChange, setIsAnimating]);
 
   const handleSetTarget = useCallback((newTarget) => {
     setTarget(newTarget);
@@ -273,6 +277,7 @@ export default function SceneWrapper({
           setTarget={handleSetTarget}
           screenMesh={screenMesh}
           currentTarget={target}
+          cameraReset={cameraReset}
           setIsAnimating={setIsAnimating}
         />
       )}

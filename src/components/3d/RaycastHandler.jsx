@@ -4,6 +4,8 @@ import * as THREE from "three";
 import gsap from "gsap";
 import { navConfig } from "../../utils/navConfig.js";
 
+window.THREE = THREE;
+
 export default function RaycastHandler({
   targets,
   controlsRef,
@@ -11,17 +13,45 @@ export default function RaycastHandler({
   setTarget,
   screenMesh,
   currentTarget,
+  cameraReset,
   setIsAnimating,
 }) {
   const raycaster = useRef(new THREE.Raycaster());
   const pointer = useRef(new THREE.Vector2(-9999, -9999));
   const hoveredNavEntry = useRef(null);
   const animatingRef = useRef(false);
+  const animSafetyTimer = useRef(null);
+  const lastFocusedMesh = useRef(null);
   const { camera, gl } = useThree();
   const [animating, setAnimating] = useState(false);
 
   // Pointer/touch tracking for clean tap detection
   const pointerDownPos = useRef({ x: 0, y: 0, time: 0 });
+
+  // Stable refs to prevent tearing down window listeners on navigation state updates
+  const targetsRef = useRef(targets);
+  targetsRef.current = targets;
+  const setScreenMeshRef = useRef(setScreenMesh);
+  setScreenMeshRef.current = setScreenMesh;
+  const setTargetRef = useRef(setTarget);
+  setTargetRef.current = setTarget;
+
+  // Guarantee that whenever user returns home (currentTarget === null or cameraReset triggered),
+  // all animation locks, flags, and pointer tracking are immediately cleared!
+  useEffect(() => {
+    if (!currentTarget) {
+      if (animSafetyTimer.current) clearTimeout(animSafetyTimer.current);
+      animatingRef.current = false;
+      setAnimating(false);
+      setIsAnimating?.(false);
+      lastFocusedMesh.current = null;
+      pointerDownPos.current = { x: 0, y: 0, time: 0 };
+      if (controlsRef.current) {
+        controlsRef.current.enabled = true;
+        controlsRef.current.enableZoom = true;
+      }
+    }
+  }, [currentTarget, cameraReset, setIsAnimating, controlsRef]);
 
   // --- helpers ---
   const findNavEntryBy = useCallback(
@@ -31,8 +61,8 @@ export default function RaycastHandler({
   );
 
   const findTargetByName = useCallback(
-    (name) => targets.find((o) => o.name === name),
-    [targets],
+    (name) => (targetsRef.current || []).find((o) => o.name === name),
+    [],
   );
 
   const playHoverAnimation = useCallback((object, on) => {
@@ -78,6 +108,9 @@ export default function RaycastHandler({
   const focusCameraOnObject = useCallback(
     (object) => {
       if (!object) return;
+      if (animSafetyTimer.current) clearTimeout(animSafetyTimer.current);
+      lastFocusedMesh.current = object;
+
       const box = new THREE.Box3().setFromObject(object);
       const center = box.getCenter(new THREE.Vector3());
       const size = box.getSize(new THREE.Vector3());
@@ -128,11 +161,22 @@ export default function RaycastHandler({
 
       animatingRef.current = true;
       setAnimating(true);
-      setIsAnimating(true);
+      setIsAnimating?.(true);
       if (controlsRef.current) {
         controlsRef.current.enabled = false;
         controlsRef.current.enableZoom = false;
       }
+
+      // Safety timeout: unlock controls and animation flag after 2.2s even if tween is killed
+      animSafetyTimer.current = setTimeout(() => {
+        animatingRef.current = false;
+        setAnimating(false);
+        setIsAnimating?.(false);
+        if (controlsRef.current) {
+          controlsRef.current.enabled = true;
+          controlsRef.current.enableZoom = true;
+        }
+      }, 2200);
 
       gsap.killTweensOf([controlsRef.current.target, camera.position]);
 
@@ -157,13 +201,14 @@ export default function RaycastHandler({
           controlsRef.current.update();
         },
         onComplete: () => {
+          if (animSafetyTimer.current) clearTimeout(animSafetyTimer.current);
           if (controlsRef.current) {
             controlsRef.current.enabled = true;
             controlsRef.current.enableZoom = true;
           }
           animatingRef.current = false;
           setAnimating(false);
-          setIsAnimating(false);
+          setIsAnimating?.(false);
         },
       });
     },
@@ -331,10 +376,13 @@ export default function RaycastHandler({
     }
   });
 
-  // focus camera when screenMesh changes
+  // focus camera when screenMesh changes (e.g. from external triggers)
   useEffect(() => {
-    if (screenMesh) {
+    if (screenMesh && screenMesh !== lastFocusedMesh.current) {
+      lastFocusedMesh.current = screenMesh;
       focusCameraOnObject(screenMesh);
+    } else if (!screenMesh) {
+      lastFocusedMesh.current = null;
     }
   }, [screenMesh, focusCameraOnObject]);
 
@@ -383,7 +431,7 @@ export default function RaycastHandler({
     };
   }, [targets, setScreenMesh, setTarget, findTargetByName, findNavEntryBy, updatePointer, camera]);
 
-  // Handle click / tap with drag tolerance
+  // Handle click / tap with drag tolerance & touch reliability
   useEffect(() => {
     const handleDown = (e) => {
       let clientX, clientY;
@@ -394,10 +442,13 @@ export default function RaycastHandler({
         clientX = e.clientX;
         clientY = e.clientY;
       }
-      pointerDownPos.current = { x: clientX, y: clientY, time: Date.now() };
+      if (clientX !== undefined && clientY !== undefined) {
+        pointerDownPos.current = { x: clientX, y: clientY, time: Date.now() };
+      }
     };
 
     const handleUp = (e) => {
+      // If animation is in progress, ignore clicks to prevent conflicting tweens
       if (animatingRef.current) return;
 
       let clientX, clientY;
@@ -420,14 +471,21 @@ export default function RaycastHandler({
       const dist = Math.hypot(dx, dy);
       const duration = Date.now() - pointerDownPos.current.time;
 
-      // If user dragged to orbit scene (> 20px), do not treat as tap
-      if (dist > 20 && duration > 80) return;
+      // Always reset pointerDownPos immediately so old coordinates never poison subsequent taps
+      pointerDownPos.current = { x: 0, y: 0, time: 0 };
+
+      // Reject only if genuinely a drag gesture to orbit the room
+      // On mobile touchscreen: finger surface contact shifts 20-35px during a tap
+      const maxDragDist = isTouch ? 45 : 25;
+      const maxDragDuration = isTouch ? 400 : 300;
+      if (dist > maxDragDist && duration > maxDragDuration) {
+        return;
+      }
 
       const clicked = findIntersectedTarget(clientX, clientY, isTouch);
       if (!clicked) return;
 
       if (clicked.name.includes("Screen")) {
-        // Keep controls enabled and zoom active so users can zoom with mouse wheel
         if (controlsRef.current) {
           controlsRef.current.enabled = true;
           controlsRef.current.enableZoom = true;
@@ -438,8 +496,8 @@ export default function RaycastHandler({
 
         const screenTarget = findTargetByName(navEntry.target);
         if (screenTarget) {
-          setScreenMesh?.(screenTarget);
-          setTarget(navEntry.text);
+          setScreenMeshRef.current?.(screenTarget);
+          setTargetRef.current?.(navEntry.text);
           focusCameraOnObject(screenTarget);
         }
       } else {
@@ -449,8 +507,8 @@ export default function RaycastHandler({
         if (navEntry) {
           const screenTarget = findTargetByName(navEntry.target);
           if (screenTarget) {
-            setScreenMesh?.(screenTarget);
-            setTarget(navEntry.text);
+            setScreenMeshRef.current?.(screenTarget);
+            setTargetRef.current?.(navEntry.text);
             focusCameraOnObject(screenTarget);
           }
         }
@@ -459,20 +517,21 @@ export default function RaycastHandler({
 
     window.addEventListener("pointerdown", handleDown, { passive: true });
     window.addEventListener("pointerup", handleUp);
+    window.addEventListener("touchstart", handleDown, { passive: true });
+    window.addEventListener("touchend", handleUp);
 
     return () => {
       window.removeEventListener("pointerdown", handleDown);
       window.removeEventListener("pointerup", handleUp);
+      window.removeEventListener("touchstart", handleDown);
+      window.removeEventListener("touchend", handleUp);
     };
   }, [
-    targets,
-    screenMesh,
     controlsRef,
-    setScreenMesh,
-    setTarget,
     findNavEntryBy,
     findTargetByName,
     findIntersectedTarget,
+    focusCameraOnObject,
   ]);
 
   return null;

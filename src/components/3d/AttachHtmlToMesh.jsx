@@ -55,13 +55,14 @@ export default function AttachHtmlToMesh({ mesh, children, isActive = false }) {
     return () => cancelAnimationFrame(raf);
   }, [size, mesh, configEntry]);
 
-  if (!mesh || !configEntry) return null;
-
   useEffect(() => {
     const onResize = () => setIsMedium(window.innerWidth >= 768);
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
+
+  // If this screen is not active or mesh is not ready, do not mount Drei Html or render DOM overlays
+  if (!isActive || !mesh || !configEntry) return null;
 
   const distanceFactor = isMedium ? 0.4 : 0.6; // md+ = 0.4, below md = 0.6
   const multiplier = isMedium ? 1000 : 700; // md+ = 1000px, below md = 700px
@@ -128,10 +129,11 @@ export default function AttachHtmlToMesh({ mesh, children, isActive = false }) {
       occlude="blending"
       center
       distanceFactor={distanceFactor}
+      pointerEvents="auto"
       style={{
         width: `${size.width * multiplier}px`,
         height: `${size.height * multiplier}px`,
-        pointerEvents: isActive ? "auto" : "none",
+        pointerEvents: "auto",
       }}
     >
       <div
