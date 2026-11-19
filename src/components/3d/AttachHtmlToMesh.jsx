@@ -3,7 +3,7 @@ import { useEffect, useState, useLayoutEffect, useRef } from "react";
 import { Vector3 } from "three";
 import { navConfig } from "../../utils/navConfig.js";
 
-export default function AttachHtmlToMesh({ mesh, children }) {
+export default function AttachHtmlToMesh({ mesh, children, isActive = false }) {
   const [size, setSize] = useState({ width: 1, height: 1 });
   const [position, setPosition] = useState([0, 0, 0]);
   const [isMedium, setIsMedium] = useState(window.innerWidth >= 768);
@@ -131,11 +131,14 @@ export default function AttachHtmlToMesh({ mesh, children }) {
       style={{
         width: `${size.width * multiplier}px`,
         height: `${size.height * multiplier}px`,
+        pointerEvents: isActive ? "auto" : "none",
       }}
     >
       <div
         onWheel={handleWheel}
-        className="w-full h-full flex items-center justify-center"
+        className={`w-full h-full flex items-center justify-center ${
+          isActive ? "pointer-events-auto" : "pointer-events-none"
+        }`}
       >
         {children}
       </div>

@@ -1,8 +1,8 @@
-import { BsLinkedin, BsGithub, BsWhatsapp } from "react-icons/bs";
+import { BsLinkedin, BsGithub, BsWhatsapp, BsFillHouseDoorFill } from "react-icons/bs";
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
 import { useState } from "react";
 
-export default function ContactPage({ setTarget, language }) {
+export default function ContactPage({ setTarget, language, onHome }) {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -117,11 +117,31 @@ export default function ContactPage({ setTarget, language }) {
       <div className="absolute w-full h-full bg-grid"></div>
       <div className="absolute w-full h-full text-xl md:text-2xl p-4 flex flex-col items-center justify-between border font-mono">
         <div className="w-full text-center items-center justify-between flex font-mono">
-          <button onClick={() => setTarget("AboutMe_Red_Text_Target")}>
+          <button
+            onClick={() => setTarget("AboutMe_Red_Text_Target")}
+            className="cursor-pointer hover:scale-110 transition-transform"
+            aria-label="Previous"
+          >
             <MdKeyboardArrowLeft className="w-7 h-7 md:w-12 md:h-12" />
           </button>
-          <h1 className="text-2xl md:text-4xl">{t.title}</h1>
-          <button onClick={() => setTarget("AboutMe_Red_Text_Target")}>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl md:text-4xl font-bold">{t.title}</h1>
+            {onHome && (
+              <button
+                onClick={onHome}
+                type="button"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 font-bold text-xs md:text-sm font-mono tracking-wider cursor-pointer shadow-sm active:scale-95 transition-all select-none"
+              >
+                <BsFillHouseDoorFill className="w-3.5 h-3.5" />
+                <span>{language === "bn" ? "হোম" : "Home"}</span>
+              </button>
+            )}
+          </div>
+          <button
+            onClick={() => setTarget("AboutMe_Red_Text_Target")}
+            className="cursor-pointer hover:scale-110 transition-transform"
+            aria-label="Next"
+          >
             <MdKeyboardArrowRight className="w-7 h-7 md:w-12 md:h-12" />
           </button>
         </div>

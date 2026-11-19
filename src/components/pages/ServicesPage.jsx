@@ -10,6 +10,7 @@ import {
   BsArrowRight,
   BsArrowLeft,
   BsAwardFill,
+  BsFillHouseDoorFill,
 } from "react-icons/bs";
 
 export default function ServicesPage({
@@ -18,6 +19,7 @@ export default function ServicesPage({
   target,
   cameraReset,
   navKey,
+  onHome,
 }) {
   // null = 3-service catalog cards; serviceId = inside detail view
   const [selectedServiceId, setSelectedServiceId] = useState(null);
@@ -124,8 +126,8 @@ export default function ServicesPage({
 
         {/* Content Box */}
         <div className="absolute inset-0 p-4 md:p-6 flex flex-col justify-between border border-neutral-300">
-          {/* Top Bar: SINGLE CLEAN BACK OPTION (EXACTLY 1 ARROW + SLIGHTLY BIGGER TEXT) */}
-          <div className="w-full pb-3 border-b border-neutral-300/80 shrink-0">
+          {/* Top Bar: SINGLE CLEAN BACK OPTION + HOME BUTTON */}
+          <div className="w-full pb-3 border-b border-neutral-300/80 shrink-0 flex items-center justify-between">
             <button
               onClick={() => setSelectedServiceId(null)}
               className="inline-flex items-center gap-2.5 text-neutral-900 hover:text-blue-600 font-bold text-base md:text-lg lg:text-xl transition-colors cursor-pointer group select-none"
@@ -133,6 +135,16 @@ export default function ServicesPage({
               <BsArrowLeft className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-200 group-hover:-translate-x-1.5 shrink-0" />
               <span>{t.backToList}</span>
             </button>
+            {onHome && (
+              <button
+                onClick={onHome}
+                type="button"
+                className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 font-bold text-xs md:text-sm font-mono tracking-wider cursor-pointer shadow-md shadow-neutral-500/20 active:scale-95 transition-all select-none"
+              >
+                <BsFillHouseDoorFill className="w-3.5 h-3.5 md:w-4 md:h-4" />
+                <span>{language === "bn" ? "হোমে ফিরুন" : "Home"}</span>
+              </button>
+            )}
           </div>
 
           {/* Main Scrollable Body — Spacious, Highly Readable, Line-by-Line */}
@@ -234,11 +246,21 @@ export default function ServicesPage({
 
       {/* Main Container - Full Bleed */}
       <div className="absolute inset-0 p-3 md:p-5 flex flex-col justify-between border border-neutral-300">
-        {/* Top Header Bar - Clean & Minimalist */}
+        {/* Top Header Bar - Clean & Minimalist with Home Button */}
         <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80 shrink-0">
           <h1 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-900">
             {t.catalogTitle}
           </h1>
+          {onHome && (
+            <button
+              onClick={onHome}
+              type="button"
+              className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 font-bold text-xs md:text-sm font-mono tracking-wider cursor-pointer shadow-md shadow-neutral-500/20 active:scale-95 transition-all select-none"
+            >
+              <BsFillHouseDoorFill className="w-3.5 h-3.5 md:w-4 md:h-4" />
+              <span>{language === "bn" ? "হোমে ফিরুন" : "Home"}</span>
+            </button>
+          )}
         </div>
 
         {/* 3 Services Cards - Stacked Vertically with Gorgeous Royal Blue Hover */}

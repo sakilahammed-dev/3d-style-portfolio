@@ -1,6 +1,7 @@
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from "react-icons/md";
+import { BsFillHouseDoorFill } from "react-icons/bs";
 
-export default function AboutMe({ setTarget, language }) {
+export default function AboutMe({ setTarget, language, onHome }) {
   const content = {
     en: {
       title: "About Me",
@@ -61,15 +62,27 @@ export default function AboutMe({ setTarget, language }) {
           <p className="text-black">{t.desc1}</p>
           <p className="text-black">{t.desc2}</p>
 
-          <a
-            href={t.cvFile}
-            download="Sakil_Ahammed_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-mono text-black flex gap-4 items-center justify-center px-4 py-2 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50 cursor-pointer"
-          >
-            {t.cv}
-          </a>
+          <div className="flex items-center gap-3 justify-center w-full mt-1">
+            <a
+              href={t.cvFile}
+              download="Sakil_Ahammed_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-black flex gap-2 items-center justify-center px-4 py-2 rounded-2xl shadow-md shadow-neutral-500 hover:scale-105 transition-transform bg-neutral-200/80 border border-neutral-50 cursor-pointer font-bold text-sm md:text-base"
+            >
+              {t.cv}
+            </a>
+            {onHome && (
+              <button
+                onClick={onHome}
+                type="button"
+                className="font-mono text-white flex gap-2 items-center justify-center px-4 py-2 rounded-2xl shadow-md bg-neutral-900 hover:bg-neutral-800 hover:scale-105 transition-transform cursor-pointer font-bold text-sm md:text-base select-none"
+              >
+                <BsFillHouseDoorFill className="w-4 h-4" />
+                <span>{language === "bn" ? "হোম" : "Home"}</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

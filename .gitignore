@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 
 blender
+*.backup*
+*.original
+*.before_*
+scratch/
+

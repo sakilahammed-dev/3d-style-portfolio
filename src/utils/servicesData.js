@@ -20,7 +20,7 @@ export const servicesData = [
       es: "Ingeniería Web y Software",
     },
     title: {
-      bn: "১. Full Stack Developer (AI-assisted)",
+      bn: "01. Full Stack Developer (AI-assisted)",
       en: "01. Full Stack Developer (AI-assisted)",
       es: "01. Desarrollador Full Stack (con IA)",
     },
@@ -121,7 +121,7 @@ export const servicesData = [
       es: "Operaciones Inteligentes y Automatización",
     },
     title: {
-      bn: "২. Business Automation Executive",
+      bn: "02. Business Automation Executive",
       en: "02. Business Automation Executive",
       es: "02. Ejecutivo de Automatización de Negocios",
     },
@@ -222,7 +222,7 @@ export const servicesData = [
       es: "Branding Visual y Medios con IA",
     },
     title: {
-      bn: "৩. AI Content & Motion Video Creator",
+      bn: "03. AI Content & Motion Video Creator",
       en: "03. AI Content & Motion Video Creator",
       es: "03. Creador de Contenido y Video Motion con IA",
     },

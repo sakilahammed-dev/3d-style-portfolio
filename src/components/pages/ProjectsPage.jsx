@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { projects } from "../../utils/projectsData";
-import { BsGithub, BsArrowLeft, BsGlobe } from "react-icons/bs";
+import { BsGithub, BsArrowLeft, BsGlobe, BsFillHouseDoorFill } from "react-icons/bs";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import TechCarousel from "../ui/TechCarousel.jsx";
 
@@ -11,6 +11,7 @@ export default function ProjectsPage({
   target,
   cameraReset,
   navKey,
+  onHome,
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedProject, setSelectedProject] = useState(null);
@@ -94,15 +95,27 @@ export default function ProjectsPage({
         <div className="absolute w-full h-full bg-grid"></div>
 
         <div className="absolute w-full h-full p-6 flex flex-col items-center justify-between gap-3 border border-neutral-300">
-          {/* Top Bar: Title & Date */}
+          {/* Top Bar: Title, Date & Home */}
           <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80">
             <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-neutral-900 truncate px-1">
               {selectedProject.title}
             </h1>
 
-            <span className="text-base md:text-xl text-neutral-600 font-medium px-1">
-              {selectedProject.date?.[language] || selectedProject.date?.bn || selectedProject.date?.en}
-            </span>
+            <div className="flex items-center gap-2 md:gap-3 shrink-0">
+              <span className="text-base md:text-xl text-neutral-600 font-medium px-1">
+                {selectedProject.date?.[language] || selectedProject.date?.bn || selectedProject.date?.en}
+              </span>
+              {onHome && (
+                <button
+                  onClick={onHome}
+                  type="button"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 md:px-3.5 md:py-1.5 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 font-bold text-xs md:text-sm font-mono tracking-wider cursor-pointer shadow-sm active:scale-95 transition-all select-none"
+                >
+                  <BsFillHouseDoorFill className="w-3.5 h-3.5" />
+                  <span>{language === "bn" ? "হোম" : "Home"}</span>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Prominent High-Resolution Showcase Image */}
@@ -373,11 +386,21 @@ export default function ProjectsPage({
     <div className="w-full h-full relative bg-neutral-200 select-none font-mono text-2xl md:text-3xl text-center overflow-hidden">
       <div className="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
       <div className="absolute inset-0 font-mono p-6 md:p-8 flex flex-col justify-between gap-3 border border-neutral-300">
-        {/* Top Header Bar - Exact Match with Services */}
+        {/* Top Header Bar - Exact Match with Services and Home Button */}
         <div className="w-full flex items-center justify-between pb-2 border-b border-neutral-300/80 shrink-0 text-left">
           <h1 className="text-2xl md:text-4xl font-black tracking-tight text-neutral-900">
             {t.projectsTitle || "Projects"}
           </h1>
+          {onHome && (
+            <button
+              onClick={onHome}
+              type="button"
+              className="inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-xl bg-neutral-900 text-white hover:bg-neutral-800 font-bold text-xs md:text-sm font-mono tracking-wider cursor-pointer shadow-md shadow-neutral-500/20 active:scale-95 transition-all select-none"
+            >
+              <BsFillHouseDoorFill className="w-3.5 h-3.5 md:w-4 md:h-4" />
+              <span>{language === "bn" ? "হোমে ফিরুন" : "Home"}</span>
+            </button>
+          )}
         </div>
 
         <div className="w-full flex-1 grid grid-cols-3 grid-rows-3 gap-3 md:gap-4 min-h-0">

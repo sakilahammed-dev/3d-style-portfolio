@@ -84,20 +84,43 @@ export default function RaycastHandler({
       const maxDim = Math.max(size.x, size.y, size.z);
       const fov = camera.fov * (Math.PI / 180);
       const isMobile = window.innerWidth < 768;
-      const isArcade =
-        object.name === "Jackbox_Screen_White_Target" ||
-        object.name === "ArcadeMachine_Screen_White_Target";
 
-      const distanceMult = isMobile && isArcade ? 2.05 : 1.5;
+      let distanceMult = 1.5;
+      if (isMobile) {
+        if (object.name === "Jackbox_Screen_White_Target") {
+          // Services: subtly reduce zoom from 2.05 to 2.22 so red border shows without empty side space
+          distanceMult = 2.22;
+        } else if (object.name === "ArcadeMachine_Screen_White_Target") {
+          // Gallery: subtly reduce zoom from 2.05 to 2.22 so arcade wings show cleanly without excess space
+          distanceMult = 2.22;
+        } else if (object.name === "VendingMachine_Screen_White_Target") {
+          // Projects: subtly reduce zoom from 1.50 to 1.80 so title & cards fit edge-to-edge with no clipping
+          distanceMult = 1.80;
+        } else if (object.name === "Phone_Screen_White_Target") {
+          // AboutMe & Contact: subtle framing
+          distanceMult = 1.65;
+        } else {
+          distanceMult = 1.75;
+        }
+      }
+
       let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2)) * distanceMult;
 
       const configEntry = findNavEntryBy("target", object.name);
       const offsetArray = configEntry?.cameraOffset || [0, 0, 1];
       const offsetDirection = new THREE.Vector3(...offsetArray).normalize();
       const targetCenter = center.clone();
-      if (isMobile && isArcade) {
-        // Center the arcade cabinet cleanly in mobile portrait
-        targetCenter.y -= 0.015;
+      if (isMobile) {
+        if (object.name === "ArcadeMachine_Screen_White_Target") {
+          // Elevate arcade target slightly so 3D joysticks sit cleanly below the video cards
+          targetCenter.y += 0.008;
+        } else if (object.name === "Jackbox_Screen_White_Target") {
+          // Center Jackbox cabinet in mobile portrait
+          targetCenter.y -= 0.015;
+        } else if (object.name === "VendingMachine_Screen_White_Target") {
+          // Center Vending machine comfortably in mobile portrait
+          targetCenter.y += 0.010;
+        }
       }
       const newCameraPos = targetCenter
         .clone()
@@ -318,18 +341,20 @@ export default function RaycastHandler({
   // Global navigation helper for direct targeting & automated testing
   useEffect(() => {
     window.__navigateToTarget = (targetName) => {
-      const navEntry = Object.values(navConfig).find(
-        (conf) =>
+      const navEntry = Object.entries(navConfig).find(
+        ([key, conf]) =>
+          key.toLowerCase() === targetName.toLowerCase() ||
           conf.glass === targetName ||
           conf.text === targetName ||
           conf.target === targetName ||
           conf.text.toLowerCase().includes(targetName.toLowerCase()),
-      );
+      )?.[1];
       if (navEntry) {
         const screenTarget = findTargetByName(navEntry.target);
         if (screenTarget) {
           setScreenMesh?.(screenTarget);
           setTarget(navEntry.text);
+          focusCameraOnObject(screenTarget);
           return;
         }
       }
@@ -412,9 +437,10 @@ export default function RaycastHandler({
         if (!navEntry) return;
 
         const screenTarget = findTargetByName(navEntry.target);
-        if (screenTarget && screenTarget !== screenMesh) {
+        if (screenTarget) {
           setScreenMesh?.(screenTarget);
           setTarget(navEntry.text);
+          focusCameraOnObject(screenTarget);
         }
       } else {
         const navEntry = Object.values(navConfig).find(
@@ -425,6 +451,7 @@ export default function RaycastHandler({
           if (screenTarget) {
             setScreenMesh?.(screenTarget);
             setTarget(navEntry.text);
+            focusCameraOnObject(screenTarget);
           }
         }
       }

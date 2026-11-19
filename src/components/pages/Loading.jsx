@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 export default function Loading({ loaded, setShowLoading }) {
   const [totalSeconds, setTotalSeconds] = useState(0);
   const [timeString, setTimeString] = useState("");
+  const [fastReady, setFastReady] = useState(false);
   const noiseRef = useRef(null);
   const linesRef = useRef(null);
   const titleRef = useRef(null);
@@ -15,10 +16,23 @@ export default function Loading({ loaded, setShowLoading }) {
   const [exiting, setExiting] = useState(false);
   const containerRef = useRef(null);
 
+  // Guarantee START appears swiftly within 1.2s on mobile/desktop
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setFastReady(true);
+    }, 1200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isReady = loaded || fastReady;
+
   const pad = (val) => (val < 10 ? "0" + val : val);
 
   const handleExit = () => {
     setExiting(true);
+    if (containerRef.current) {
+      containerRef.current.style.pointerEvents = "none";
+    }
 
     gsap.to(containerRef.current, {
       opacity: 0,
@@ -159,7 +173,7 @@ export default function Loading({ loaded, setShowLoading }) {
 
   useEffect(() => {
     let tween;
-    if (!loaded && dotsRef.current) {
+    if (!isReady && dotsRef.current) {
       tween = gsap.to(dotsRef.current, {
         keyframes: [
           { innerHTML: "", duration: 0.375 },
@@ -174,10 +188,10 @@ export default function Loading({ loaded, setShowLoading }) {
     return () => {
       if (tween) tween.kill();
     };
-  }, [loaded]);
+  }, [isReady]);
 
   useEffect(() => {
-    if (!loaded || !enterRef.current) return;
+    if (!isReady || !enterRef.current) return;
     gsap.to(enterRef.current, {
       keyframes: textShadows.map((shadow) => ({
         textShadow: shadow,
@@ -187,7 +201,7 @@ export default function Loading({ loaded, setShowLoading }) {
       yoyo: true,
       ease: "steps(9)",
     });
-  }, [loaded]);
+  }, [isReady]);
 
   return (
     <div
@@ -218,7 +232,7 @@ export default function Loading({ loaded, setShowLoading }) {
           ref={centerRef}
           className="flex w-full items-center justify-center h-full text-center text-5xl"
         >
-          {loaded ? (
+          {isReady ? (
             <button
               ref={enterRef}
               className="relative bg-transparent px-8 py-4 cursor-pointer text-white font-mono font-bold tracking-widest text-4xl md:text-5xl hover:scale-105 transition-transform duration-200 select-none"
